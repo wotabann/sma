@@ -1,0 +1,94 @@
+@charset "UTF-8";
+
+/******************************************************************************/
+/* song_history -                                                             */
+/******************************************************************************/
+.song-history-wrapper {
+  width: 100%;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+.song-history-header h1 {
+  color: rgba(0, 164, 105, 1.0);
+}
+.song-history-header h2 {
+  color: #333;
+}
+.song-history-inner {
+  background-color: #fff;
+  width: 100%;
+  margin: 0 auto;
+  padding: 10px 20px 0px 20px;
+}
+.song-history-header {
+  width: 100%;
+}
+.song-history-select {
+  margin: auto;
+  padding-top: 20px;
+  padding-bottom: 10px;
+  text-align: center;
+}
+.song-history-select select {
+  width: 60%;
+  margin: auto;
+  padding: 5px;
+  font-size: 1.1rem;
+  border-radius: 3px;
+}
+.song-history-content {
+  padding: 20px;
+}
+.song-history-group1 {
+  width: 100%;
+  margin: 10px auto 50px auto;
+  border-radius: 6px;
+  border: 2px solid rgba(0, 164, 105, 1.0);
+  padding: 0 0 15px 0;
+}
+.song-history-group1-header {
+  background: rgba(0, 164, 105, 1.0);
+  border-radius: 3px 3px 0 0;
+  color: #fff;
+  padding: 5px;
+  font-size: 1.1rem;
+  letter-spacing: 0.1rem;
+}
+.song-history-group2 {
+  margin: 0 auto;
+  padding: 10px 10px 5px 10px;
+}
+.song-history-group2-header {
+  width: 95%;
+  border-radius: 2px;
+  border-left: 4px solid rgba(0, 164, 105, 1.0);
+  border-bottom: 1px solid rgba(0, 164, 105, 1.0);
+  color: #333;
+  padding: 3px 3px 3px 10px;
+  letter-spacing: 0.1rem;
+}
+.song-history-group3 {
+  margin: 0 auto;
+  padding: 0 14px;
+}
+.song-history-group3 ul {
+  margin: 0;
+  padding: 0;
+  padding-top: 4px;
+}
+.song-history-group3 li {
+  display: flex !important;
+  align-items: flex-end;
+  padding-top: 6px;
+}
+.song-history-title {
+  display: inline-block;
+  font-weight: bold;
+}
+.song-history-artist {
+  padding-left: 5px;
+  font-size: 0.9rem;
+}
+.song-history-artist::before {
+  content: ' / ';
+}

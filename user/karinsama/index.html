@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>スマブラSP対戦記録</title>
+
+        <!-- スマートフォン表示対応 -->
+        <meta name="viewport" content="width=device-width">
+
+        <!-- フォントスタイル -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Hachi+Maru+Pop&display=swap" rel="stylesheet">
+        <link href="http://fonts.googleapis.com/css?family=Abel" rel="stylesheet" type="text/css">
+
+        <!-- JavaScript -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
+
+        <!-- CSS -->
+        <link rel="stylesheet" type="text/css" href="../../css/sma.css">
+    </head>
+
+    <body>
+
+    <div id="overlay">
+        <div class="cv-spinner">
+            <span class="spinner"></span>
+        </div>
+    </div>
+
+    <datalist id="fighter-list">
+        <option value="マリオ"></option>
+        <option value="ドンキーコング"></option>
+        <option value="リンク"></option>
+        <option value="サムス"></option>
+        <option value="ダークサムス"></option>
+        <option value="ヨッシー"></option>
+        <option value="カービィ"></option>
+        <option value="フォックス"></option>
+        <option value="ピカチュウ"></option>
+        <option value="ルイージ"></option>
+        <option value="ネス"></option>
+        <option value="キャプテン・ファルコン"></option>
+        <option value="プリン"></option>
+        <option value="ピーチ"></option>
+        <option value="デイジー"></option>
+        <option value="クッパ"></option>
+        <option value="アイスクライマー"></option>
+        <option value="シーク"></option>
+        <option value="ゼルダ"></option>
+        <option value="ドクターマリオ"></option>
+        <option value="ピチュー"></option>
+        <option value="ファルコ"></option>
+        <option value="マルス"></option>
+        <option value="ルキナ"></option>
+        <option value="こどもリンク"></option>
+        <option value="ガノンドロフ"></option>
+        <option value="ミュウツー"></option>
+        <option value="ロイ"></option>
+        <option value="クロム"></option>
+        <option value="Mr.ゲーム＆ウォッチ"></option>
+        <option value="メタナイト"></option>
+        <option value="ピット"></option>
+        <option value="ブラックピット"></option>
+        <option value="ゼロスーツサムス"></option>
+        <option value="ワリオ"></option>
+        <option value="スネーク"></option>
+        <option value="アイク"></option>
+        <option value="ポケモントレーナー"></option>
+        <option value="ディディーコング"></option>
+        <option value="リュカ"></option>
+        <option value="ソニック"></option>
+        <option value="デデデ"></option>
+        <option value="ピクミン＆オリマー"></option>
+        <option value="ルカリオ"></option>
+        <option value="ロボット"></option>
+        <option value="トゥーンリンク"></option>
+        <option value="ウルフ"></option>
+        <option value="むらびと"></option>
+        <option value="ロックマン"></option>
+        <option value="Wii Fit トレーナー"></option>
+        <option value="ロゼッタ＆チコ"></option>
+        <option value="リトル・マック"></option>
+        <option value="ゲッコウガ"></option>
+        <option value="Miiファイター格闘"></option>
+        <option value="Miiファイター剣術"></option>
+        <option value="Miiファイター射撃"></option>
+        <option value="パルテナ"></option>
+        <option value="パックマン"></option>
+        <option value="ルフレ"></option>
+        <option value="シュルク"></option>
+        <option value="クッパJr."></option>
+        <option value="ダックハント"></option>
+        <option value="リュウ"></option>
+        <option value="ケン"></option>
+        <option value="クラウド"></option>
+        <option value="カムイ"></option>
+        <option value="ベヨネッタ"></option>
+        <option value="インクリング"></option>
+        <option value="リドリー"></option>
+        <option value="シモン"></option>
+        <option value="リヒター"></option>
+        <option value="キングクルール"></option>
+        <option value="しずえ"></option>
+        <option value="ガオガエン"></option>
+        <option value="パックンフラワー"></option>
+        <option value="ジョーカー"></option>
+        <option value="勇者"></option>
+        <option value="バンジョー＆カズーイ"></option>
+        <option value="テリー"></option>
+        <option value="ベレト／ベレス"></option>
+        <option value="ミェンミェン"></option>
+        <option value="スティーブ／アレックス"></option>
+        <option value="セフィロス"></option>
+        <option value="ホムラ／ヒカリ"></option>
+        <option value="カズヤ"></option>
+        <option value="ソラ"></option>
+    </datalist>
+
+    <div id="background">
+        <div id="container" class="contents-wrapper-check">
+
+            <section class="contents">
+                <div class="register-wrapper">
+                    <div class="register-inner">
+                        <div class="register-header">
+                            <h1>Account</h1>
+                            <h2>アカウント情報</h2>
+                            <div style="top: 50px; left:   6%;" class="contents-header-shape contents-header-medium contents-header-green  contents-header-circle"></div>
+                            <div style="top: 70px; left:  14%;" class="contents-header-shape contents-header-large  contents-header-orange contents-header-square"></div>
+                            <div style="top: 60px; right:  7%;" class="contents-header-shape contents-header-medium contents-header-yellow contents-header-square"></div>
+                            <div style="top: 80px; right: 13%;" class="contents-header-shape contents-header-large  contents-header-green  contents-header-circle"></div>
+                        </div>
+                        <div class="register-content">
+                            <form>
+                                <div class="register-input">
+                                    <label for="register-account-username">ユーザー名</label>
+                                    <input type="text" name="register-account-username" id="register-account-username" disabled>
+                                </div>
+                                <div class="register-input">
+                                    <label for="register-account-fighter">使用ファイター</label>
+                                    <input type="text" name="register-account-fighter" id="register-account-fighter" list="fighter-list">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="contents">
+                <div class="register-wrapper">
+                    <div class="register-inner">
+                        <div class="register-header">
+                            <h1>Register</h1>
+                            <h2>結果登録</h2>
+                            <div style="top: 50px; left:   6%;" class="contents-header-shape contents-header-medium contents-header-green  contents-header-circle"></div>
+                            <div style="top: 70px; left:  14%;" class="contents-header-shape contents-header-large  contents-header-orange contents-header-square"></div>
+                            <div style="top: 60px; right:  7%;" class="contents-header-shape contents-header-medium contents-header-yellow contents-header-square"></div>
+                            <div style="top: 80px; right: 13%;" class="contents-header-shape contents-header-large  contents-header-green  contents-header-circle"></div>
+                        </div>
+                        <div class="register-content">
+                            <form>
+                                <div class="register-input">
+                                    <label for="register-game-record-date">対戦日</label>
+                                    <input type="date" name="register-game-record-date" id="register-game-record-date">
+                                </div>
+                                <div class="register-input">
+                                    <label for="register-game-record-rate">戦闘力(対戦後)</label>
+                                    <input type="number" name="register-game-record-rate" id="register-game-record-rate" placeholder="(例) 765">
+                                </div>
+                                <div class="register-input">
+                                    <label for="register-game-record-stock">ストック差</label>
+                                    <input type="number" name="register-game-record-stock" id="register-game-record-stock" list="register-game-record-stock-list" placeholder="(例) 1, -2">
+                                    <datalist id="register-game-record-stock-list">
+                                        <option value=1></option>
+                                        <option value=-1></option>
+                                        <option value=2></option>
+                                        <option value=-2></option>
+                                        <option value=3></option>
+                                        <option value=-3></option>
+                                    </datalist>
+                                </div>
+                                <div class="register-input">
+                                    <label for="register-game-record-fighter">相手ファイター</label>
+                                    <input type="text" name="register-game-record-fighter" id="register-game-record-fighter" list="fighter-list">
+                                </div>
+                                <button type="button" id="register-game-record-button" class="register-game-record-button">
+                                    登録する
+                                </button>
+                            </form>
+                            <div class="register-game-record-result">
+                                <div class="register-game-record-result-caption">前回の結果:</div>
+                                <div class="register-game-record-result-content" id="register-game-record-result"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="contents">
+                <div class="register-wrapper">
+                    <div class="register-inner">
+                        <div class="register-header">
+                            <h1>Records</h1>
+                            <h2>戦績</h2>
+                            <div style="top: 50px; left:   6%;" class="contents-header-shape contents-header-medium contents-header-yellow contents-header-circle"></div>
+                            <div style="top: 70px; left:  14%;" class="contents-header-shape contents-header-large  contents-header-green  contents-header-square"></div>
+                            <div style="top: 60px; right:  7%;" class="contents-header-shape contents-header-medium contents-header-green  contents-header-square"></div>
+                            <div style="top: 80px; right: 13%;" class="contents-header-shape contents-header-large  contents-header-orange contents-header-circle"></div>
+                        </div>
+                        <div class="register-content">
+                            <h3>直近の戦績</h3>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+    <script src="../../js/util.js"></script>
+    <script src="../../js/Account.js"></script>
+    <script src="../../js/GameRecord.js"></script>
+    <script src="../../js/PostRecvData.js"></script>
+    <script src="../../js/PostSendData.js"></script>
+    <script src="../../js/Poster.js"></script>
+    <script src="../../js/LoadingHtml.js"></script>
+    <script src="../../js/FighterListHtml.js"></script>
+    <script src="../../js/AccountHtml.js"></script>
+    <script src="../../js/GameRecordHtml.js"></script>
+    <script src="../../js/Registerer.js"></script>
+    <script src="../../js/register.js"></script>
+</body>
+</html>
