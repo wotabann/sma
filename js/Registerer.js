@@ -14,8 +14,8 @@ class Registerer {
     }
     catch(e) {
       var errorString = "予期せぬエラーが発生しました。";
-      GameRecordHtml.SetResult(errorString);
-      alert(errorString);
+      GameRecordHtml.SetResult(e);
+      alert(e);
     }
   
     GameRecordHtml.SetRegisterButtonEnabled();
@@ -25,12 +25,20 @@ class Registerer {
   /**
    * @note 登録メイン処理
    */
-  static _doRegister() {
+  static async _doRegister() {
     // 入力フォームのチェック
     var errorString = this._validateInputs();
     if (errorString != "") {
       GameRecordHtml.SetResult(errorString);
       alert(errorString);
+      return;
+    }
+
+    // 確認ダイアログ
+    var confirmString = this._createConfirmString();
+    if (!window.confirm(confirmString)) {
+      LoadingHtml.ClearLoading();
+      GameRecordHtml.SetRegisterButtonEnabled();
       return;
     }
 
@@ -42,7 +50,7 @@ class Registerer {
 
     // ポスト
     LoadingHtml.ShowLoading();
-    var postRecvData = Poster.PostRegisterRequest(payload);
+    var postRecvData = await Poster.PostRegisterRequest(payload);
     LoadingHtml.ClearLoading();
 
     // 結果のチェック
@@ -74,6 +82,22 @@ class Registerer {
     GameRecordHtml.ClearRate();
     GameRecordHtml.ClearStock();
     GameRecordHtml.ClearFighter();
+  }
+
+
+  /**
+   * @note 登録確認テキストを作成する
+   * @return {String}
+   */
+  static _createConfirmString() {
+    var msg = "";
+    var gameRecord = GameRecordHtml.GetGameRecord();
+    msg = msg + "【日付】 " + gameRecord.Date + "\n";
+    msg = msg + "【戦闘力】 " + gameRecord.Rate + "\n";
+    msg = msg + "【スト差】 " + gameRecord.Stock + "\n";
+    msg = msg + "【相手】 " + gameRecord.Fighter + "\n";
+    msg = msg + "上記の内容でよろしいですか？"
+    return msg;
   }
 
 

@@ -12,8 +12,11 @@ class GameRecordHtml {
   static _getResultObject()  { return $("#register-game-record-result"); }
 
   // 各要素のセット
-  static SetDate(txt)   { this._getDateObject().val(txt); }
-  static SetResult(txt) { this._getResultObject().text(txt); }
+  static SetDate(txt)    { this._getDateObject().val(txt); }
+  static SetRate(txt)    { this._getRateObject().val(txt); }
+  static SetStock(txt)   { this._getStockObject().val(txt); }
+  static SetFighter(txt) { this._getFighterObject().val(txt); }
+  static SetResult(txt)  { this._getResultObject().text(txt); }
 
   // 各要素のクリア
   static ClearRate()    { this._getRateObject().val(""); }

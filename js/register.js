@@ -3,10 +3,14 @@
  * @note 画面ロード時のイベント
  */
 $(window).on("load", function() {
-  //AccountHtml.SetUserName(Util.GetDirectoryName());
-  //AccountHtml.SetFighter(GetMyFighter());
   AccountHtml.SetUserName("test");
   AccountHtml.SetFighter("マリオ");
+  //GameRecordHtml.SetRate(777);
+  //GameRecordHtml.SetStock(3);
+  //GameRecordHtml.SetFighter("スティーブ／アレックス");
+
+  //AccountHtml.SetUserName(Util.GetDirectoryName());
+  //AccountHtml.SetFighter(GetMyFighter());
   GameRecordHtml.SetDate(Util.GetToday());
   GameRecordHtml.SetRegisterButtonClickEvent(DoRegisterWrapper);
 });

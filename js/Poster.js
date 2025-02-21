@@ -1,8 +1,5 @@
 class Poster {
 
-  // 通信中フラグ
-  static _isCommunicating = false;
-
   // URL
   static _url = "https://script.google.com/macros/s/AKfycbxCdDEdjIlQVzbH6QzQ1A5Jq6Hbw0Z9nbGr2w1LH27hmUjumDlI5bbPTTt6Y3SWbJ73/exec";
 
@@ -14,17 +11,18 @@ class Poster {
   }
 
 
+  
   /**
    * @note   戦績登録のリクエストをする
-   * @param  {jsonObject} payload
+   * @param  {JsonObject} payload
    * @return {PostRecvData}
    */
-  static PostRegisterRequest(payload) {
+  static async PostRegisterRequest(payload) {
     var postSendData = new PostSendData();
     postSendData.Header = "register";
     postSendData.Payload = payload;
 
-    return Poster._post(postSendData);
+    return this._fetchData(postSendData);
   }
 
 
@@ -33,14 +31,34 @@ class Poster {
    * @param  {PostSendData} postSendData
    * @return {PostRecvData}
    */
-  static _post(postSendData) {
-    var postRecvData = null;
+  static async _fetchData(postSendData) {
+    const options = {
+      'method': "POST",
+      'body': JSON.stringify(postSendData.ToJsonObject()),
+      "Content-Type" : "application/json"
+    };
 
-    // 通信中かどうか確認
-    if (this._isCommunicating) {
+    try {
+      const response = await fetch(this._url, options);
+      const data = await response.json();
+      var postRecvData = new PostRecvData(data);
+      return postRecvData;
+    } catch (error) {
       return null;
     }
-    this._isCommunicating = true;
+  }
+
+
+  
+
+
+  /**
+   * @note   ポストする
+   * @param  {PostSendData} postSendData
+   * @return {PostRecvData}
+   */
+  static _post2(postSendData) {
+    var postRecvData = null;
 
     // ポスト実行
     $.ajax({
@@ -57,7 +75,6 @@ class Poster {
     .fail(function(jqXHR, textStatus, errorThrown) {
     })
     .always(function() {
-      this._isCommunicating = false;
     })
   
     return postRecvData;

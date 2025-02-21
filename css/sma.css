@@ -325,10 +325,10 @@ body {
 }
 .register-input label {
   display: inline-block;
-  width: 120px;
-  margin-right: 20px;
+  width: 80px;
+  margin-right: 10px;
   text-align: right;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
 }
 .register-input input {
   width: 75%;
@@ -337,7 +337,7 @@ body {
 }
 .register-game-record-button {
   display: block;
-  width: 180px;
+  width: 150px;
   padding: 6px 0;
   margin: 10px auto 0 auto;
   font-size: 1.0rem;
@@ -370,21 +370,20 @@ body {
   font-size: 0.9rem;
 }
 .register-game-record-result-caption {
-  width: 120px;
-  margin-right: 20px;
+  width: 80px;
+  margin-right: 10px;
   text-align: right;
   font-size: 0.9rem;
 }
 .register-game-record-result-content {
-  width: 400px;
   text-align: left;
   font-size: 0.9rem;
 }
 #register-account-username {
-  width: 250px;
+  width: 180px;
 }
 #register-account-fighter {
-  width: 250px;
+  width: 180px;
 }
 #register-game-record-date {
   width: 120px;
@@ -396,6 +395,6 @@ body {
   width: 120px;
 }
 #register-game-record-fighter {
-  width: 250px;
+  width: 180px;
 }
 
