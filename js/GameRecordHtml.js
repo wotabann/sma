@@ -8,8 +8,8 @@ class GameRecordHtml {
   static _getRateObject()    { return $("#register-game-record-rate"); }
   static _getStockObject()   { return $("#register-game-record-stock"); }
   static _getFighterObject() { return $("#register-game-record-fighter"); }
-  static _getButtonObject()  { return $("#register-game-record-button"); }
-  static _getResultObject()  { return $("#register-game-record-result"); }
+  static _getButtonObject()  { return $("#register-request-button"); }
+  static _getResultObject()  { return $("#register-request-result"); }
 
   // 各要素のセット
   static SetDate(txt)    { this._getDateObject().val(txt); }
@@ -27,7 +27,7 @@ class GameRecordHtml {
   /**
    * @note   登録ボタン押下時のイベントをセットする
    */
-  static SetRegisterButtonClickEvent(fnc) {
+  static SetRequestButtonClickEvent(fnc) {
     this._getButtonObject().on("click", fnc);
   }
 
@@ -35,7 +35,7 @@ class GameRecordHtml {
   /**
    * @note   登録ボタンを有効にする
    */
-  static SetRegisterButtonEnabled() {
+  static SetRequestButtonEnabled() {
     this._getButtonObject().prop("disabled", false);
   }
 
@@ -43,7 +43,7 @@ class GameRecordHtml {
   /**
    * @note   登録ボタンを無効にする
    */
-  static SetRegisterButtonDisabled() {
+  static SetRequestButtonDisabled() {
     this._getButtonObject().prop("disabled", true);
   }
 

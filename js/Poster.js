@@ -11,27 +11,12 @@ class Poster {
   }
 
 
-  
-  /**
-   * @note   戦績登録のリクエストをする
-   * @param  {JsonObject} payload
-   * @return {PostRecvData}
-   */
-  static async PostRegisterRequest(payload) {
-    var postSendData = new PostSendData();
-    postSendData.Header = "register";
-    postSendData.Payload = payload;
-
-    return this._fetchData(postSendData);
-  }
-
-
   /**
    * @note   ポストする
    * @param  {PostSendData} postSendData
    * @return {PostRecvData}
    */
-  static async _fetchData(postSendData) {
+  static async Post(postSendData) {
     const options = {
       'method': "POST",
       'body': JSON.stringify(postSendData.ToJsonObject()),
@@ -43,10 +28,12 @@ class Poster {
       const data = await response.json();
       var postRecvData = new PostRecvData(data);
       return postRecvData;
-    } catch (error) {
+    }
+    catch (e) {
       return null;
     }
   }
+
 
 
   

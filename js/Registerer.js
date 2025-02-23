@@ -6,113 +6,76 @@ class Registerer {
   /**
    * @note 登録ボタン押下時のイベント
    */
-  static DoRegister() {
-    GameRecordHtml.SetRegisterButtonDisabled();
+  static async Request() {
+    var errorString = "";
+
+    GameRecordHtml.SetResult("");
+    GameRecordHtml.SetRequestButtonDisabled();
 
     try {
-      this._doRegister();
+      errorString = await this._request();
     }
     catch(e) {
-      var errorString = "予期せぬエラーが発生しました。";
-      GameRecordHtml.SetResult(e);
-      alert(e);
+      errorString = "予期せぬエラーが発生しました。";
     }
-  
-    GameRecordHtml.SetRegisterButtonEnabled();
+
+    if (errorString != "") {
+      GameRecordHtml.SetResult(errorString);
+      alert(errorString);
+    }
+
+    GameRecordHtml.SetRequestButtonEnabled();
   }
 
 
   /**
    * @note 登録メイン処理
+   * @return {String}
    */
-  static async _doRegister() {
+  static async _request() {
+    // 汎用データ
+    var errorString;
+    var gameRecordString;
+
+    // 入力データの取得
+    var account = AccountHtml.GetAccount();
+    var gameRecord = GameRecordHtml.GetGameRecord();
+
     // 入力フォームのチェック
-    var errorString = this._validateInputs();
+    errorString = this._validateInputs();
     if (errorString != "") {
-      GameRecordHtml.SetResult(errorString);
-      alert(errorString);
-      return;
+      return errorString;
     }
 
     // 確認ダイアログ
-    var confirmString = this._createConfirmString();
-    if (!window.confirm(confirmString)) {
-      LoadingHtml.ClearLoading();
-      GameRecordHtml.SetRegisterButtonEnabled();
-      return;
+    gameRecordString = this._createGameRecordText(gameRecord);
+    if (!window.confirm("下記の内容で登録しますか？\n" + gameRecordString)) {
+      return "";
     }
-
-    // ペイロード作成
-    var payload = {
-      Account:    AccountHtml.GetAccount().ToJsonObject(),
-      GameRecord: GameRecordHtml.GetGameRecord().ToJsonObject(),
-    };
 
     // ポスト
     LoadingHtml.ShowLoading();
-    var postRecvData = await Poster.PostRegisterRequest(payload);
+    var postSendData = PostDataManager.CreateRegisterRequest(account, gameRecord);
+    var postRecvData = await Poster.Post(postSendData);
     LoadingHtml.ClearLoading();
 
     // 結果のチェック
     if (postRecvData == null) {
-      errorString = "予期せぬエラーが発生しました。";
-      GameRecordHtml.SetResult(errorString);
-      alert(errorString);
-      return;
+      return "サーバーとの通信中に予期せぬエラーが発生しました。";
     }
     if (postRecvData.ErrorString != "") {
-      errorString = postRecvData.ErrorString;
-      GameRecordHtml.SetResult(errorString);
-      alert(errorString);
-      return;
+      return postRecvData.ErrorString;
     }
-
-    // メッセージ
-    GameRecordHtml.SetResult(this._createResultString(postRecvData));
 
     // 入力フォームをクリア
     this._clearInputs();
-  }
 
+    // 登録結果テキストを更新
+    var responseGameRecord = PostDataManager.ParseGameRecordFromRegisterResponse(postRecvData);
+    gameRecordString = this._createGameRecordText(responseGameRecord);
+    GameRecordHtml.SetResult(gameRecordString);
 
-  /**
-   * @note 入力フォームをクリアする
-   */
-  static _clearInputs() {
-    GameRecordHtml.ClearRate();
-    GameRecordHtml.ClearStock();
-    GameRecordHtml.ClearFighter();
-  }
-
-
-  /**
-   * @note 登録確認テキストを作成する
-   * @return {String}
-   */
-  static _createConfirmString() {
-    var msg = "";
-    var gameRecord = GameRecordHtml.GetGameRecord();
-    msg = msg + "【日付】 " + gameRecord.Date + "\n";
-    msg = msg + "【戦闘力】 " + gameRecord.Rate + "\n";
-    msg = msg + "【スト差】 " + gameRecord.Stock + "\n";
-    msg = msg + "【相手】 " + gameRecord.Fighter + "\n";
-    msg = msg + "上記の内容でよろしいですか？"
-    return msg;
-  }
-
-
-  /**
-   * @note 結果テキストを作成する
-   * @param  {PostRecvData} postRecvData
-   * @return {String}
-   */
-  static _createResultString(postRecvData) {
-    var msg = "";
-    msg = msg + postRecvData.Payload.Date + ", ";
-    msg = msg + postRecvData.Payload.Rate + ", ";
-    msg = msg + postRecvData.Payload.Stock + ", ";
-    msg = msg + postRecvData.Payload.Fighter;
-    return msg;
+    return "";
   }
 
 
@@ -124,6 +87,7 @@ class Registerer {
     var pattern;
     var matchResult;
 
+    // 入力データを取得
     var account = AccountHtml.GetAccount();
     var gameRecord = GameRecordHtml.GetGameRecord();
 
@@ -166,6 +130,31 @@ class Registerer {
     }
 
     return "";
+  }
+
+
+  /**
+   * @note 対戦結果を1行テキストにする
+   * @param  {GameRecord} gameRecord
+   * @return {String}
+   */
+  static _createGameRecordText(gameRecord) {
+    var msg = "";
+    msg = msg + gameRecord.Date + ", ";
+    msg = msg + gameRecord.Rate + ", ";
+    msg = msg + gameRecord.Stock + ", ";
+    msg = msg + gameRecord.Fighter;
+    return msg;
+  }
+
+
+  /**
+   * @note 入力フォームをクリアする
+   */
+  static _clearInputs() {
+    GameRecordHtml.ClearRate();
+    GameRecordHtml.ClearStock();
+    GameRecordHtml.ClearFighter();
   }
 
 }

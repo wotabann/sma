@@ -31,20 +31,26 @@ h2 {
   padding-bottom: 10px;
 }
 h3 {
-  font-size: 16px;
+  font-size: 14px;
   font-weight: normal;
   text-align: left;
   letter-spacing: 0.1rem;
   color: #333;
   padding: 2px 7px;
-  border-left: 3px solid rgba(0, 164, 105, 1.0);
-  border-bottom: 1px solid rgba(0, 164, 105, 1.0);
+  border-left: 3px solid rgba(0, 73, 134, 1.0);
+  border-bottom: 1px solid rgba(0, 73, 134, 1.0);
 }
 ul {
   padding-left: 0;
 }
 li {
   list-style: none;
+}
+.positive-font {
+  color: green;
+}
+.negative-font {
+  color: red;
 }
 
 /******************************************************************************/
@@ -335,7 +341,7 @@ body {
   padding: 3px;
   text-align: left;
 }
-.register-game-record-button {
+.register-request-button {
   display: block;
   width: 150px;
   padding: 6px 0;
@@ -351,31 +357,29 @@ body {
   border-radius: 30px;
   transition: 0.3s;
 }
-.register-game-record-button:hover {
-  background-color: #fff;
-  color: rgba(0, 164, 105, 1.0);
+.register-request-button:hover {
   cursor: pointer;
 }
-.register-game-record-button:disabled {
+.register-request-button:disabled {
   background-color: #bbb;
   border-color: #bbb;
   color: #fff;
   cursor: default;
 }
-.register-game-record-result {
+.register-request-result {
   display: flex !important;
   align-items: flex-start;
   width: 100%;
   margin: 10px auto 0 auto;
   font-size: 0.9rem;
 }
-.register-game-record-result-caption {
+.register-request-result-caption {
   width: 80px;
   margin-right: 10px;
   text-align: right;
   font-size: 0.9rem;
 }
-.register-game-record-result-content {
+.register-request-result-content {
   text-align: left;
   font-size: 0.9rem;
 }
@@ -398,3 +402,94 @@ body {
   width: 180px;
 }
 
+
+
+/******************************************************************************/
+/* Dump                                                                       */
+/******************************************************************************/
+.dump-wrapper {
+  width: 100%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.dump-header h1 {
+  color: rgba(0, 73, 134, 1.0);
+}
+.dump-header h2 {
+  color: #333;
+}
+.dump-request-button {
+  display: block;
+  width: 150px;
+  padding: 6px 0;
+  margin: 10px auto 0 auto;
+  font-size: 1.0rem;
+  text-align: center;
+  letter-spacing: 0.1rem;
+  text-decoration: none;
+  background-color: rgba(0, 73, 134, 1.0);
+  color: #fff;
+  border: 2px solid transparent;
+  border-color: rgba(0, 73, 134, 1.0);
+  border-radius: 30px;
+  transition: 0.3s;
+}
+.dump-request-button:hover {
+  cursor: pointer;
+}
+.dump-request-button:disabled {
+  background-color: #bbb;
+  border-color: #bbb;
+  color: #fff;
+  cursor: default;
+}
+.dump-inner {
+  background-color: #fff;
+  border-radius: 30px;
+  width: 98%;
+  margin: 0 auto;
+  padding-top: 10px;
+  padding-bottom: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+  box-shadow: 0 0px 16px rgba(0, 73, 134, .50);
+}
+.dump-content {
+  width: 98%;
+  margin: 0 auto;
+  text-align: center;
+}
+.dump-history-list {
+  display: flex;
+  justify-content: center;
+  font-size: 0.8rem;
+  padding: 2px 0;
+}
+.dump-history-list:first-of-type {
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 3px;
+  font-weight: bold;
+}
+.dump-history-list-date {
+  width: 140px;
+  text-align: right;
+  margin-right: 10px;
+}
+.dump-history-list-rate {
+  width: 80px;
+  text-align: right;
+  margin-right: 10px;
+}
+.dump-history-list-stock {
+  width: 80px;
+  text-align: right;
+  margin-right: 20px;
+}
+.dump-history-list-fighter {
+  width: 200px;
+  text-align: left;
+}
+#dump-history-chart {
+  height: 400px;
+  display: none;
+}

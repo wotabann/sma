@@ -3,24 +3,23 @@
  * @note 画面ロード時のイベント
  */
 $(window).on("load", function() {
-  AccountHtml.SetUserName("test");
-  AccountHtml.SetFighter("マリオ");
-  //GameRecordHtml.SetRate(777);
-  //GameRecordHtml.SetStock(3);
-  //GameRecordHtml.SetFighter("スティーブ／アレックス");
-
-  //AccountHtml.SetUserName(Util.GetDirectoryName());
-  //AccountHtml.SetFighter(GetMyFighter());
+  AccountHtml.SetUserName(Util.GetDirectoryName());
+  AccountHtml.SetFighter(GetMyFighter());
   GameRecordHtml.SetDate(Util.GetToday());
-  GameRecordHtml.SetRegisterButtonClickEvent(DoRegisterWrapper);
+  GameRecordHtml.SetRequestButtonClickEvent(RequestRegister);
+  DumpHtml.SetRequestButtonClickEvent(RequestDump);
 });
 
+
+function RequestDump() {
+  Dumper.Request();
+}
 
 /**
  * @note 登録する
  */
-function DoRegisterWrapper() {
-  Registerer.DoRegister();
+function RequestRegister() {
+  Registerer.Request();
 }
 
 
@@ -32,8 +31,10 @@ function GetMyFighter() {
   switch(dirName) {
     case "karinsama":
       return "インクリング";
-    case "deme":
-      return "ピカチュウ";
+      case "deme":
+        return "ピカチュウ";
+      case "test":
+        return "マリオ";
     default:
       return "";
   }
