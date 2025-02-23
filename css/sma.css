@@ -471,7 +471,7 @@ body {
   font-weight: bold;
 }
 .dump-history-list-date {
-  width: 140px;
+  width: 80px;
   text-align: right;
   margin-right: 10px;
 }
