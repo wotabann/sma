@@ -48,6 +48,9 @@ class DumpHistoryHtml {
     var listHeader = this._getListHeaderRowObject();
     var listRow = listHeader.clone().appendTo(list);
 
+    var date = gameRecord.Date.substr(5, 5).replace("-", "/");
+
+    listRow.children(".dump-history-list-date").text(date);
     listRow.children(".dump-history-list-rate").text(gameRecord.Rate + "万");
     listRow.children(".dump-history-list-stock").text(gameRecord.Stock);
     listRow.children(".dump-history-list-fighter").text(gameRecord.Fighter);
@@ -68,10 +71,17 @@ class DumpHistoryHtml {
   static _updateChart(gameRecords, maxCount) {
     var labels = [];
     var values = [];
+    var suggestedMax = 0;
+    var suggestedMin = 2000;
     for (let i = 0; i < maxCount; i++) {
       labels.push("");
       values.push(gameRecords.Index(i).Rate);
+      suggestedMax = Math.max(suggestedMax, gameRecords.Index(i).Rate);
+      suggestedMin = Math.min(suggestedMin, gameRecords.Index(i).Rate);
     }
+
+    suggestedMax = (Math.ceil(suggestedMax / 100) * 100) + 100;
+    suggestedMin = (Math.floor(suggestedMin / 100) * 100) - 100;
 
     var chartObject = this._getChartObject();
     chartObject.show();
@@ -99,14 +109,14 @@ class DumpHistoryHtml {
         scales: {
           yAxes: [{
             ticks: {
-              suggestedMax: 1000,
-              suggestedMin: 200,
+              suggestedMax: suggestedMax,
+              suggestedMin: suggestedMin,
               stepSize: 100,
               callback: function(value, index, values){
                 return  value +  '万'
               }
             }
-          }]
+          }],
         },
       }
     });
