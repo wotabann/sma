@@ -4,10 +4,11 @@ class DumpHistoryHtml {
 
   
   // 各要素の取得
-  static _getListObject()          { return $("#dump-history-list"); }
-  static _getChartObject()         { return $("#dump-history-chart"); }
-  static _getListRowObjects()      { return this._getListObject().children(".dump-history-list") ;}
-  static _getListHeaderRowObject() { return this._getListObject().children(".dump-history-list:first") ;}
+  static _getListObject()           { return $("#dump-history-list"); }
+  static _getListRowObjects()       { return $(".dump-history-list-row"); }
+  static _getListHeaderRowObject()  { return $(".dump-history-list-row:first") ;}
+  static _getChartObject()          { return $("#dump-history-chart-canvas"); }
+  static _getFilteredChartObject()  { return $("#dump-history-filtered-chart-canvas"); }
 
 
   /**
@@ -48,12 +49,12 @@ class DumpHistoryHtml {
     var listHeader = this._getListHeaderRowObject();
     var listRow = listHeader.clone().appendTo(list);
 
-    var date = gameRecord.Date.substr(5, 5).replace("-", "/");
+    var date = gameRecord.Date.substr(5, 5);
 
-    listRow.children(".dump-history-list-date").text(date);
-    listRow.children(".dump-history-list-rate").text(gameRecord.Rate + "万");
-    listRow.children(".dump-history-list-stock").text(gameRecord.Stock);
-    listRow.children(".dump-history-list-fighter").text(gameRecord.Fighter);
+    listRow.children(".dump-history-list-row-date").text(date);
+    listRow.children(".dump-history-list-row-rate").text(gameRecord.Rate + "万");
+    listRow.children(".dump-history-list-row-stock").text(gameRecord.Stock);
+    listRow.children(".dump-history-list-row-fighter").text(gameRecord.Fighter);
 
     if (gameRecord.Stock > 0) {
       listRow.addClass("positive-font");
@@ -73,15 +74,15 @@ class DumpHistoryHtml {
     var values = [];
     var suggestedMax = 0;
     var suggestedMin = 2000;
-    for (let i = 0; i < maxCount; i++) {
+    for (let i = 0; i < gameRecords.Length(); i++) {
       labels.push("");
       values.push(gameRecords.Index(i).Rate);
       suggestedMax = Math.max(suggestedMax, gameRecords.Index(i).Rate);
       suggestedMin = Math.min(suggestedMin, gameRecords.Index(i).Rate);
     }
 
-    suggestedMax = (Math.ceil(suggestedMax / 100) * 100) + 100;
-    suggestedMin = (Math.floor(suggestedMin / 100) * 100) - 100;
+    suggestedMax = (Math.ceil((suggestedMax / 100) + 0.5) * 100);
+    suggestedMin = (Math.floor((suggestedMin / 100) - 0.5) * 100);
 
     var chartObject = this._getChartObject();
     chartObject.show();
@@ -95,7 +96,79 @@ class DumpHistoryHtml {
             label: '戦闘力[万]',
             data: values,
             borderWidth: 1,
-            borderColor: "rgba(255,0,0,1)",
+            borderColor: "rgba(0,73,134,1.0)",
+            backgroundColor: "rgba(0,0,0,0)",
+            pointRadius: 0,
+            tension: 0
+          }
+        ],
+      },
+      options: {
+        title: {
+          display: false,
+        },
+        scales: {
+          yAxes: [{
+            ticks: {
+              suggestedMax: suggestedMax,
+              suggestedMin: suggestedMin,
+              stepSize: 100,
+              callback: function(value, index, values){
+                return  value +  '万'
+              }
+            }
+          }],
+        },
+      }
+    });
+  }
+
+  /**
+   * @note フィルタ後チャートを作成する。
+   * @param {GameRecords} gameRecords
+   * @param {Integer} maxCount
+   */
+  static _updateFilteredChart(gameRecords, maxCount) {
+    var labels = [];
+    var values = [];
+    var suggestedMax = 0;
+    var suggestedMin = 2000;
+
+    var cnt = 0;
+    var rate = 0;
+    for (let i = (gameRecords.Length() - 1); i >= 0; i--) {
+      cnt++;
+      rate += gameRecords.Index(i).Rate;
+      if ((i % 3) == 0) {
+        labels.push("");
+        values.push(rate / cnt);
+        suggestedMax = Math.max(suggestedMax, rate / cnt);
+        suggestedMin = Math.min(suggestedMin, rate / cnt);
+        cnt = 0;
+        rate = 0;
+      }
+      if (values.length >= 30) {
+        break;
+      }
+    }
+    values = values.reverse();
+    
+    suggestedMax = (Math.ceil((suggestedMax / 100) + 0.5) * 100);
+    suggestedMin = (Math.floor((suggestedMin / 100) - 0.5) * 100);
+
+    var chartObject = this._getFilteredChartObject();
+    chartObject.show();
+
+    var myLineChart = new Chart(chartObject, {
+      type: 'line',
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            label: '戦闘力[万]',
+            data: values,
+            borderWidth: 1,
+            borderColor: "rgba(0,73,134,1.0)",
             backgroundColor: "rgba(0,0,0,0)",
             pointRadius: 0,
             tension: 0

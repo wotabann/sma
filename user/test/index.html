@@ -214,18 +214,58 @@
                         </button>
 
                         
-                        <div class="dump-content">
-                            <h3>直近の戦績(チャート)</h3>
-                            <canvas id="dump-history-chart"></canvas>
+                        <div class="dump-content" id="dump-history-chart">
+                            <h3>戦闘力の推移</h3>
+                            <canvas id="dump-history-chart-canvas"></canvas>
                         </div>
 
                         <div class="dump-content" id="dump-history-list">
-                            <h3>直近の戦績</h3>
+                            <h3>直近の戦績(30戦)</h3>
                             <div class="dump-history-list">
-                                <div class="dump-history-list-date">日付</div>
-                                <div class="dump-history-list-rate">戦闘力</div>
-                                <div class="dump-history-list-stock">スト差</div>
-                                <div class="dump-history-list-fighter">相手キャラ</div>
+                                <div class="dump-history-list-row">
+                                    <div class="dump-history-list-row-date">日付</div>
+                                    <div class="dump-history-list-row-rate">戦闘力</div>
+                                    <div class="dump-history-list-row-stock">スト差</div>
+                                    <div class="dump-history-list-row-fighter">相手キャラ</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="dump-content" id="dump-ranking-win-rate">
+                            <h3>ランキング(勝率)</h3>
+                            <div class="dump-ranking">
+                                <div class="dump-ranking-best" id="dump-ranking-win-rate-best">
+                                    <div class="dump-ranking-row">
+                                        <div class="dump-ranking-row-rate">勝率</div>
+                                        <div class="dump-ranking-row-fighter">得意キャラ</div>
+                                    </div>
+                                    <div class="dump-ranking-row">
+                                        <div class="dump-ranking-row-rate">80%</div>
+                                        <div class="dump-ranking-row-fighter">ｐｐｐｐｐｐ</div>
+                                    </div>
+                                    <div class="dump-ranking-row">
+                                        <div class="dump-ranking-row-rate">75%</div>
+                                        <div class="dump-ranking-row-fighter">相手キャラ</div>
+                                    </div>
+                                </div>
+                                <div class="dump-ranking-worst" id="dump-ranking-win-rate-worst">
+                                    <div class="dump-ranking-row">
+                                        <div class="dump-ranking-row-rate">勝率</div>
+                                        <div class="dump-ranking-row-fighter">苦手キャラ</div>
+                                    </div>
+                                    <div class="dump-ranking-row">
+                                        <div class="dump-ranking-row-rate">100%</div>
+                                        <div class="dump-ranking-row-fighter">ああああああああああ</div>
+                                    </div>
+                                    <div class="dump-ranking-row">
+                                        <div class="dump-ranking-row-rate">100%</div>
+                                        <div class="dump-ranking-row-fighter">ああああああああああ</div>
+                                    </div>
+                                    <div class="dump-ranking-row">
+                                        <div class="dump-ranking-row-rate">100%</div>
+                                        <div class="dump-ranking-row-fighter">ああああああああああ</div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
@@ -238,21 +278,31 @@
     </div>
 
     <script src="../../js/util.js"></script>
+
     <script src="../../js/Account.js"></script>
     <script src="../../js/GameRecord.js"></script>
     <script src="../../js/GameRecords.js"></script>
+
+    <script src="../../js/FighterRecord.js"></script>
+    <script src="../../js/FighterRecords.js"></script>
+    <script src="../../js/FighterRecordAnalyzer.js"></script>
+
     <script src="../../js/Poster.js"></script>
     <script src="../../js/PostRecvData.js"></script>
     <script src="../../js/PostSendData.js"></script>
     <script src="../../js/PostDataManager.js"></script>
+
     <script src="../../js/LoadingHtml.js"></script>
     <script src="../../js/FighterListHtml.js"></script>
     <script src="../../js/AccountHtml.js"></script>
     <script src="../../js/GameRecordHtml.js"></script>
     <script src="../../js/DumpHistoryHtml.js"></script>
+    <script src="../../js/DumpWinRateHtml.js"></script>
     <script src="../../js/DumpHtml.js"></script>
+
     <script src="../../js/Registerer.js"></script>
     <script src="../../js/Dumper.js"></script>
+
     <script src="../../js/register.js"></script>
 </body>
 </html>

@@ -63,6 +63,15 @@ class Dumper {
     DumpHistoryHtml.Update(gameRecords);
 
     return "";
+
+    // FighterRecords作成
+    var fighterRecordAnalyzer = new FighterRecordAnalyzer();
+    for (let i = 0; i < gameRecords.Length(); i++) {
+      fighterRecordAnalyzer.AddGameRecord(gameRecords.Index(i));
+    }
+    DumpWinRateHtml.Update(fighterRecordAnalyzer.FighterRecords());
+    
+    return "";
   }
 
 

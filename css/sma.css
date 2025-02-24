@@ -459,7 +459,11 @@ body {
   margin: 0 auto;
   text-align: center;
 }
+
 .dump-history-list {
+  width: 100%;
+}
+.dump-history-list-row {
   display: flex;
   justify-content: center;
   font-size: 0.8rem;
@@ -470,26 +474,86 @@ body {
   margin-bottom: 3px;
   font-weight: bold;
 }
-.dump-history-list-date {
+.dump-history-list-row-date {
   width: 80px;
   text-align: right;
   margin-right: 10px;
 }
-.dump-history-list-rate {
+.dump-history-list-row-rate {
   width: 80px;
   text-align: right;
   margin-right: 10px;
 }
-.dump-history-list-stock {
+.dump-history-list-row-stock {
   width: 80px;
   text-align: right;
   margin-right: 20px;
 }
-.dump-history-list-fighter {
+.dump-history-list-row-fighter {
   width: 200px;
   text-align: left;
 }
-#dump-history-chart {
-  height: 400px;
+#dump-history-chart-canvas {
+  height: 300px;
   display: none;
 }
+#dump-history-filtered-chart-canvas {
+  height: 300px;
+  display: none;
+}
+
+.dump-ranking {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin: 0 auto;
+  font-size: 0.8rem;
+}
+.dump-ranking-kind {
+  font-weight: normal;
+  text-align: center;
+  letter-spacing: 0.1rem;
+  color: #333;
+  padding: 0px 2px;
+  margin-bottom: 8px;
+  border-bottom: 1px solid #ccc;
+}
+.dump-ranking-best {
+  width: 50%;
+  border-right: 1px solid #ccc;
+}
+.dump-ranking-worst {
+  width: 50%;
+}
+.dump-ranking-row {
+  display: flex;
+  justify-content: center;
+  padding: 1px 0;
+}
+.dump-ranking-row:first-of-type {
+  border-bottom: 1px solid #ccc;
+  margin: 3px 0;
+  padding: 3px 0;
+  font-weight: bold;
+}
+.dump-ranking-row-rate {
+  width: 20%;
+  margin-right: 20px;
+  text-align: right;
+}
+.dump-ranking-row-count {
+  width: 70%;
+  margin-right: 20px;
+  text-align: right;
+}
+.dump-ranking-row-fighter {
+  width: 200px;
+  text-align: left;
+}
+
+
+
+#dump-ranking-win-rate {
+  display: none;
+}
+
