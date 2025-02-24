@@ -11,10 +11,6 @@ class FighterRecord {
     return this.WinCount / this.GameCount;
   }
 
-  LoseRate() {
-    return this.LoseCount / this.GameCount;
-  }
-
   StockRate() {
     return this.TotalStock / this.GameCount;
   }

@@ -3,12 +3,12 @@ class AccountHtml {
   }
   
   // 各要素の取得
-  static _getUserNameObject() { return $("#register-account-username"); }
-  static _getFighterObject()  { return $("#register-account-fighter"); }
+  static _getUserNameHtml() { return $("#register-account-username"); }
+  static _getFighterHtml()  { return $("#register-account-fighter"); }
 
   // 各要素のセット
-  static SetUserName(txt) { this._getUserNameObject().val(txt); }
-  static SetFighter(txt)  { this._getFighterObject().val(txt); }
+  static SetUserName(txt) { this._getUserNameHtml().val(txt); }
+  static SetFighter(txt)  { this._getFighterHtml().val(txt); }
 
   /**
    * @note   Accountの入力値を取得する
@@ -16,8 +16,8 @@ class AccountHtml {
    */
   static GetAccount() {
     var account = new Account();
-    account.UserName = this._getUserNameObject().val();
-    account.Fighter =  this._getFighterObject().val();
+    account.UserName = this._getUserNameHtml().val();
+    account.Fighter =  this._getFighterHtml().val();
     return account;
   }
 }

@@ -40,11 +40,11 @@ class FighterRecords {
     return null;
   }
 
-  /**
-   * @param  {function} fnc
-   * @return {}
-   */
-  Sort(fnc) {
-    this._fighterRecords.sort(fnc);
-  }
+  // 各種ソート
+  SortByGameCount() { this._fighterRecords.sort(function(a, b) { return b.GameCount - a.GameCount; }); }
+  SortByWinCount()  { this._fighterRecords.sort(function(a, b) { return b.WinCount  - a.WinCount;  }); }
+  SortByLoseCount() { this._fighterRecords.sort(function(a, b) { return b.LoseCount - a.LoseCount; }); }
+  SortByWinRate()   { this._fighterRecords.sort(function(a, b) { return b.WinRate() - a.WinRate(); }); }
+  SortByWinRateR()  { this._fighterRecords.sort(function(a, b) { return a.WinRate() - b.WinRate(); }); }
+
 }

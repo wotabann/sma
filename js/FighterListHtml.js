@@ -4,7 +4,7 @@ class FighterListHtml {
 
   
   // 各要素の取得
-  static _getFighterListObject() { return $("#fighter-list"); }
+  static _getFighterListHtml() { return $("#fighter-list"); }
 
 
   /**
@@ -13,7 +13,7 @@ class FighterListHtml {
    * @return {Boolean}
    */
   static IsExist(fighter) {
-    var matchResult = this._getFighterListObject().children("option").filter(function(index){
+    var matchResult = this._getFighterListHtml().children("option").filter(function(index){
       return $(this).val() === fighter
     });
     return (matchResult.val() != undefined);

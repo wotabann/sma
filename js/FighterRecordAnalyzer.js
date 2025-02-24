@@ -28,16 +28,6 @@ class FighterRecordAnalyzer {
   }
 
   /**
-   * @return {FighterRecords}
-   */
-  SortByWinRate() {
-    this._fighterRecords.Sort(function(a, b) {
-      return a.WinRate() > b.WinRate();
-    });
-    return this._fighterRecords;
-  }
-
-  /**
    * @param  {GameRecord} gameRecord
    * @return {FighterRecord}
    */

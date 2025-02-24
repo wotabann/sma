@@ -460,7 +460,10 @@ body {
   text-align: center;
 }
 
-.dump-history-list {
+#dump-history-list-wrapper {
+  display: none;
+}
+#dump-history-list {
   width: 100%;
 }
 .dump-history-list-row {
@@ -469,7 +472,7 @@ body {
   font-size: 0.8rem;
   padding: 2px 0;
 }
-.dump-history-list:first-of-type {
+.dump-history-list-row:first-of-type {
   border-bottom: 1px solid #ccc;
   margin-bottom: 3px;
   font-weight: bold;
@@ -485,7 +488,7 @@ body {
   margin-right: 10px;
 }
 .dump-history-list-row-stock {
-  width: 80px;
+  width: 60px;
   text-align: right;
   margin-right: 20px;
 }
@@ -493,13 +496,12 @@ body {
   width: 200px;
   text-align: left;
 }
-#dump-history-chart-canvas {
-  height: 300px;
+
+#dump-history-chart-wrapper {
   display: none;
 }
-#dump-history-filtered-chart-canvas {
+#dump-history-chart-canvas {
   height: 300px;
-  display: none;
 }
 
 .dump-ranking {
@@ -508,15 +510,6 @@ body {
   width: 100%;
   margin: 0 auto;
   font-size: 0.8rem;
-}
-.dump-ranking-kind {
-  font-weight: normal;
-  text-align: center;
-  letter-spacing: 0.1rem;
-  color: #333;
-  padding: 0px 2px;
-  margin-bottom: 8px;
-  border-bottom: 1px solid #ccc;
 }
 .dump-ranking-best {
   width: 50%;
@@ -537,12 +530,12 @@ body {
   font-weight: bold;
 }
 .dump-ranking-row-rate {
-  width: 20%;
+  width: 80px;
   margin-right: 20px;
   text-align: right;
 }
 .dump-ranking-row-count {
-  width: 70%;
+  width: 250px;
   margin-right: 20px;
   text-align: right;
 }
@@ -552,8 +545,7 @@ body {
 }
 
 
-
-#dump-ranking-win-rate {
+#dump-ranking-win-rate-wrapper {
   display: none;
 }
 

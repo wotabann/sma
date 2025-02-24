@@ -4,7 +4,7 @@ class DumpHtml {
 
   
   // 各要素の取得
-  static _getRequestButtonObject()  { return $("#dump-request-button"); }
+  static _getRequestButtonHtml()  { return $("#dump-request-button"); }
 
   // 各要素のセット
 
@@ -18,7 +18,7 @@ class DumpHtml {
    * @note   ボタン押下時のイベントをセットする
    */
   static SetRequestButtonClickEvent(fnc) {
-    this._getRequestButtonObject().on("click", fnc);
+    this._getRequestButtonHtml().on("click", fnc);
   }
 
 
@@ -26,7 +26,7 @@ class DumpHtml {
    * @note   ボタンを有効にする
    */
   static SetRequestButtonEnabled() {
-    this._getRequestButtonObject().prop("disabled", false);
+    this._getRequestButtonHtml().prop("disabled", false);
   }
 
 
@@ -34,7 +34,7 @@ class DumpHtml {
    * @note   ボタンを無効にする
    */
   static SetRequestButtonDisabled() {
-    this._getRequestButtonObject().prop("disabled", true);
+    this._getRequestButtonHtml().prop("disabled", true);
   }
 
 }

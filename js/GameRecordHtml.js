@@ -4,31 +4,31 @@ class GameRecordHtml {
 
   
   // 各要素の取得
-  static _getDateObject()    { return $("#register-game-record-date"); }
-  static _getRateObject()    { return $("#register-game-record-rate"); }
-  static _getStockObject()   { return $("#register-game-record-stock"); }
-  static _getFighterObject() { return $("#register-game-record-fighter"); }
-  static _getButtonObject()  { return $("#register-request-button"); }
-  static _getResultObject()  { return $("#register-request-result"); }
+  static _getDateHtml()    { return $("#register-game-record-date"); }
+  static _getRateHtml()    { return $("#register-game-record-rate"); }
+  static _getStockHtml()   { return $("#register-game-record-stock"); }
+  static _getFighterHtml() { return $("#register-game-record-fighter"); }
+  static _getButtonHtml()  { return $("#register-request-button"); }
+  static _getResultHtml()  { return $("#register-request-result"); }
 
   // 各要素のセット
-  static SetDate(txt)    { this._getDateObject().val(txt); }
-  static SetRate(txt)    { this._getRateObject().val(txt); }
-  static SetStock(txt)   { this._getStockObject().val(txt); }
-  static SetFighter(txt) { this._getFighterObject().val(txt); }
-  static SetResult(txt)  { this._getResultObject().text(txt); }
+  static SetDate(txt)    { this._getDateHtml().val(txt); }
+  static SetRate(txt)    { this._getRateHtml().val(txt); }
+  static SetStock(txt)   { this._getStockHtml().val(txt); }
+  static SetFighter(txt) { this._getFighterHtml().val(txt); }
+  static SetResult(txt)  { this._getResultHtml().text(txt); }
 
   // 各要素のクリア
-  static ClearRate()    { this._getRateObject().val(""); }
-  static ClearStock()   { this._getStockObject().val(""); }
-  static ClearFighter() { this._getFighterObject().val(""); }
+  static ClearRate()    { this._getRateHtml().val(""); }
+  static ClearStock()   { this._getStockHtml().val(""); }
+  static ClearFighter() { this._getFighterHtml().val(""); }
 
 
   /**
    * @note   登録ボタン押下時のイベントをセットする
    */
   static SetRequestButtonClickEvent(fnc) {
-    this._getButtonObject().on("click", fnc);
+    this._getButtonHtml().on("click", fnc);
   }
 
 
@@ -36,7 +36,7 @@ class GameRecordHtml {
    * @note   登録ボタンを有効にする
    */
   static SetRequestButtonEnabled() {
-    this._getButtonObject().prop("disabled", false);
+    this._getButtonHtml().prop("disabled", false);
   }
 
 
@@ -44,7 +44,7 @@ class GameRecordHtml {
    * @note   登録ボタンを無効にする
    */
   static SetRequestButtonDisabled() {
-    this._getButtonObject().prop("disabled", true);
+    this._getButtonHtml().prop("disabled", true);
   }
 
 
@@ -54,10 +54,10 @@ class GameRecordHtml {
    */
   static GetGameRecord() {
     var gameRecord = new GameRecord();
-    gameRecord.Date    = this._getDateObject().val();
-    gameRecord.Rate    = this._getRateObject().val();
-    gameRecord.Stock   = this._getStockObject().val();
-    gameRecord.Fighter = this._getFighterObject().val();
+    gameRecord.Date    = this._getDateHtml().val();
+    gameRecord.Rate    = this._getRateHtml().val();
+    gameRecord.Stock   = this._getStockHtml().val();
+    gameRecord.Fighter = this._getFighterHtml().val();
     return gameRecord;
   }
 }

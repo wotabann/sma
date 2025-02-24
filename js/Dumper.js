@@ -62,14 +62,19 @@ class Dumper {
     // 対戦履歴を更新
     DumpHistoryHtml.Update(gameRecords);
 
-    return "";
-
     // FighterRecords作成
     var fighterRecordAnalyzer = new FighterRecordAnalyzer();
     for (let i = 0; i < gameRecords.Length(); i++) {
       fighterRecordAnalyzer.AddGameRecord(gameRecords.Index(i));
     }
+
+    // 勝率ランキングを更新
+    try {
     DumpWinRateHtml.Update(fighterRecordAnalyzer.FighterRecords());
+    }
+    catch(e) {
+      alert(e.stack);
+    }
     
     return "";
   }
