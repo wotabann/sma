@@ -504,6 +504,38 @@ body {
   height: 300px;
 }
 
+
+#dump-fighter-record-table-wrapper {
+  display: none;
+}
+#dump-fighter-record-table {
+  overflow-x: scroll;
+}
+#dump-fighter-record-table table {
+  font-size: 0.8rem;
+  text-align: right;
+  white-space: nowrap;
+}
+#dump-fighter-record-table th {
+  cursor: pointer;
+  min-width: 60px;
+}
+#dump-fighter-record-table th, td {
+  padding: 2px 4px;
+}
+#dump-fighter-record-table th.sort.desc::after {
+  white-space: pre;
+  content: "\a▼";
+  font-size: 0.7rem;
+}
+#dump-fighter-record-table th.sort.asc::after {
+  white-space: pre;
+  content: "\a▲";
+  font-size: 0.7rem;
+}
+
+
+
 .dump-ranking {
   display: flex;
   justify-content: center;
@@ -543,9 +575,6 @@ body {
   width: 200px;
   text-align: left;
 }
-
-
 #dump-ranking-win-rate-wrapper {
   display: none;
 }
-

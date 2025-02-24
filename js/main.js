@@ -1,11 +1,15 @@
+
 /**
  * @note 画面ロード時のイベント
  */
-AccountHtml.SetUserName(Util.GetDirectoryName());
-AccountHtml.SetFighter(GetMyFighter());
-GameRecordHtml.SetDate(Util.GetToday());
-GameRecordHtml.SetRequestButtonClickEvent(RequestRegister);
-DumpHtml.SetRequestButtonClickEvent(RequestDump);
+$(window).on("load", function() {
+  AccountHtml.SetUserName(Util.GetDirectoryName());
+  AccountHtml.SetFighter(GetMyFighter());
+  GameRecordHtml.SetDate(Util.GetToday());
+  GameRecordHtml.SetRequestButtonClickEvent(RequestRegister);
+  DumpHtml.SetRequestButtonClickEvent(RequestDump);
+});
+
 
 
 /**

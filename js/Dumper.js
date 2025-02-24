@@ -59,22 +59,25 @@ class Dumper {
     // 結果を変数に格納
     var gameRecords = PostDataManager.ParseGameRecordsFromDumpResponse(postRecvData);
 
-    // 対戦履歴を更新
-    DumpHistoryHtml.Update(gameRecords);
-
     // FighterRecords作成
     var fighterRecordAnalyzer = new FighterRecordAnalyzer();
     for (let i = 0; i < gameRecords.Length(); i++) {
       fighterRecordAnalyzer.AddGameRecord(gameRecords.Index(i));
     }
 
-    // 勝率ランキングを更新
+    // 対戦履歴を更新
+    DumpHistoryHtml.Update(gameRecords);
+
+    // 相手キャラ毎の戦績を更新
     try {
-    DumpWinRateHtml.Update(fighterRecordAnalyzer.FighterRecords());
+    DumpFighterRecordHtml.Update(fighterRecordAnalyzer.FighterRecords());
     }
-    catch(e) {
+    catch (e) {
       alert(e.stack);
     }
+
+    // 勝率ランキングを更新
+    // DumpWinRateHtml.Update(fighterRecordAnalyzer.FighterRecords());
     
     return "";
   }
