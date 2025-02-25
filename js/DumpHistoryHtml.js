@@ -82,13 +82,15 @@ class DumpHistoryHtml {
     var suggestedMax = 0;
     var suggestedMin = 2000;
 
+    // 退避
+    var length = gameRecords.Length();
+
     // 表示する最大レコード数
-    var maxCount = Math.min(MAX_COUNT, gameRecords.Length());
+    var maxCount = Math.min(MAX_COUNT, length);
 
     // プロットする点を作成
-    for (let i = 0; i < maxCount; i++) {
+    for (let i = (length - maxCount); i < length; i++) {
       var rate = gameRecords.Index(i).Rate;
-
       labels.push("");
       values.push(rate);
       suggestedMax = Math.max(suggestedMax, rate);

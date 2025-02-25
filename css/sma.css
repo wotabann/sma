@@ -510,6 +510,7 @@ body {
 }
 #dump-fighter-record-table {
   overflow-x: scroll;
+  padding-bottom: 20px;
 }
 #dump-fighter-record-table table {
   font-size: 0.8rem;
@@ -519,6 +520,7 @@ body {
 #dump-fighter-record-table th {
   cursor: pointer;
   min-width: 60px;
+  border-bottom: 1px solid #ccc;
 }
 #dump-fighter-record-table th, td {
   padding: 2px 4px;
@@ -532,6 +534,10 @@ body {
   white-space: pre;
   content: "\a▲";
   font-size: 0.7rem;
+}
+.dump-fighter-record-table-description {
+  font-size: 0.8rem;
+  color: #333;
 }
 
 

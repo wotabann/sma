@@ -40,6 +40,8 @@ function GetMyFighter() {
       return "ピカチュウ";
     case "kouki":
       return "ベレト／ベレス";
+    case "fumi":
+      return "ジョーカー";
     case "test":
       return "マリオ";
     default:
