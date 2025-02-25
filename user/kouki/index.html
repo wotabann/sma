@@ -16,10 +16,9 @@
         <!-- JavaScript -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/list.js/2.3.1/list.min.js"></script>
 
         <!-- CSS -->
-        <link rel="stylesheet" type="text/css" href="../../css/sma.css">
+        <link rel="stylesheet" type="text/css" href="../../css/sma.css?ver=20250225a">
     </head>
 
 
@@ -237,51 +236,70 @@
                                 </div>
                             </div>
 
-                            <div class="dump-content" id="dump-ranking-win-rate-wrapper">
-                                <h3>勝率ランキング</h3>
-                                <div class="dump-ranking">
-                                    <div class="dump-ranking-best" id="dump-ranking-win-rate-best">
-                                        <div class="dump-ranking-row">
-                                            <div class="dump-ranking-row-rate">勝率</div>
-                                            <div class="dump-ranking-row-fighter">得意キャラ</div>
-                                        </div>
-                                    </div>
-                                    <div class="dump-ranking-worst" id="dump-ranking-win-rate-worst">
-                                        <div class="dump-ranking-row">
-                                            <div class="dump-ranking-row-rate">勝率</div>
-                                            <div class="dump-ranking-row-fighter">苦手キャラ</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
                             <div class="dump-content" id="dump-fighter-record-table-wrapper">
                                 <h3>相手キャラ毎の対戦データ</h3>
                                 <div class="dump-fighter-record-table-description">
-                                    横スクロール可能／列名クリックでソート可能
+                                    横スクロール可能／列名の▲▼でソート可能
                                 </div>
                                 <div id="dump-fighter-record-table">
                                     <table>
                                         <thead>
                                             <tr>
-                                                <th class="sort" data-sort="dump-table-fighter">相手キャラ</th>
-                                                <th class="sort" data-sort="dump-table-game-count">対戦数</th>
-                                                <th class="sort" data-sort="dump-table-win-count">勝ち数</th>
-                                                <th class="sort" data-sort="dump-table-lose-count">負け数</th>
-                                                <th class="sort" data-sort="dump-table-win-rate">勝率</th>
-                                                <th class="sort" data-sort="dump-table-stock-rate">スト差<br>平均</th>
-                                                <th class="sort" data-sort="dump-table-total-stock">スト差<br>合計</th>
+                                                <th>
+                                                    <div class="sort-asc"  data-sort-cell="fighter" data-sort-type="string">▲</div>
+                                                    <div>相手キャラ</div>
+                                                    <div class="sort-desc" data-sort-cell="fighter" data-sort-type="string">▼</div>
+                                                </th>
+                                                <th>
+                                                    <div class="sort-asc"  data-sort-cell="game-count" data-sort-type="number">▲</div>
+                                                    <div>対戦数</div>
+                                                    <div class="sort-desc" data-sort-cell="game-count" data-sort-type="number">▼</div>
+                                                </th>
+                                                <th>
+                                                    <div class="sort-asc"  data-sort-cell="win-count" data-sort-type="number">▲</div>
+                                                    <div>勝ち数</div>
+                                                    <div class="sort-desc" data-sort-cell="win-count" data-sort-type="number">▼</div>
+                                                </th>
+                                                <th>
+                                                    <div class="sort-asc"  data-sort-cell="lose-count" data-sort-type="number">▲</div>
+                                                    <div>負け数</div>
+                                                    <div class="sort-desc" data-sort-cell="lose-count" data-sort-type="number">▼</div>
+                                                </th>
+                                                <th>
+                                                    <div class="sort-asc"  data-sort-cell="win-rate" data-sort-type="float">▲</div>
+                                                    <div>勝率</div>
+                                                    <div class="sort-desc" data-sort-cell="win-rate" data-sort-type="float">▼</div>
+                                                </th>
+                                                <th>
+                                                    <div class="sort-asc"  data-sort-cell="stock-rate" data-sort-type="float">▲</div>
+                                                    <div>平均スト差</div>
+                                                    <div class="sort-desc" data-sort-cell="stock-rate" data-sort-type="float">▼</div>
+                                                </th>
+                                                <th>
+                                                    <div class="sort-asc"  data-sort-cell="total-stock" data-sort-type="number">▲</div>
+                                                    <div>合計スト差</div>
+                                                    <div class="sort-desc" data-sort-cell="total-stock" data-sort-type="number">▼</div>
+                                                </th>
                                             </tr>
                                         </thead>
-                                        <tbody class="list">
+                                        <tbody class="sort-body">
                                             <tr>
-                                                <td class="dump-table-fighter"></td>
-                                                <td class="dump-table-game-count"></td>
-                                                <td class="dump-table-win-count"></td>
-                                                <td class="dump-table-lose-count"></td>
-                                                <td class="dump-table-win-rate"></td>
-                                                <td class="dump-table-stock-rate"></td>
-                                                <td class="dump-table-total-stock"></td>
+                                                <td class="dump-table-fighter"     data-sort-cell="fighter"   >1</td>
+                                                <td class="dump-table-game-count"  data-sort-cell="game-count"></td>
+                                                <td class="dump-table-win-count"   data-sort-cell="win-count"></td>
+                                                <td class="dump-table-lose-count"  data-sort-cell="lose-count"></td>
+                                                <td class="dump-table-win-rate"    data-sort-cell="win-rate"></td>
+                                                <td class="dump-table-stock-rate"  data-sort-cell="stock-rate"></td>
+                                                <td class="dump-table-total-stock" data-sort-cell="total-stock"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="dump-table-fighter"     data-sort-cell="fighter"   >2</td>
+                                                <td class="dump-table-game-count"  data-sort-cell="game-count"></td>
+                                                <td class="dump-table-win-count"   data-sort-cell="win-count"></td>
+                                                <td class="dump-table-lose-count"  data-sort-cell="lose-count"></td>
+                                                <td class="dump-table-win-rate"    data-sort-cell="win-rate"></td>
+                                                <td class="dump-table-stock-rate"  data-sort-cell="stock-rate"></td>
+                                                <td class="dump-table-total-stock" data-sort-cell="total-stock"></td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -297,34 +315,36 @@
         </div>
 
         
-        <script src="../../js/util.js"></script>
+        <script src="../../js/util.js?ver=20250225a"></script>
 
-        <script src="../../js/Account.js"></script>
-        <script src="../../js/GameRecord.js"></script>
-        <script src="../../js/GameRecords.js"></script>
+        <script src="../../js/Account.js?ver=20250225a"></script>
+        <script src="../../js/GameRecord.js?ver=20250225a"></script>
+        <script src="../../js/GameRecords.js?ver=20250225a"></script>
 
-        <script src="../../js/FighterRecord.js"></script>
-        <script src="../../js/FighterRecords.js"></script>
-        <script src="../../js/FighterRecordAnalyzer.js"></script>
+        <script src="../../js/FighterRecord.js?ver=20250225a"></script>
+        <script src="../../js/FighterRecords.js?ver=20250225a"></script>
+        <script src="../../js/FighterRecordAnalyzer.js?ver=20250225a"></script>
 
-        <script src="../../js/Poster.js"></script>
-        <script src="../../js/PostRecvData.js"></script>
-        <script src="../../js/PostSendData.js"></script>
-        <script src="../../js/PostDataManager.js"></script>
+        <script src="../../js/Poster.js?ver=20250225a"></script>
+        <script src="../../js/PostRecvData.js?ver=20250225a"></script>
+        <script src="../../js/PostSendData.js?ver=20250225a"></script>
+        <script src="../../js/PostDataManager.js?ver=20250225a"></script>
 
-        <script src="../../js/LoadingHtml.js"></script>
-        <script src="../../js/FighterListHtml.js"></script>
-        <script src="../../js/AccountHtml.js"></script>
-        <script src="../../js/GameRecordHtml.js"></script>
-        <script src="../../js/DumpHistoryHtml.js"></script>
-        <script src="../../js/DumpWinRateHtml.js"></script>
-        <script src="../../js/DumpFighterRecordHtml.js"></script>
-        <script src="../../js/DumpHtml.js"></script>
+        <script src="../../js/LoadingHtml.js?ver=20250225a"></script>
+        <script src="../../js/FighterListHtml.js?ver=20250225a"></script>
+        <script src="../../js/AccountHtml.js?ver=20250225a"></script>
+        <script src="../../js/GameRecordHtml.js?ver=20250225a"></script>
+        <script src="../../js/DumpHistoryHtml.js?ver=20250225a"></script>
+        <script src="../../js/DumpWinRateHtml.js?ver=20250225a"></script>
+        <script src="../../js/DumpFighterRecordHtml.js?ver=20250225a"></script>
+        <script src="../../js/DumpHtml.js?ver=20250225a"></script>
 
-        <script src="../../js/Registerer.js"></script>
-        <script src="../../js/Dumper.js"></script>
+        <script src="../../js/TableSorter.js?ver=20250225a"></script>
 
-        <script src="../../js/main.js"></script>
+        <script src="../../js/Registerer.js?ver=20250225a"></script>
+        <script src="../../js/Dumper.js?ver=20250225a"></script>
+
+        <script src="../../js/main.js?ver=20250225a"></script>
 
     </body>
 </html>

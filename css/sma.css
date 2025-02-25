@@ -519,22 +519,23 @@ body {
   white-space: nowrap;
 }
 #dump-fighter-record-table th {
-  cursor: pointer;
   min-width: 60px;
   border-bottom: 1px solid #ccc;
+  text-align: center;
+}
+#dump-fighter-record-table .sort-asc,
+#dump-fighter-record-table .sort-desc {
+  cursor: pointer;
+  border: 0px solid rgba(0, 0, 0, 0.3);
+  color: rgba(0, 0, 0, 0.4);
+  width: 30px;
+  height: 18px;
+  font-size: 12px;
+  padding: 0;
+  margin: 0 auto;
 }
 #dump-fighter-record-table th, td {
   padding: 2px 4px;
-}
-#dump-fighter-record-table th.sort.desc::after {
-  white-space: pre;
-  content: "\a▼";
-  font-size: 0.7rem;
-}
-#dump-fighter-record-table th.sort.asc::after {
-  white-space: pre;
-  content: "\a▲";
-  font-size: 0.7rem;
 }
 .dump-fighter-record-table-description {
   font-size: 0.8rem;
@@ -557,49 +558,4 @@ body {
   height: 100%;
   background-color: #fff;
   z-index: -1;
-}
-
-
-
-.dump-ranking {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  margin: 0 auto;
-  font-size: 0.8rem;
-}
-.dump-ranking-best {
-  width: 50%;
-  border-right: 1px solid #ccc;
-}
-.dump-ranking-worst {
-  width: 50%;
-}
-.dump-ranking-row {
-  display: flex;
-  justify-content: center;
-  padding: 1px 0;
-}
-.dump-ranking-row:first-of-type {
-  border-bottom: 1px solid #ccc;
-  margin: 3px 0;
-  padding: 3px 0;
-  font-weight: bold;
-}
-.dump-ranking-row-rate {
-  width: 80px;
-  margin-right: 20px;
-  text-align: right;
-}
-.dump-ranking-row-count {
-  width: 250px;
-  margin-right: 20px;
-  text-align: right;
-}
-.dump-ranking-row-fighter {
-  width: 200px;
-  text-align: left;
-}
-#dump-ranking-win-rate-wrapper {
-  display: none;
 }

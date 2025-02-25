@@ -104,20 +104,7 @@ class DumpFighterRecordHtml {
    * @note テーブルのソート機能を更新する。
    */
   static _updateTableSort() {
-    const options = {
-      valueNames: [
-        'dump-table-fighter',
-        'dump-table-game-count',
-        'dump-table-win-count',
-        'dump-table-lose-count',
-        'dump-table-win-rate',
-        'dump-table-stock-rate',
-        'dump-table-total-stock',
-      ],
-    };
-    
-    // list.jsのインスタンス生成
-    const searchList = new List('dump-fighter-record-table', options);
+    new TableSorter("dump-fighter-record-table");
   }
 
 }

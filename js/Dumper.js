@@ -69,15 +69,7 @@ class Dumper {
     DumpHistoryHtml.Update(gameRecords);
 
     // 相手キャラ毎の戦績を更新
-    try {
     DumpFighterRecordHtml.Update(fighterRecordAnalyzer.FighterRecords());
-    }
-    catch (e) {
-      alert(e.stack);
-    }
-
-    // 勝率ランキングを更新
-    // DumpWinRateHtml.Update(fighterRecordAnalyzer.FighterRecords());
     
     return "";
   }
