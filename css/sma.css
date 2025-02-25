@@ -509,8 +509,9 @@ body {
   display: none;
 }
 #dump-fighter-record-table {
-  overflow-x: scroll;
+  overflow-x: auto;
   padding-bottom: 20px;
+  -webkit-overflow-scrolling: touch;
 }
 #dump-fighter-record-table table {
   font-size: 0.8rem;
@@ -538,6 +539,24 @@ body {
 .dump-fighter-record-table-description {
   font-size: 0.8rem;
   color: #333;
+}
+#dump-fighter-record-table th:first-child,
+#dump-fighter-record-table td:first-child {
+  position: sticky;
+  top: 0;
+  left: 0;
+  padding-right: 5px;
+}
+#dump-fighter-record-table th:first-child::before,
+#dump-fighter-record-table td:first-child::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  z-index: -1;
 }
 
 
