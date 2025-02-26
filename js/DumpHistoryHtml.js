@@ -13,7 +13,7 @@ class DumpHistoryHtml {
 
 
   /**
-   * @note   Recordの入力値を取得する。
+   * @note   表示を更新する。
    * @param  {GameRecords} gameRecords
    */
   static Update(gameRecords) {
@@ -32,7 +32,7 @@ class DumpHistoryHtml {
   static _clearList() {
     var listRowHtmls = this._getListRowHtmls();
     for (let i = 1; i < listRowHtmls.length; i++) {
-      listRowHtmls[i].remove();
+      $(listRowHtmls[i]).remove();
     }
   }
 
@@ -42,7 +42,7 @@ class DumpHistoryHtml {
    * @param {GameRecords} gameRecords
    */
   static _updateList(gameRecords) {
-    const MAX_COUNT = 30;
+    const MAX_COUNT = 100;
 
     // 退避
     var length = gameRecords.Length();
@@ -53,7 +53,7 @@ class DumpHistoryHtml {
     var maxCount = Math.min(MAX_COUNT, length);
 
     // 1レコードずつループして表示
-    for (let i = (length - maxCount); i < length; i++) {
+    for (let i = (length - 1); i >= (length - maxCount); i--) {
       var gameRecord = gameRecords.Index(i);
 
       var date = gameRecord.Date.substr(5, 5);

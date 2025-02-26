@@ -58,6 +58,12 @@ class GameRecordHtml {
     gameRecord.Rate    = this._getRateHtml().val();
     gameRecord.Stock   = this._getStockHtml().val();
     gameRecord.Fighter = this._getFighterHtml().val();
+
+    var d = new Date();
+    this.CreateTime = d.getTime();
+    this.UpdateTime = d.getTime();
+    this.IsDeleted  = false;
+
     return gameRecord;
   }
 }

@@ -59,17 +59,22 @@ class Dumper {
     // 結果を変数に格納
     var gameRecords = PostDataManager.ParseGameRecordsFromDumpResponse(postRecvData);
 
-    // FighterRecords作成
-    var fighterRecordAnalyzer = new FighterRecordAnalyzer();
-    for (let i = 0; i < gameRecords.Length(); i++) {
-      fighterRecordAnalyzer.AddGameRecord(gameRecords.Index(i));
+    // 結果を解析
+    try {
+    var recordAnalyzer = new RecordAnalyzer(gameRecords);
     }
+    catch(e) {
+      alert(e.stack);
+    }
+
+    // 集計結果を更新
+    DumpTotalRecordHtml.Update(recordAnalyzer.TotalRecord());
 
     // 対戦履歴を更新
     DumpHistoryHtml.Update(gameRecords);
 
     // 相手キャラ毎の戦績を更新
-    DumpFighterRecordHtml.Update(fighterRecordAnalyzer.FighterRecords());
+    DumpFighterRecordHtml.Update(recordAnalyzer.FighterRecords());
     
     return "";
   }

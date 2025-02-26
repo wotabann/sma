@@ -4,6 +4,10 @@ class GameRecord {
     this.Rate = 0;
     this.Stock = 0;
     this.Fighter = "ファイター名";
+
+    this.CreateTime = 0;
+    this.UpdateTime = 0;
+    this.IsDeleted  = false;
   }
 
   ToJsonObject() {
@@ -12,6 +16,10 @@ class GameRecord {
       Rate:    this.Rate,
       Stock:   this.Stock,
       Fighter: this.Fighter,
+
+      CreateTime: this.CreateTime,
+      UpdateTime: this.UpdateTime,
+      IsDeleted:  this.IsDeleted,
     };
     return data;
   }

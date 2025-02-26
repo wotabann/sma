@@ -29,7 +29,7 @@ class DumpFighterRecordHtml {
   static _clearTable() {
     var trHtmls = this._getTableTbodyTrHtml();
     for (let i = 1; i < trHtmls.length; i++) {
-      trHtmls[i].remove();
+      $(trHtmls[i]).remove();
     }
   }
   

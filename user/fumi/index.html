@@ -18,7 +18,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
 
         <!-- CSS -->
-        <link rel="stylesheet" type="text/css" href="../../css/sma.css?ver=20250225a">
+        <link rel="stylesheet" type="text/css" href="../../css/sma.css?ver=20250226a">
     </head>
 
 
@@ -218,6 +218,44 @@
                             <button type="button" id="dump-request-button" class="dump-request-button">
                                 データを取得
                             </button>
+
+                            <div class="dump-content" id="dump-total-record-wrapper">
+                                <h3>基本情報</h3>
+                                <div id="dump-total-record">
+                                    <div class="dump-total-record-col">
+                                        <div class="dump-total-record-row">
+                                            <div class="dump-total-record-caption">戦闘力</div>
+                                            <div class="dump-total-record-content" id="dump-total-record-rate"></div>
+                                        </div>
+                                        <div class="dump-total-record-row">
+                                            <div class="dump-total-record-caption">最高戦闘力</div>
+                                            <div class="dump-total-record-content" id="dump-total-record-max-rate"></div>
+                                        </div>
+                                        <div class="dump-total-record-row">
+                                            <div class="dump-total-record-caption">最低戦闘力</div>
+                                            <div class="dump-total-record-content" id="dump-total-record-min-rate"></div>
+                                        </div>
+                                    </div>
+                                    <div class="dump-total-record-col">
+                                        <div class="dump-total-record-row">
+                                            <div class="dump-total-record-caption">戦闘回数</div>
+                                            <div class="dump-total-record-content" id="dump-total-record-game-count"></div>
+                                        </div>
+                                        <div class="dump-total-record-row">
+                                            <div class="dump-total-record-caption">最大連勝</div>
+                                            <div class="dump-total-record-content" id="dump-total-record-max-win"></div>
+                                        </div>
+                                        <div class="dump-total-record-row">
+                                            <div class="dump-total-record-caption">最大連敗</div>
+                                            <div class="dump-total-record-content" id="dump-total-record-max-lose"></div>
+                                        </div>
+                                        <div class="dump-total-record-row">
+                                            <div class="dump-total-record-caption">勝率</div>
+                                            <div class="dump-total-record-content" id="dump-total-record-win-rate"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             
                             <div class="dump-content" id="dump-history-chart-wrapper">
                                 <h3>戦闘力の推移</h3>
@@ -225,7 +263,7 @@
                             </div>
 
                             <div class="dump-content" id="dump-history-list-wrapper">
-                                <h3>直近の戦績(30戦)</h3>
+                                <h3>直近の戦績</h3>
                                 <div id="dump-history-list">
                                     <div class="dump-history-list-row">
                                         <div class="dump-history-list-row-date">日付</div>
@@ -315,36 +353,40 @@
         </div>
 
         
-        <script src="../../js/util.js?ver=20250225a"></script>
+        <script src="../../js/util.js?ver=20250226a"></script>
 
-        <script src="../../js/Account.js?ver=20250225a"></script>
-        <script src="../../js/GameRecord.js?ver=20250225a"></script>
-        <script src="../../js/GameRecords.js?ver=20250225a"></script>
+        <script src="../../js/TotalRecord.js?ver=20250226a"></script>
 
-        <script src="../../js/FighterRecord.js?ver=20250225a"></script>
-        <script src="../../js/FighterRecords.js?ver=20250225a"></script>
-        <script src="../../js/FighterRecordAnalyzer.js?ver=20250225a"></script>
+        <script src="../../js/Account.js?ver=20250226a"></script>
+        <script src="../../js/GameRecord.js?ver=20250226a"></script>
+        <script src="../../js/GameRecords.js?ver=20250226a"></script>
 
-        <script src="../../js/Poster.js?ver=20250225a"></script>
-        <script src="../../js/PostRecvData.js?ver=20250225a"></script>
-        <script src="../../js/PostSendData.js?ver=20250225a"></script>
-        <script src="../../js/PostDataManager.js?ver=20250225a"></script>
+        <script src="../../js/FighterRecord.js?ver=20250226a"></script>
+        <script src="../../js/FighterRecords.js?ver=20250226a"></script>
 
-        <script src="../../js/LoadingHtml.js?ver=20250225a"></script>
-        <script src="../../js/FighterListHtml.js?ver=20250225a"></script>
-        <script src="../../js/AccountHtml.js?ver=20250225a"></script>
-        <script src="../../js/GameRecordHtml.js?ver=20250225a"></script>
-        <script src="../../js/DumpHistoryHtml.js?ver=20250225a"></script>
-        <script src="../../js/DumpWinRateHtml.js?ver=20250225a"></script>
-        <script src="../../js/DumpFighterRecordHtml.js?ver=20250225a"></script>
-        <script src="../../js/DumpHtml.js?ver=20250225a"></script>
+        <script src="../../js/RecordAnalyzer.js?ver=20250226a"></script>
 
-        <script src="../../js/TableSorter.js?ver=20250225a"></script>
+        <script src="../../js/Poster.js?ver=20250226a"></script>
+        <script src="../../js/PostRecvData.js?ver=20250226a"></script>
+        <script src="../../js/PostSendData.js?ver=20250226a"></script>
+        <script src="../../js/PostDataManager.js?ver=20250226a"></script>
 
-        <script src="../../js/Registerer.js?ver=20250225a"></script>
-        <script src="../../js/Dumper.js?ver=20250225a"></script>
+        <script src="../../js/LoadingHtml.js?ver=20250226a"></script>
+        <script src="../../js/FighterListHtml.js?ver=20250226a"></script>
+        <script src="../../js/AccountHtml.js?ver=20250226a"></script>
+        <script src="../../js/GameRecordHtml.js?ver=20250226a"></script>
+        <script src="../../js/DumpTotalRecordHtml.js?ver=20250226a"></script>
+        <script src="../../js/DumpHistoryHtml.js?ver=20250226a"></script>
+        <script src="../../js/DumpWinRateHtml.js?ver=20250226a"></script>
+        <script src="../../js/DumpFighterRecordHtml.js?ver=20250226a"></script>
+        <script src="../../js/DumpHtml.js?ver=20250226a"></script>
 
-        <script src="../../js/main.js?ver=20250225a"></script>
+        <script src="../../js/TableSorter.js?ver=20250226a"></script>
+
+        <script src="../../js/Registerer.js?ver=20250226a"></script>
+        <script src="../../js/Dumper.js?ver=20250226a"></script>
+
+        <script src="../../js/main.js?ver=20250226a"></script>
 
     </body>
 </html>
