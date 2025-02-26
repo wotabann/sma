@@ -60,9 +60,10 @@ class GameRecordHtml {
     gameRecord.Fighter = this._getFighterHtml().val();
 
     var d = new Date();
-    this.CreateTime = d.getTime();
-    this.UpdateTime = d.getTime();
-    this.IsDeleted  = false;
+    var t = d.getTime();
+    gameRecord.CreateTime = t;
+    gameRecord.UpdateTime = t;
+    gameRecord.IsDeleted  = false;
 
     return gameRecord;
   }
