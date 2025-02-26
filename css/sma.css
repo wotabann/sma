@@ -482,12 +482,12 @@ body {
   padding: 4px 0;
 }
 .dump-total-record-caption {
-  min-width: 180px;
+  width: 180px;
   padding-right: 10px;
   text-align: right;
 }
 .dump-total-record-content {
-  min-width: 200px;
+  width: 110px;
   padding-left: 10px;
   text-align: left;
 }
