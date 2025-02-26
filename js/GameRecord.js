@@ -1,5 +1,6 @@
 class GameRecord {
   constructor() {
+    this.Id = 0;
     this.Date = "2025-01-01";
     this.Rate = 0;
     this.Stock = 0;
@@ -12,6 +13,7 @@ class GameRecord {
 
   ToJsonObject() {
     var data = {
+      Id:      this.Id,
       Date:    this.Date,
       Rate:    this.Rate,
       Stock:   this.Stock,

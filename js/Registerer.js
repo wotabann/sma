@@ -104,6 +104,13 @@ class Registerer {
     }
 
     // 日付
+    pattern = "^[0-9]{1,4}$";
+    matchResult = gameRecord.Id.match(pattern);
+    if (matchResult == null) {
+      return "IDが不正です。";
+    }
+
+    // 日付
     pattern = "^202[5-9]-[0-9][0-9]-[0-3][0-9]$";
     matchResult = gameRecord.Date.match(pattern);
     if (matchResult == null) {
@@ -155,6 +162,7 @@ class Registerer {
     GameRecordHtml.ClearRate();
     GameRecordHtml.ClearStock();
     GameRecordHtml.ClearFighter();
+    GameRecordHtml.ClearId();
   }
 
 }

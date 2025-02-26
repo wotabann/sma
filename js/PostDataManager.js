@@ -25,10 +25,14 @@ class PostDataManager {
    */
   static ParseGameRecordFromRegisterResponse(postRecvData) {
     var gameRecord = new GameRecord();
-    gameRecord.Date    = postRecvData.Payload.GameRecord.Date;
-    gameRecord.Rate    = postRecvData.Payload.GameRecord.Rate;
-    gameRecord.Stock   = postRecvData.Payload.GameRecord.Stock;
-    gameRecord.Fighter = postRecvData.Payload.GameRecord.Fighter;
+    gameRecord.Id         = postRecvData.Payload.GameRecord.Id;
+    gameRecord.Date       = postRecvData.Payload.GameRecord.Date;
+    gameRecord.Rate       = postRecvData.Payload.GameRecord.Rate;
+    gameRecord.Stock      = postRecvData.Payload.GameRecord.Stock;
+    gameRecord.Fighter    = postRecvData.Payload.GameRecord.Fighter;
+    gameRecord.CreateTime = postRecvData.Payload.GameRecord.CreateTime;
+    gameRecord.UpdateTime = postRecvData.Payload.GameRecord.UpdateTime;
+    gameRecord.IsDeleted  = postRecvData.Payload.GameRecord.IsDeleted;
     return gameRecord;
   }
 
@@ -57,10 +61,14 @@ class PostDataManager {
 
     for (let tmp of postRecvData.Payload.GameRecords) {
       var gameRecord = new GameRecord();
-      gameRecord.Date    = tmp.Date;
-      gameRecord.Rate    = tmp.Rate;
-      gameRecord.Stock   = tmp.Stock;
-      gameRecord.Fighter = tmp.Fighter;
+      gameRecord.Id         = tmp.Id;
+      gameRecord.Date       = tmp.Date;
+      gameRecord.Rate       = tmp.Rate;
+      gameRecord.Stock      = tmp.Stock;
+      gameRecord.Fighter    = tmp.Fighter;
+      gameRecord.CreateTime = tmp.CreateTime;
+      gameRecord.UpdateTime = tmp.UpdateTime;
+      gameRecord.IsDeleted  = tmp.IsDeleted;
 
       gameRecords.Push(gameRecord);
     }

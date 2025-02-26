@@ -60,6 +60,7 @@ class DumpHistoryHtml {
       var font = (gameRecord.Stock > 0) ? "positive-font" : "negative-font";
 
       var listRowHtml = listRowHeaderHtml.clone().appendTo(listHtml);
+      listRowHtml.children(".dump-history-list-row-id").text(gameRecord.Id);
       listRowHtml.children(".dump-history-list-row-date").text(date);
       listRowHtml.children(".dump-history-list-row-rate").text(gameRecord.Rate + "万");
       listRowHtml.children(".dump-history-list-row-stock").text(gameRecord.Stock);

@@ -4,6 +4,7 @@ class GameRecordHtml {
 
   
   // 各要素の取得
+  static _getIdHtml()      { return $("#register-game-record-id"); }
   static _getDateHtml()    { return $("#register-game-record-date"); }
   static _getRateHtml()    { return $("#register-game-record-rate"); }
   static _getStockHtml()   { return $("#register-game-record-stock"); }
@@ -12,6 +13,7 @@ class GameRecordHtml {
   static _getResultHtml()  { return $("#register-request-result"); }
 
   // 各要素のセット
+  static SetId(txt)      { this._getIdHtml().val(txt); }
   static SetDate(txt)    { this._getDateHtml().val(txt); }
   static SetRate(txt)    { this._getRateHtml().val(txt); }
   static SetStock(txt)   { this._getStockHtml().val(txt); }
@@ -22,6 +24,7 @@ class GameRecordHtml {
   static ClearRate()    { this._getRateHtml().val(""); }
   static ClearStock()   { this._getStockHtml().val(""); }
   static ClearFighter() { this._getFighterHtml().val(""); }
+  static ClearId()      { this._getIdHtml().val(0); }
 
 
   /**
@@ -54,6 +57,7 @@ class GameRecordHtml {
    */
   static GetGameRecord() {
     var gameRecord = new GameRecord();
+    gameRecord.Id      = this._getIdHtml().val();
     gameRecord.Date    = this._getDateHtml().val();
     gameRecord.Rate    = this._getRateHtml().val();
     gameRecord.Stock   = this._getStockHtml().val();

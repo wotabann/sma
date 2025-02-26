@@ -389,6 +389,9 @@ body {
 #register-account-fighter {
   width: 180px;
 }
+#register-game-record-id {
+  width: 80px;
+}
 #register-game-record-date {
   width: 120px;
 }
@@ -525,6 +528,11 @@ body {
   height: 100%;
   background: #fff;
   z-index: -1;
+}
+.dump-history-list-row-id {
+  width: 20px;
+  text-align: right;
+  display: none;
 }
 .dump-history-list-row-date {
   width: 80px;
