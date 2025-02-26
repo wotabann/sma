@@ -42,7 +42,7 @@ class DumpHistoryHtml {
    * @param {GameRecords} gameRecords
    */
   static _updateList(gameRecords) {
-    const MAX_COUNT = 100;
+    const MAX_COUNT = 30;
 
     // 退避
     var length = gameRecords.Length();
