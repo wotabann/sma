@@ -13,7 +13,7 @@ class Registerer {
     GameRecordHtml.SetRequestButtonDisabled();
 
     try {
-      errorString = await this._request();
+      errorString = await Registerer._request();
     }
     catch(e) {
       errorString = "予期せぬエラーが発生しました。";
@@ -25,6 +25,85 @@ class Registerer {
     }
 
     GameRecordHtml.SetRequestButtonEnabled();
+  }
+
+
+  /**
+   * @note 削除ボタン押下時のイベント
+   * @return {Boolean}
+   */
+  static async Delete(gameRecord) {
+    var errorString = "";
+
+    GameRecordHtml.SetRequestButtonDisabled();
+
+    try {
+      errorString = await Registerer._delete_restore(gameRecord, true);
+    }
+    catch(e) {
+      errorString = "予期せぬエラーが発生しました。";
+    }
+
+    if (errorString != "") {
+      alert(errorString);
+    }
+
+    GameRecordHtml.SetRequestButtonEnabled();
+
+    return (errorString == "");
+  }
+
+
+  /**
+   * @note 復活ボタン押下時のイベント
+   * @return {Boolean}
+   */
+  static async Restore(gameRecord) {
+    var errorString = "";
+
+    GameRecordHtml.SetRequestButtonDisabled();
+
+    try {
+      errorString = await Registerer._delete_restore(gameRecord, false);
+    }
+    catch(e) {
+      errorString = "予期せぬエラーが発生しました。";
+    }
+
+    if (errorString != "") {
+      alert(errorString);
+    }
+
+    GameRecordHtml.SetRequestButtonEnabled();
+
+    return (errorString == "");
+  }
+
+
+  /**
+   * @note 修正ボタン押下時のイベント
+   * @param {GameRecord} gameRecord
+   * @return {Boolean}
+   */
+  static PreUpdate(gameRecord) {
+    var date = gameRecord.Date.substr(0, 10).replaceAll("/", "-");
+    GameRecordHtml.SetId(gameRecord.Id);
+    GameRecordHtml.SetDate(date);
+    GameRecordHtml.SetRate(gameRecord.Rate);
+    GameRecordHtml.SetStock(gameRecord.Stock);
+    GameRecordHtml.SetFighter(gameRecord.Fighter);
+    $(window).scrollTop(0);
+
+    var msg = "";
+    msg += "対象を結果登録欄に反映しました。\n";
+    msg += "内容を修正して再度登録してください。\n";
+    msg += "\n";
+    msg += "※※※ 注意 ※※※\n";
+    msg += "取り消す場合はページをリロードしてください。\n";
+    msg += "(編集対象のIDがクリアされないため)";
+    alert(msg);
+
+    return true;
   }
 
 
@@ -74,6 +153,52 @@ class Registerer {
     var responseGameRecord = PostDataManager.ParseGameRecordFromRegisterResponse(postRecvData);
     gameRecordString = this._createGameRecordText(responseGameRecord);
     GameRecordHtml.SetResult(gameRecordString);
+
+    return "";
+  }
+
+
+  /**
+   * @note 戦績の削除処理
+   * @param  {GameRecord} gameRecord
+   * @param  {Boolean}    isDelete
+   * @return {String}
+   */
+  static async _delete_restore(gameRecord, isDelete) {
+    var msg = "";
+
+    if (isDelete) {
+      msg += "下記の戦績を削除します。\n";
+      msg += "本当によろしいですか？\n";
+      msg += this._createGameRecordText(gameRecord);
+    }
+    else {
+      msg += "下記の戦績を復活させますか？\n";
+      msg += this._createGameRecordText(gameRecord);
+    }
+
+    // 確認ダイアログ
+    if (!window.confirm(msg)) {
+      return "";
+    }
+
+    // 入力データの取得
+    var account = AccountHtml.GetAccount();
+    gameRecord.IsDeleted = isDelete;
+
+    // ポスト
+    LoadingHtml.ShowLoading();
+    var postSendData = PostDataManager.CreateRegisterRequest(account, gameRecord);
+    var postRecvData = await Poster.Post(postSendData);
+    LoadingHtml.ClearLoading();
+
+    // 結果のチェック
+    if (postRecvData == null) {
+      return "サーバーとの通信中に予期せぬエラーが発生しました。";
+    }
+    if (postRecvData.ErrorString != "") {
+      return postRecvData.ErrorString;
+    }
 
     return "";
   }

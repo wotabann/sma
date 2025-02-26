@@ -8,10 +8,16 @@ class FighterRecord {
   }
 
   WinRate() {
-    return this.WinCount / this.GameCount;
+    if (this.GameCount > 0) {
+      return this.WinCount / this.GameCount;
+    }
+    return 0;
   }
 
   StockRate() {
-    return this.TotalStock / this.GameCount;
+    if (this.GameCount > 0) {
+      return this.TotalStock / this.GameCount;
+    }
+    return 0;
   }
 }

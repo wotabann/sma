@@ -1,4 +1,7 @@
 class DumpHistoryHtml {
+  static _MAX_LIST_COUNT = 30;
+  static _MAX_CHART_COUNT = 100;
+
   constructor() {
   }
 
@@ -16,13 +19,34 @@ class DumpHistoryHtml {
    * @note   表示を更新する。
    * @param  {GameRecords} gameRecords
    */
-  static Update(gameRecords) {
+  static Update(gameRecords, listClickCallback) {
     this._clearList();
-    this._updateList(gameRecords);
+    this._updateList(gameRecords, listClickCallback);
     this._updateChart(gameRecords);
+
+    this._hideList();
 
     this._getListWrapperHtml().show();
     this._getChartWrapperHtml().show();
+  }
+
+
+  /**
+   * @note   表示を更新する。(1行)
+   * @param  {GameRecord} gameRecord
+   */
+  static UpdateRow(gameRecord) {
+    var listRowHtmls = this._getListRowHtmls();
+
+    for (let i = 0; i < listRowHtmls.length; i++) {
+      var listRowHtml = $(listRowHtmls[i]);
+      var id = listRowHtml.children(".dump-history-list-row-id").text();
+
+      if (id == gameRecord.Id) {
+        this._updateListRow(listRowHtml, gameRecord);
+        return;
+      }
+    }
   }
 
 
@@ -41,31 +65,87 @@ class DumpHistoryHtml {
    * @note リストを更新する。
    * @param {GameRecords} gameRecords
    */
-  static _updateList(gameRecords) {
-    const MAX_COUNT = 30;
-
+  static _updateList(gameRecords, listClickCallback) {
     // 退避
     var length = gameRecords.Length();
     var listHtml = this._getListHtml();
     var listRowHeaderHtml = this._getListRowHeaderHtml();
 
-    // 表示する最大レコード数
-    var maxCount = Math.min(MAX_COUNT, length);
-
     // 1レコードずつループして表示
-    for (let i = (length - 1); i >= (length - maxCount); i--) {
+    for (let i = (length - 1); i >= 0; i--) {
       var gameRecord = gameRecords.Index(i);
 
-      var date = gameRecord.Date.substr(5, 5);
-      var font = (gameRecord.Stock > 0) ? "positive-font" : "negative-font";
-
+      // 1行追加
       var listRowHtml = listRowHeaderHtml.clone().appendTo(listHtml);
-      listRowHtml.children(".dump-history-list-row-id").text(gameRecord.Id);
-      listRowHtml.children(".dump-history-list-row-date").text(date);
-      listRowHtml.children(".dump-history-list-row-rate").text(gameRecord.Rate + "万");
-      listRowHtml.children(".dump-history-list-row-stock").text(gameRecord.Stock);
-      listRowHtml.children(".dump-history-list-row-fighter").text(gameRecord.Fighter);
-      listRowHtml.addClass(font);
+
+      // 追加した行の内容を更新
+      this._updateListRow(listRowHtml, gameRecord);
+
+      // クリックイベントをセット
+      var arg = {
+        gameRecord: gameRecord,
+        callback: listClickCallback
+      };
+      listRowHtml.on("click", arg, this._listRowCallback);
+    }
+  }
+
+
+  /**
+   * @note リストを更新する。(1行)
+   * @param {Object}     listRowHtml
+   * @param {GameRecord} gameRecord
+   */
+  static _updateListRow(listRowHtml, gameRecord) {
+    var date = gameRecord.Date.substr(5, 5);
+    var font = (gameRecord.Stock > 0) ? "positive-font" : "negative-font";
+
+    listRowHtml.children(".dump-history-list-row-is-deleted").text(gameRecord.IsDeleted);
+    listRowHtml.children(".dump-history-list-row-id").text(gameRecord.Id);
+    listRowHtml.children(".dump-history-list-row-date").text(date);
+    listRowHtml.children(".dump-history-list-row-rate").text(gameRecord.Rate + "万");
+    listRowHtml.children(".dump-history-list-row-stock").text(gameRecord.Stock);
+    listRowHtml.children(".dump-history-list-row-fighter").text(gameRecord.Fighter);
+    listRowHtml.addClass(font);
+
+    if (gameRecord.IsDeleted) {
+      listRowHtml.addClass("line-through");
+    }
+    else {
+      listRowHtml.removeClass("line-through");
+    }
+  }
+
+
+  /**
+   * @note リストクリック時のイベント
+   * @param {GameRecord} gameRecord
+   */
+  static _listRowCallback(e) {
+    e.data.callback(e.data.gameRecord);
+  }
+
+
+  /**
+   * @note リストを全件表示する。
+   */
+  static _showList() {
+    var listRowHtmls = this._getListRowHtmls();
+    for (let i = 0; i < listRowHtmls.length; i++) {
+      $(listRowHtmls[i]).show();
+    }
+  }
+
+
+  /**
+   * @note リストを隠す。
+   */
+  static _hideList() {
+    const MAX_COUNT = DumpHistoryHtml._MAX_LIST_COUNT;
+
+    var listRowHtmls = this._getListRowHtmls();
+    for (let i = MAX_COUNT; i < listRowHtmls.length; i++) {
+      $(listRowHtmls[i]).hide();
     }
   }
 
@@ -75,7 +155,7 @@ class DumpHistoryHtml {
    * @param {GameRecords} gameRecords
    */
   static _updateChart(gameRecords) {
-    const MAX_COUNT = 100;
+    const MAX_COUNT = DumpHistoryHtml._MAX_CHART_COUNT;
 
     // チャートのオプション初期値
     var labels = [];
@@ -91,6 +171,10 @@ class DumpHistoryHtml {
 
     // プロットする点を作成
     for (let i = (length - maxCount); i < length; i++) {
+      if (gameRecords.Index(i).IsDeleted) {
+        continue;
+      }
+
       var rate = gameRecords.Index(i).Rate;
       labels.push("");
       values.push(rate);

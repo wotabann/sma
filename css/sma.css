@@ -52,6 +52,9 @@ li {
 .negative-font {
   color: red;
 }
+.line-through {
+  text-decoration: line-through;
+}
 
 /******************************************************************************/
 /* html                                                                       */
@@ -510,6 +513,23 @@ body {
   font-size: 0.8rem;
   padding: 2px 0;
   white-space: nowrap;
+  user-select: none;
+}
+@media (hover: hover) {
+  /* hover指定できるPCを想定したスタイル */
+  .dump-history-list-row:hover {
+    cursor: pointer;
+    background-color: #aaa;
+    color: #fff;
+  }
+}
+@media (hover: none) {
+  /* hoverが使えないタッチ端末を想定した装飾 */
+  .dump-history-list-row:active {
+    cursor: pointer;
+    background-color: #aaa;
+    color: #fff;
+  }
 }
 .dump-history-list-row:first-of-type {
   position: sticky;
@@ -528,6 +548,11 @@ body {
   height: 100%;
   background: #fff;
   z-index: -1;
+}
+.dump-history-list-row-is-deleted {
+  width: 20px;
+  text-align: right;
+  display: none;
 }
 .dump-history-list-row-id {
   width: 20px;
