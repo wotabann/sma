@@ -469,12 +469,12 @@ body {
   font-size: 0.9rem;
 }
 .dump-total-record-col {
-  width: 49%;
+  width: 48%;
   padding: 0 5px;
 }
 .dump-total-record-col:first-of-type {
   border-right: 1px solid #ccc;
-  margin-right: 20px;
+  margin-right: 5px;
 }
 .dump-total-record-row {
   display: flex;
