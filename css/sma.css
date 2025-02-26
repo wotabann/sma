@@ -496,10 +496,7 @@ body {
   display: none;
 }
 #dump-history-list {
-  overflow-y: auto;
   width: 100%;
-  max-height: 400px;
-  -webkit-overflow-scrolling: touch;
 }
 .dump-history-list-row {
   display: flex;
@@ -564,10 +561,7 @@ body {
 }
 #dump-fighter-record-table {
   overflow-x: auto;
-  overflow-y: auto;
-  max-height: 400px;
   padding-bottom: 20px;
-  -webkit-overflow-scrolling: touch;
 }
 #dump-fighter-record-table table {
   font-size: 0.8rem;
