@@ -479,6 +479,7 @@ body {
 .dump-total-record-row {
   display: flex;
   justify-content: center;
+  vertical-align: middle;
   padding: 4px 0;
 }
 .dump-total-record-caption {
@@ -497,10 +498,12 @@ body {
 }
 #dump-history-list {
   width: 100%;
+  padding-bottom: 10px;
 }
 .dump-history-list-row {
   display: flex;
   justify-content: center;
+  vertical-align: middle;
   font-size: 0.8rem;
   padding: 2px 0;
   white-space: nowrap;
@@ -569,6 +572,9 @@ body {
   white-space: nowrap;
   border-collapse: collapse;
   border-spacing: 0;
+}
+#dump-fighter-record-table tr {
+  vertical-align: middle;
 }
 #dump-fighter-record-table th {
   position: sticky;
