@@ -12,6 +12,10 @@ class RecordAnalyzer {
     for (let i = 0; i < gameRecords.Length(); i++) {
       var gameRecord = gameRecords.Index(i);
 
+      if (gameRecord.IsDeleted) {
+        continue;
+      }
+
       win  = (gameRecord.Stock > 0) ? (win  + 1) : 0;
       lose = (gameRecord.Stock < 0) ? (lose + 1) : 0;
 
@@ -19,6 +23,7 @@ class RecordAnalyzer {
       this._updateFighterRecords(gameRecord);
       this._updateTotalRecord(gameRecord, win, lose);
     }
+    return;
   }
 
   /**
@@ -44,6 +49,7 @@ class RecordAnalyzer {
       fighterRecord.Fighter = gameRecord.Fighter;
       this._fighterRecords.Push(fighterRecord);
     }
+    return;
   }
 
   /**
@@ -55,6 +61,7 @@ class RecordAnalyzer {
     fighterRecord.WinCount   += (gameRecord.Stock > 0) ? 1 : 0;
     fighterRecord.LoseCount  += (gameRecord.Stock < 0) ? 1 : 0;
     fighterRecord.TotalStock += gameRecord.Stock;
+    return;
   }
 
   /**

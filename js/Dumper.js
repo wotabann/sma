@@ -15,7 +15,6 @@ class Dumper {
       errorString = await this._request();
     }
     catch(e) {
-      alert(e.stack);
       errorString = "予期せぬエラーが発生しました。";
     }
 
@@ -67,7 +66,7 @@ class Dumper {
     DumpTotalRecordHtml.Update(recordAnalyzer.TotalRecord());
 
     // 対戦履歴を更新
-    DumpHistoryHtml.Update(gameRecords, Dumper._historyOnClick);
+    DumpHistoryHtml.Update(gameRecords, Registerer.DumpHistoryOnClick);
 
     // 相手キャラ毎の戦績を更新
     DumpFighterRecordHtml.Update(recordAnalyzer.FighterRecords());
@@ -101,57 +100,6 @@ class Dumper {
     }
 
     return "";
-  }
-
-
-
-  /**
-   * @note 対戦履歴のクリックイベント
-   * @param {GameRecord} gameRecord
-   */
-  static async _historyOnClick(gameRecord) {
-    var operation;
-    if (gameRecord.IsDeleted) {
-      operation = "(\"修正\" or \"復活\")";
-    }
-    else {
-      operation = "(\"修正\" or \"削除\")";
-    }
-
-    var msg = "";
-    msg += gameRecord.Date.substr(0, 10) + ", ";
-    msg += gameRecord.Rate + ", ";
-    msg += gameRecord.Stock + ", ";
-    msg += gameRecord.Fighter + "\n";
-    msg += "\n";
-    msg += "実行したい操作を入力してください。\n";
-    msg += "(\"修正\" or \"削除\" or \"復活\")";
-
-    var isSucceeded;
-    var text = prompt(msg);
-    switch (text) {
-      case "修正":
-        await Registerer.PreUpdate(gameRecord);
-        return;
-      case "削除":
-        isSucceeded = await Registerer.Delete(gameRecord);
-        if (isSucceeded) {
-          gameRecord.IsDeleted = true;
-          DumpHistoryHtml.UpdateRow(gameRecord);
-        }
-        return;
-      case "復活":
-        isSucceeded = await Registerer.Restore(gameRecord);
-        if (isSucceeded) {
-          gameRecord.IsDeleted = false;
-          DumpHistoryHtml.UpdateRow(gameRecord);
-        }
-        return;
-      case null:
-        return;
-    }
-    alert("未定義の操作のためキャンセルされました。");
-    return;
   }
 
 }

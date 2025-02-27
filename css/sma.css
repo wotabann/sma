@@ -506,6 +506,43 @@ body {
   width: 100%;
   padding-bottom: 10px;
 }
+#dump-history-list-show-button,
+#dump-history-list-hide-button {
+  position: relative;
+  display: block;
+  width: 160px;
+  padding: 4px 0;
+  margin: 10px auto 0 auto;
+  font-size: 0.9rem;
+  text-align: center;
+  text-decoration: none;
+  background-color: #fff;
+  color: rgba(0, 73, 134, 1.0);
+  border: 1px solid transparent;
+  border-color: rgba(0, 73, 134, 1.0);
+  border-radius: 30px;
+  cursor: pointer;
+}
+#dump-history-list-show-button::after,
+#dump-history-list-hide-button::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 16px;
+  width: 7px;
+  height: 7px;
+  margin: auto;
+  border-top: 1px solid rgba(0, 73, 134, 1.0);
+  border-right: 1px solid rgba(0, 73, 134, 1.0);
+  box-sizing: border-box;
+}
+#dump-history-list-show-button::after {
+  transform: translateY(-2px) rotate(135deg);
+}
+#dump-history-list-hide-button::after {
+  transform: translateY(2px) rotate(315deg);
+}
 .dump-history-list-row {
   display: flex;
   justify-content: center;

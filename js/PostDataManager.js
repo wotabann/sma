@@ -5,12 +5,16 @@ class PostDataManager {
   /**
    * @param  {Account}    account
    * @param  {GameRecord} gameRecord
+   * @param  {String}     operation
+   * @param  {Boolean}    isDump
    * @return {PostSendData}
    */
-  static CreateRegisterRequest(account, gameRecord) {
+  static CreateRegisterRequest(account, gameRecord, operation, isDump) {
     var payload = {
       Account:    account.ToJsonObject(),
       GameRecord: gameRecord.ToJsonObject(),
+      Operation:  operation,
+      IsDump:     isDump,
     };
 
     var postSendData = new PostSendData();
@@ -34,6 +38,46 @@ class PostDataManager {
     gameRecord.UpdateTime = postRecvData.Payload.GameRecord.UpdateTime;
     gameRecord.IsDeleted  = postRecvData.Payload.GameRecord.IsDeleted;
     return gameRecord;
+  }
+
+  /**
+   * @param  {PostRecvData} postRecvData
+   * @return {GameRecords}
+   */
+  static ParseGameRecordsFromRegisterResponse(postRecvData) {
+    var gameRecords = new GameRecords();
+
+    for (let tmp of postRecvData.Payload.GameRecords) {
+      var gameRecord = new GameRecord();
+      gameRecord.Id         = tmp.Id;
+      gameRecord.Date       = tmp.Date;
+      gameRecord.Rate       = tmp.Rate;
+      gameRecord.Stock      = tmp.Stock;
+      gameRecord.Fighter    = tmp.Fighter;
+      gameRecord.CreateTime = tmp.CreateTime;
+      gameRecord.UpdateTime = tmp.UpdateTime;
+      gameRecord.IsDeleted  = tmp.IsDeleted;
+
+      gameRecords.Push(gameRecord);
+    }
+    return gameRecords;
+  }
+
+
+  /**
+   * @param  {Account}    account
+   * @param  {GameRecord} gameRecord
+   * @return {PostSendData}
+   */
+  static CreateRestoreRequest(gameRecord) {
+    var payload = {
+      GameRecord: gameRecord.ToJsonObject(),
+    };
+
+    var postSendData = new PostSendData();
+    postSendData.Header  = "RestoreRequest";
+    postSendData.Payload = payload;
+    return postSendData;
   }
 
 

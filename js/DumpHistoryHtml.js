@@ -7,12 +7,14 @@ class DumpHistoryHtml {
 
   
   // 各要素の取得
-  static _getListHtml()          { return $("#dump-history-list"); }
-  static _getListWrapperHtml()   { return $("#dump-history-list-wrapper"); }
-  static _getListRowHtmls()      { return this._getListHtml().children(".dump-history-list-row"); }
-  static _getListRowHeaderHtml() { return this._getListHtml().children(".dump-history-list-row:first") ;}
-  static _getChartHtml()         { return $("#dump-history-chart-canvas"); }
-  static _getChartWrapperHtml()  { return $("#dump-history-chart-wrapper")}
+  static _getListHtml()            { return $("#dump-history-list"); }
+  static _getListWrapperHtml()     { return $("#dump-history-list-wrapper"); }
+  static _getListRowHtmls()        { return this._getListHtml().children(".dump-history-list-row"); }
+  static _getListRowHeaderHtml()   { return this._getListHtml().children(".dump-history-list-row:first") ;}
+  static _getListShowButtonHtml()  { return $("#dump-history-list-show-button"); }
+  static _getListHideButtonHtml()  { return $("#dump-history-list-hide-button"); }
+  static _getChartHtml()           { return $("#dump-history-chart-canvas"); }
+  static _getChartWrapperHtml()    { return $("#dump-history-chart-wrapper"); }
 
 
   /**
@@ -20,33 +22,49 @@ class DumpHistoryHtml {
    * @param  {GameRecords} gameRecords
    */
   static Update(gameRecords, listClickCallback) {
+    // リストをクリア
     this._clearList();
+
+    // リストを更新
     this._updateList(gameRecords, listClickCallback);
-    this._updateChart(gameRecords);
-
-    this._hideList();
-
     this._getListWrapperHtml().show();
+
+    // リストの表示設定など
+    this._hideList();
+    this._getListShowButtonHtml().on("click", function() { DumpHistoryHtml._showList(); });
+    this._getListHideButtonHtml().on("click", function() { DumpHistoryHtml._hideList(); });
+
+    // チャートを更新
+    this._updateChart(gameRecords);
     this._getChartWrapperHtml().show();
   }
 
 
   /**
-   * @note   表示を更新する。(1行)
-   * @param  {GameRecord} gameRecord
+   * @note リストクリック時のイベント
+   * @param {GameRecord} gameRecord
    */
-  static UpdateRow(gameRecord) {
-    var listRowHtmls = this._getListRowHtmls();
+  static _listRowCallback(e) {
+    // クリックされた行のオブジェクト
+    var listRowHtml   = $(this);
+    var isDeletedHtml = listRowHtml.children(".dump-history-list-row-is-deleted");
+    var idHtml        = listRowHtml.children(".dump-history-list-row-id");
+    var dateHtml      = listRowHtml.children(".dump-history-list-row-date");
+    var rateHtml      = listRowHtml.children(".dump-history-list-row-rate");
+    var stockHtml     = listRowHtml.children(".dump-history-list-row-stock");
+    var fighterHtml   = listRowHtml.children(".dump-history-list-row-fighter");
 
-    for (let i = 0; i < listRowHtmls.length; i++) {
-      var listRowHtml = $(listRowHtmls[i]);
-      var id = listRowHtml.children(".dump-history-list-row-id").text();
+    // 引数を作成
+    var gameRecord = new GameRecord();
+    gameRecord.Id = idHtml.text();
+    gameRecord.Date = dateHtml.data("raw");
+    gameRecord.Rate = rateHtml.data("raw");
+    gameRecord.Stock = stockHtml.text();
+    gameRecord.Fighter = fighterHtml.text();
+    gameRecord.IsDeleted = isDeletedHtml.text();
 
-      if (id == gameRecord.Id) {
-        this._updateListRow(listRowHtml, gameRecord);
-        return;
-      }
-    }
+    // コールバック関数を呼び出す
+    e.data.callback(gameRecord);
   }
 
 
@@ -57,6 +75,87 @@ class DumpHistoryHtml {
     var listRowHtmls = this._getListRowHtmls();
     for (let i = 1; i < listRowHtmls.length; i++) {
       $(listRowHtmls[i]).remove();
+    }
+  }
+
+
+  /**
+   * @note リストを全件表示する。
+   */
+  static _showList() {
+    const MAX_COUNT = DumpHistoryHtml._MAX_LIST_COUNT;
+
+    var listRowHtmls = this._getListRowHtmls();
+    for (let i = 0; i < listRowHtmls.length; i++) {
+      $(listRowHtmls[i]).show();
+    }
+
+    this._getListShowButtonHtml().hide();
+    this._getListHideButtonHtml().hide();
+    if (listRowHtmls.length > MAX_COUNT) {
+      this._getListHideButtonHtml().show();
+    }
+  }
+
+
+  /**
+   * @note リストを隠す。
+   */
+  static _hideList() {
+    const MAX_COUNT = DumpHistoryHtml._MAX_LIST_COUNT;
+
+    var listRowHtmls = this._getListRowHtmls();
+    for (let i = MAX_COUNT; i < listRowHtmls.length; i++) {
+      $(listRowHtmls[i]).hide();
+    }
+
+    this._getListShowButtonHtml().hide();
+    this._getListHideButtonHtml().hide();
+    if (listRowHtmls.length > MAX_COUNT) {
+      this._getListShowButtonHtml().show();
+    }
+  }
+
+
+  /**
+   * @note リストを更新する。(1行)
+   * @param {Object}     listRowHtml
+   * @param {GameRecord} gameRecord
+   */
+  static _updateListRow(listRowHtml, gameRecord) {
+    // 設定値
+    var date = gameRecord.Date.substr(5, 5);
+    var font = (gameRecord.Stock > 0) ? "positive-font" : "negative-font";
+
+    // 各要素
+    var idHtml        = listRowHtml.children(".dump-history-list-row-id");
+    var dateHtml      = listRowHtml.children(".dump-history-list-row-date");
+    var rateHtml      = listRowHtml.children(".dump-history-list-row-rate");
+    var stockHtml     = listRowHtml.children(".dump-history-list-row-stock");
+    var fighterHtml   = listRowHtml.children(".dump-history-list-row-fighter");
+    var isDeletedHtml = listRowHtml.children(".dump-history-list-row-is-deleted");
+
+    // 各要素の表示を更新
+    idHtml.text(gameRecord.Id);
+    dateHtml.text(date);
+    rateHtml.text(gameRecord.Rate + "万");
+    stockHtml.text(gameRecord.Stock);
+    fighterHtml.text(gameRecord.Fighter);
+    isDeletedHtml.text(gameRecord.IsDeleted);
+
+    // リストクリックのコールバック用に生の値を仕込む
+    dateHtml.data("raw", gameRecord.Date);
+    rateHtml.data("raw", gameRecord.Rate);
+
+    // 勝敗に応じてフォントを設定
+    listRowHtml.addClass(font);
+
+    // 削除済みかどうかに応じてフォントを設定
+    if (gameRecord.IsDeleted) {
+      listRowHtml.addClass("line-through");
+    }
+    else {
+      listRowHtml.removeClass("line-through");
     }
   }
 
@@ -82,70 +181,8 @@ class DumpHistoryHtml {
       this._updateListRow(listRowHtml, gameRecord);
 
       // クリックイベントをセット
-      var arg = {
-        gameRecord: gameRecord,
-        callback: listClickCallback
-      };
+      var arg = { callback: listClickCallback };
       listRowHtml.on("click", arg, this._listRowCallback);
-    }
-  }
-
-
-  /**
-   * @note リストを更新する。(1行)
-   * @param {Object}     listRowHtml
-   * @param {GameRecord} gameRecord
-   */
-  static _updateListRow(listRowHtml, gameRecord) {
-    var date = gameRecord.Date.substr(5, 5);
-    var font = (gameRecord.Stock > 0) ? "positive-font" : "negative-font";
-
-    listRowHtml.children(".dump-history-list-row-is-deleted").text(gameRecord.IsDeleted);
-    listRowHtml.children(".dump-history-list-row-id").text(gameRecord.Id);
-    listRowHtml.children(".dump-history-list-row-date").text(date);
-    listRowHtml.children(".dump-history-list-row-rate").text(gameRecord.Rate + "万");
-    listRowHtml.children(".dump-history-list-row-stock").text(gameRecord.Stock);
-    listRowHtml.children(".dump-history-list-row-fighter").text(gameRecord.Fighter);
-    listRowHtml.addClass(font);
-
-    if (gameRecord.IsDeleted) {
-      listRowHtml.addClass("line-through");
-    }
-    else {
-      listRowHtml.removeClass("line-through");
-    }
-  }
-
-
-  /**
-   * @note リストクリック時のイベント
-   * @param {GameRecord} gameRecord
-   */
-  static _listRowCallback(e) {
-    e.data.callback(e.data.gameRecord);
-  }
-
-
-  /**
-   * @note リストを全件表示する。
-   */
-  static _showList() {
-    var listRowHtmls = this._getListRowHtmls();
-    for (let i = 0; i < listRowHtmls.length; i++) {
-      $(listRowHtmls[i]).show();
-    }
-  }
-
-
-  /**
-   * @note リストを隠す。
-   */
-  static _hideList() {
-    const MAX_COUNT = DumpHistoryHtml._MAX_LIST_COUNT;
-
-    var listRowHtmls = this._getListRowHtmls();
-    for (let i = MAX_COUNT; i < listRowHtmls.length; i++) {
-      $(listRowHtmls[i]).hide();
     }
   }
 
