@@ -7,8 +7,9 @@ class AccountHtml {
   static _getFighterHtml()  { return $("#register-account-fighter"); }
 
   // 各要素のセット
-  static SetUserName(txt) { this._getUserNameHtml().val(txt); }
-  static SetFighter(txt)  { this._getFighterHtml().val(txt); }
+  static SetUserName(txt)     { this._getUserNameHtml().val(txt); }
+  static SetFighter(txt)      { this._getFighterHtml().val(txt); }
+  static SetFighterDisabled() { this._getFighterHtml().prop("disabled", true); }
 
   /**
    * @note   Accountの入力値を取得する

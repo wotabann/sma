@@ -346,8 +346,8 @@ body {
 }
 .register-request-button {
   display: block;
-  width: 150px;
-  padding: 6px 0;
+  width: 40%;
+  padding: 8px 0;
   margin: 10px auto 0 auto;
   font-size: 1.0rem;
   text-align: center;
@@ -355,7 +355,7 @@ body {
   text-decoration: none;
   background-color: rgba(0, 164, 105, 1.0);
   color: #fff;
-  border: 2px solid transparent;
+  border: 0px solid transparent;
   border-color: rgba(0, 164, 105, 1);
   border-radius: 30px;
   transition: 0.3s;
@@ -365,7 +365,30 @@ body {
 }
 .register-request-button:disabled {
   background-color: #bbb;
-  border-color: #bbb;
+  color: #fff;
+  cursor: default;
+}
+.register-request-dump-button {
+  display: block;
+  width: 40%;
+  padding: 8px 0;
+  margin: 10px auto 0 auto;
+  font-size: 1.0rem;
+  text-align: center;
+  letter-spacing: 0.1rem;
+  text-decoration: none;
+  background: linear-gradient(135deg, rgba(0, 164, 105, 1.0) 0%, rgba(0, 164, 105, 1.0) 50%, rgba(0, 73, 134, 1.0) 50%, rgba(0, 73, 134, 1.0) 100%);
+  color: #fff;
+  border: 0px solid transparent;
+  border-color: rgba(0, 164, 105, 1);
+  border-radius: 30px;
+  transition: 0.3s;
+}
+.register-request-dump-button:hover {
+  cursor: pointer;
+}
+.register-request-dump-button:disabled {
+  background: #bbb;
   color: #fff;
   cursor: default;
 }
@@ -427,7 +450,7 @@ body {
 .dump-request-button {
   display: block;
   width: 150px;
-  padding: 6px 0;
+  padding: 8px 0;
   margin: 10px auto 0 auto;
   font-size: 1.0rem;
   text-align: center;
@@ -435,7 +458,7 @@ body {
   text-decoration: none;
   background-color: rgba(0, 73, 134, 1.0);
   color: #fff;
-  border: 2px solid transparent;
+  border: 0px solid transparent;
   border-color: rgba(0, 73, 134, 1.0);
   border-radius: 30px;
   transition: 0.3s;
@@ -445,7 +468,6 @@ body {
 }
 .dump-request-button:disabled {
   background-color: #bbb;
-  border-color: #bbb;
   color: #fff;
   cursor: default;
 }

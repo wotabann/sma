@@ -3,13 +3,14 @@ class GameRecordHtml {
   }
 
   // 各要素の取得
-  static _getIdHtml()      { return $("#register-game-record-id"); }
-  static _getDateHtml()    { return $("#register-game-record-date"); }
-  static _getRateHtml()    { return $("#register-game-record-rate"); }
-  static _getStockHtml()   { return $("#register-game-record-stock"); }
-  static _getFighterHtml() { return $("#register-game-record-fighter"); }
-  static _getButtonHtml()  { return $("#register-request-button"); }
-  static _getResultHtml()  { return $("#register-request-result"); }
+  static _getIdHtml()                 { return $("#register-game-record-id"); }
+  static _getDateHtml()               { return $("#register-game-record-date"); }
+  static _getRateHtml()               { return $("#register-game-record-rate"); }
+  static _getStockHtml()              { return $("#register-game-record-stock"); }
+  static _getFighterHtml()            { return $("#register-game-record-fighter"); }
+  static _getRequestButtonHtml()      { return $("#register-request-button"); }
+  static _getRequestDumpButtonHtml()  { return $("#register-request-dump-button"); }
+  static _getResultHtml()             { return $("#register-request-result"); }
 
   // 各要素のセット
   static SetId(txt)        { this._getIdHtml().val(txt); }
@@ -30,7 +31,15 @@ class GameRecordHtml {
    * @note   登録ボタン押下時のイベントをセットする
    */
   static SetRequestButtonClickEvent(fnc) {
-    this._getButtonHtml().on("click", fnc);
+    this._getRequestButtonHtml().on("click", fnc);
+  }
+
+
+  /**
+   * @note   登録＆取得ボタン押下時のイベントをセットする
+   */
+  static SetRequestDumpButtonClickEvent(fnc) {
+    this._getRequestDumpButtonHtml().on("click", fnc);
   }
 
 
@@ -38,7 +47,8 @@ class GameRecordHtml {
    * @note   登録ボタンを有効にする
    */
   static SetRequestButtonEnabled() {
-    this._getButtonHtml().prop("disabled", false);
+    this._getRequestButtonHtml().prop("disabled", false);
+    this._getRequestDumpButtonHtml().prop("disabled", false);
   }
 
 
@@ -46,7 +56,8 @@ class GameRecordHtml {
    * @note   登録ボタンを無効にする
    */
   static SetRequestButtonDisabled() {
-    this._getButtonHtml().prop("disabled", true);
+    this._getRequestButtonHtml().prop("disabled", true);
+    this._getRequestDumpButtonHtml().prop("disabled", true);
   }
 
 

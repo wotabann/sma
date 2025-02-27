@@ -7,6 +7,7 @@ $(window).on("load", function() {
   AccountHtml.SetFighter(GetMyFighter());
   GameRecordHtml.SetDate(Util.GetToday());
   GameRecordHtml.SetRequestButtonClickEvent(RequestRegister);
+  GameRecordHtml.SetRequestDumpButtonClickEvent(RequestRegisterDump);
   DumpHtml.SetRequestButtonClickEvent(RequestDump);
 });
 
@@ -16,7 +17,15 @@ $(window).on("load", function() {
  * @note 登録ボタンのイベントリスナー
  */
 function RequestRegister() {
-  Registerer.Request();
+  Registerer.Request(false);
+}
+
+
+/**
+ * @note 登録＆取得ボタンのイベントリスナー
+ */
+function RequestRegisterDump() {
+  Registerer.Request(true);
 }
 
 

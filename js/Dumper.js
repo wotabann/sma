@@ -56,6 +56,9 @@ class Dumper {
       return postRecvData.ErrorString;
     }
 
+    // 修正や削除時に不整合を防止するため、使用ファイター欄を無効にする
+    AccountHtml.SetFighterDisabled();
+
     // 結果を変数に格納
     var gameRecords = PostDataManager.ParseGameRecordsFromDumpResponse(postRecvData);
 

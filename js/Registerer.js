@@ -6,14 +6,14 @@ class Registerer {
   /**
    * @note 登録ボタン押下時のイベント
    */
-  static async Request() {
+  static async Request(isDump) {
     var errorString = "";
 
     GameRecordHtml.SetResult("");
     GameRecordHtml.SetRequestButtonDisabled();
 
     try {
-      errorString = await Registerer._request();
+      errorString = await Registerer._request(isDump);
     }
     catch(e) {
       alert(e.stack);
@@ -141,7 +141,7 @@ class Registerer {
    * @note 登録メイン処理
    * @return {String}
    */
-  static async _request() {
+  static async _request(isDump) {
     // 汎用データ
     var errorString = "";
 
@@ -149,7 +149,6 @@ class Registerer {
     var account = AccountHtml.GetAccount();
     var gameRecord = GameRecordHtml.GetGameRecord();
     var operation = (gameRecord.Id > 0) ? "Update" : "Insert";
-    var isDump = (gameRecord.Id > 0) ? true : false;
 
     // 入力フォームのチェック
     errorString = this._validateInputs();
@@ -197,10 +196,14 @@ class Registerer {
     var gameRecordString = this._createGameRecordText(responseGameRecord);
     GameRecordHtml.SetResult(gameRecordString);
 
-    // データを取得時の更新
+    // データ取得時の更新
     if (isDump) {
+      AccountHtml.SetFighterDisabled();
       await Registerer._dump(postRecvData);
     }
+
+    // データ修正時は日付欄を最新にしておく
+    GameRecordHtml.SetDate(Util.GetToday());
 
     return "";
   }
