@@ -161,16 +161,16 @@ class Registerer {
 
     // 確認ダイアログ
     var msg = "";
+    msg += "下記の内容で登録ます。\nよろしいですか？\n";
+    msg += "【" + this._createGameRecordText(gameRecord) + "】";
     if (gameRecord.Id > 0) {
-      msg += "※※指定のIDで上書きされます※※\n\n";
+      msg += "\n\n※※指定のIDで上書きされます※※";
     }
     else {
       if (!(this._isDateInRange())) {
-        msg += "※※現在時刻と乖離があります※※\n\n";
+        msg += "\n\n※※日付欄と現在時刻に乖離があります※※";
       }
     }
-    msg += "下記の内容で登録ます。\nよろしいですか？\n";
-    msg += "【" + this._createGameRecordText(gameRecord) + "】";
     if (!window.confirm(msg)) {
       return "";
     }
