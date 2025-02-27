@@ -33,6 +33,7 @@ class DumpHistoryHtml {
     this._hideList();
     this._getListShowButtonHtml().on("click", function() { DumpHistoryHtml._showList(); });
     this._getListHideButtonHtml().on("click", function() { DumpHistoryHtml._hideList(); });
+    this._updateListNotice();
 
     // チャートを更新
     this._updateChart(gameRecords);
@@ -56,12 +57,12 @@ class DumpHistoryHtml {
 
     // 引数を作成
     var gameRecord = new GameRecord();
-    gameRecord.Id = idHtml.text();
+    gameRecord.Id = idHtml.data("raw");
     gameRecord.Date = dateHtml.data("raw");
     gameRecord.Rate = rateHtml.data("raw");
-    gameRecord.Stock = stockHtml.text();
-    gameRecord.Fighter = fighterHtml.text();
-    gameRecord.IsDeleted = isDeletedHtml.text();
+    gameRecord.Stock = stockHtml.data("raw");
+    gameRecord.Fighter = fighterHtml.data("raw");
+    gameRecord.IsDeleted = isDeletedHtml.data("raw");
 
     // コールバック関数を呼び出す
     e.data.callback(gameRecord);
@@ -128,12 +129,13 @@ class DumpHistoryHtml {
     var font = (gameRecord.Stock > 0) ? "positive-font" : "negative-font";
 
     // 各要素
-    var idHtml        = listRowHtml.children(".dump-history-list-row-id");
-    var dateHtml      = listRowHtml.children(".dump-history-list-row-date");
-    var rateHtml      = listRowHtml.children(".dump-history-list-row-rate");
-    var stockHtml     = listRowHtml.children(".dump-history-list-row-stock");
-    var fighterHtml   = listRowHtml.children(".dump-history-list-row-fighter");
-    var isDeletedHtml = listRowHtml.children(".dump-history-list-row-is-deleted");
+    var idHtml         = listRowHtml.children(".dump-history-list-row-id");
+    var dateHtml       = listRowHtml.children(".dump-history-list-row-date");
+    var rateHtml       = listRowHtml.children(".dump-history-list-row-rate");
+    var stockHtml      = listRowHtml.children(".dump-history-list-row-stock");
+    var fighterHtml    = listRowHtml.children(".dump-history-list-row-fighter");
+    var isDeletedHtml  = listRowHtml.children(".dump-history-list-row-is-deleted");
+    var noticeIconHtml = listRowHtml.children(".dump-history-list-row-notice-icon");
 
     // 各要素の表示を更新
     idHtml.text(gameRecord.Id);
@@ -142,10 +144,15 @@ class DumpHistoryHtml {
     stockHtml.text(gameRecord.Stock);
     fighterHtml.text(gameRecord.Fighter);
     isDeletedHtml.text(gameRecord.IsDeleted);
+    noticeIconHtml.hide();
 
     // リストクリックのコールバック用に生の値を仕込む
+    idHtml.data("raw",   gameRecord.Id);
     dateHtml.data("raw", gameRecord.Date);
     rateHtml.data("raw", gameRecord.Rate);
+    stockHtml.data("raw", gameRecord.Stock);
+    fighterHtml.data("raw", gameRecord.Fighter);
+    isDeletedHtml.data("raw", gameRecord.IsDeleted);
 
     // 勝敗に応じてフォントを設定
     listRowHtml.addClass(font);
@@ -183,6 +190,55 @@ class DumpHistoryHtml {
       // クリックイベントをセット
       var arg = { callback: listClickCallback };
       listRowHtml.on("click", arg, this._listRowCallback);
+    }
+  }
+
+
+  /**
+   * @note リストの注意喚起欄を更新する。
+   */
+  static _updateListNotice() {
+    // 退避
+    var listRowHtmls = this._getListRowHtmls();
+    var length = listRowHtmls.length;
+
+    // 1レコードずつループして表示
+    for (let i = 1; i < (length - 1); i++) {
+      var listRowHtml   = $(listRowHtmls[i]);
+
+      // 削除レコードは対象外
+      var isDeletedHtml = listRowHtml.children(".dump-history-list-row-is-deleted");
+      if (isDeletedHtml.data("raw") == true) {
+        continue;
+      }
+
+      // 必要な情報の退避
+      var rateHtml  = listRowHtml.children(".dump-history-list-row-rate");
+      var stockHtml = listRowHtml.children(".dump-history-list-row-stock");
+      var rate      = rateHtml.data("raw");
+      var stock     = stockHtml.data("raw");
+      var rate_prev = rate;
+
+      // 1試合前の戦闘力を検索
+      for (let j = (i + 1); j < length; j++) {
+        var listRowHtml_prev   = $(listRowHtmls[j]);
+        var isDeletedHtml_prev = listRowHtml_prev.children(".dump-history-list-row-is-deleted");
+        if (isDeletedHtml_prev.data("raw") == false) {
+          var rateHtml_prev = listRowHtml_prev.children(".dump-history-list-row-rate");
+          rate_prev = rateHtml_prev.data("raw");
+          break;
+        }
+      }
+
+      // 不整合のチェック
+      var noticeIconHtml;
+      var noticeHtml;
+      if ((rate < rate_prev) && (stock > 0) || (rate > rate_prev) && (stock < 0)) {
+        var noticeIconHtml = listRowHtml.children(".dump-history-list-row-notice-icon");
+        var noticeHtml     = noticeIconHtml.children(".dump-history-list-row-notice");
+        noticeHtml.text("戦闘力の増減とストック差に不整合があります。");
+        noticeIconHtml.show();
+      }
     }
   }
 

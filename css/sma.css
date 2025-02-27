@@ -544,6 +544,7 @@ body {
   transform: translateY(2px) rotate(315deg);
 }
 .dump-history-list-row {
+  position: relative;
   display: flex;
   justify-content: center;
   vertical-align: middle;
@@ -585,6 +586,35 @@ body {
   height: 100%;
   background: #fff;
   z-index: -1;
+}
+.dump-history-list-row-notice {
+  display: none;
+  position: absolute;
+  top: -15px;
+  left: 15px;
+  font-size: 0.8rem;
+  font-weight: normal;
+  white-space: nowrap;
+  background-color: rgb(255, 255, 167);
+  color: #333;
+  padding: 2px 5px;
+  border-radius: 3px;
+  border: 1px solid #aaa;
+}
+.dump-history-list-row-notice-icon {
+  display: none;
+  position: absolute;
+  top: 2px;
+  left: 5px;
+  width: 14px;
+  height: 14px;
+  font-size: 12px;
+  font-weight: bold;
+  color: red;
+  border-radius: 10px;
+}
+.dump-history-list-row-notice-icon:hover .dump-history-list-row-notice {
+  display: block;
 }
 .dump-history-list-row-is-deleted {
   width: 20px;

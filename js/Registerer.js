@@ -113,7 +113,7 @@ class Registerer {
    */
   static async DumpHistoryOnClick(gameRecord) {
     var msg = "";
-    msg += Registerer._createGameRecordText(gameRecord) + "\n";
+    msg += "【" + Registerer._createGameRecordText(gameRecord) + "】\n";
     msg += "実行したい操作を入力してください。\n";
     msg += "(\"修正\" or \"削除\" or \"復活\")";
 
@@ -157,13 +157,20 @@ class Registerer {
       return errorString;
     }
 
+    // 現在時刻と日付欄の乖離のチェック
+
     // 確認ダイアログ
     var msg = "";
-    msg += this._createGameRecordText(gameRecord) + "\n\n";
-    msg += "上記の内容で登録します。\nよろしいですか？";
     if (gameRecord.Id > 0) {
-      msg += "\n\n※※※ 注意 ※※※\n指定のIDで上書きされます。";
+      msg += "※※指定のIDで上書きされます※※\n\n";
     }
+    else {
+      if (!(this._isDateInRange())) {
+        msg += "※※現在時刻と乖離があります※※\n\n";
+      }
+    }
+    msg += "下記の内容で登録ます。\nよろしいですか？\n";
+    msg += "【" + this._createGameRecordText(gameRecord) + "】";
     if (!window.confirm(msg)) {
       return "";
     }
@@ -216,7 +223,7 @@ class Registerer {
     msg += "対象を結果登録欄に反映しました。\n";
     msg += "内容を修正して再度登録してください。\n";
     msg += "\n";
-    msg += "※※※ 注意 ※※※\n";
+    msg += "※※ 注意 ※※\n";
     msg += "取り消す場合はページをリロードしてください。\n";
     msg += "(編集対象のIDがクリアされないため)";
     alert(msg);
@@ -232,16 +239,17 @@ class Registerer {
    * @return {String}
    */
   static async _deleteRestore(gameRecord, isDelete) {
-    var msg = this._createGameRecordText(gameRecord) + "\n\n";
+    var msg = "";
     var operation = isDelete ? "Delete" : "Restore";
 
     if (isDelete) {
-      msg += "上記の戦績を削除します。\n";
-      msg += "本当によろしいですか？";
+      msg += "下記の戦績を削除します。\n";
+      msg += "本当によろしいですか？\n";
     }
     else {
-      msg += "上記の戦績を復活させますか？";
+      msg += "下記の戦績を復活させますか？\n";
     }
+    msg += "【" + this._createGameRecordText(gameRecord) + "】";
 
     // 確認ダイアログ
     if (!window.confirm(msg)) {
@@ -354,6 +362,33 @@ class Registerer {
     }
 
     return "";
+  }
+
+
+  /**
+   * @note   現在時刻と日付に乖離がないか調べる
+   * @return {Boolean}
+   */
+  static _isDateInRange() {
+    var gameRecord = GameRecordHtml.GetGameRecord();
+
+    // 現在時刻の日付と一致なら乖離なし。
+    if (gameRecord.Date == Util.GetToday()) {
+      return true;
+    }
+
+    // 現在時刻の4時間前までは乖離なしと見なす。
+    var now = new Date();
+    var date = new Date(now - (1000 * 60 * 60 * 4));
+    const yyyy = date.getFullYear();
+    const mm = ('00' + (date.getMonth()+1)).slice(-2);
+    const dd = ('00' + date.getDate()).slice(-2);
+    if (gameRecord.Date == `${yyyy}-${mm}-${dd}`) {
+      return true;
+    }
+
+    // 上記以外は日付の乖離アリと見なす。
+    return false;
   }
 
 
