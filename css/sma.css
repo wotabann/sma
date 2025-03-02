@@ -291,7 +291,8 @@ label[for="input-game-record-is-vip"] {
 label[for="input-game-record-is-vip"] span {
   display: block;
   cursor: pointer;
-  margin-left: -5px;
+  margin-top: 2px;
+  margin-left: -3px;
 }
 #input-game-record-is-vip {
   display: block;
