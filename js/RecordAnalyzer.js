@@ -9,15 +9,15 @@ class RecordAnalyzer {
     // 各種レコードを更新
     var win  = 0;
     var lose = 0;
-    for (let i = 0; i < gameRecords.Length(); i++) {
-      var gameRecord = gameRecords.Index(i);
+    for (let i = 0; i < gameRecords.length; i++) {
+      var gameRecord = gameRecords.index(i);
 
-      if (gameRecord.IsDeleted) {
+      if (gameRecord.isDeleted) {
         continue;
       }
 
-      win  = (gameRecord.Stock > 0) ? (win  + 1) : 0;
-      lose = (gameRecord.Stock < 0) ? (lose + 1) : 0;
+      win  = (gameRecord.stock > 0) ? (win  + 1) : 0;
+      lose = (gameRecord.stock < 0) ? (lose + 1) : 0;
 
       this._pushFighterRecord(gameRecord);
       this._updateFighterRecords(gameRecord);
@@ -29,14 +29,14 @@ class RecordAnalyzer {
   /**
    * @return {TotalRecord}
    */
-  TotalRecord() {
+  get totalRecord() {
     return this._totalRecord;
   }
 
   /**
    * @return {FighterRecords}
    */
-  FighterRecords() {
+  get fighterRecords() {
     return this._fighterRecords;
   }
 
@@ -44,10 +44,10 @@ class RecordAnalyzer {
    * @param  {GameRecord} gameRecord
    */
   _pushFighterRecord(gameRecord) {
-    if (this._fighterRecords.Find(gameRecord.Fighter) == null) {
+    if (this._fighterRecords.find(gameRecord.fighter) == null) {
       var fighterRecord = new FighterRecord();
-      fighterRecord.Fighter = gameRecord.Fighter;
-      this._fighterRecords.Push(fighterRecord);
+      fighterRecord.fighter = gameRecord.fighter;
+      this._fighterRecords.push(fighterRecord);
     }
     return;
   }
@@ -56,11 +56,11 @@ class RecordAnalyzer {
    * @param  {GameRecord} gameRecord
    */
   _updateFighterRecords(gameRecord) {
-    var fighterRecord = this._fighterRecords.Find(gameRecord.Fighter);
-    fighterRecord.GameCount  += 1;
-    fighterRecord.WinCount   += (gameRecord.Stock > 0) ? 1 : 0;
-    fighterRecord.LoseCount  += (gameRecord.Stock < 0) ? 1 : 0;
-    fighterRecord.TotalStock += gameRecord.Stock;
+    var fighterRecord = this._fighterRecords.find(gameRecord.fighter);
+    fighterRecord.gameCount  += 1;
+    fighterRecord.winCount   += (gameRecord.stock > 0) ? 1 : 0;
+    fighterRecord.loseCount  += (gameRecord.stock < 0) ? 1 : 0;
+    fighterRecord.totalStock += gameRecord.stock;
     return;
   }
 
@@ -70,23 +70,23 @@ class RecordAnalyzer {
    * @param  {Integer} lose
    */
   _updateTotalRecord(gameRecord, win, lose) {
-    var rate  = gameRecord.Rate;
-    var stock = gameRecord.Stock;
+    var rate  = gameRecord.rate;
+    var stock = gameRecord.stock;
 
-    var maxRate = Math.max(this._totalRecord.MaxRate, rate);
-    var minRate = Math.min(this._totalRecord.MinRate, rate);
-    var maxWin  = Math.max(this._totalRecord.MaxWin,  win);
-    var maxLose = Math.max(this._totalRecord.MaxLose, lose);
+    var maxRate = Math.max(this._totalRecord.maxRate, rate);
+    var minRate = Math.min(this._totalRecord.minRate, rate);
+    var maxWin  = Math.max(this._totalRecord.maxWin,  win);
+    var maxLose = Math.max(this._totalRecord.maxLose, lose);
 
-    this._totalRecord.GameCount  += 1;
-    this._totalRecord.WinCount   += (stock > 0) ? 1 : 0;
-    this._totalRecord.LoseCount  += (stock < 0) ? 1 : 0;
-    this._totalRecord.Rate        = rate;
-    this._totalRecord.MaxRate     = maxRate;
-    this._totalRecord.MinRate     = minRate;
-    this._totalRecord.TotalStock += stock;
-    this._totalRecord.MaxWin      = maxWin;
-    this._totalRecord.MaxLose     = maxLose;
+    this._totalRecord.gameCount  += 1;
+    this._totalRecord.winCount   += (stock > 0) ? 1 : 0;
+    this._totalRecord.loseCount  += (stock < 0) ? 1 : 0;
+    this._totalRecord.rate        = rate;
+    this._totalRecord.maxRate     = maxRate;
+    this._totalRecord.minRate     = minRate;
+    this._totalRecord.totalStock += stock;
+    this._totalRecord.maxWin      = maxWin;
+    this._totalRecord.maxLose     = maxLose;
     return;
   }
 }

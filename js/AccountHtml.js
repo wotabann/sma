@@ -1,24 +1,67 @@
 class AccountHtml {
-  constructor() {
-  }
-  
-  // 各要素の取得
-  static _getUserNameHtml() { return $("#register-account-username"); }
-  static _getFighterHtml()  { return $("#register-account-fighter"); }
 
-  // 各要素のセット
-  static SetUserName(txt)     { this._getUserNameHtml().val(txt); }
-  static SetFighter(txt)      { this._getFighterHtml().val(txt); }
-  static SetFighterDisabled() { this._getFighterHtml().prop("disabled", true); }
+  constructor() {
+    this._fighterListHtml = new FighterListHtml();
+  }
+
+
+  get userName()      { return this._html_userName.val(); }
+  set userName(value) {        this._html_userName.val(value); }
+  get fighter()       { return this._html_fighter.val(); }
+  set fighter(value)  {        this._html_fighter.val(value); }
+
+  get _html_userName() { return $("#input-account-username"); }
+  get _html_fighter()  { return $("#input-account-fighter"); }
+
+
+  disableFighter() {
+    this._html_fighter.prop("disabled", true);
+  }
+
 
   /**
-   * @note   Accountの入力値を取得する
    * @return {Account}
    */
-  static GetAccount() {
+  toAccount() {
     var account = new Account();
-    account.UserName = this._getUserNameHtml().val();
-    account.Fighter =  this._getFighterHtml().val();
+    account.userName = this.userName;
+    account.fighter  = this.fighter;
     return account;
+  }
+
+
+  /**
+   * @param {Account} account
+   */
+  fromAccount(account) {
+    this.userName = account.userName;
+    this.fighter  = account.fighter;
+  }
+
+
+
+  /**
+   * @return {String}
+   */
+  validateInputs() {
+    var pattern;
+    var matchResult;
+
+    // 入力データを取得
+    var account = this.toAccount();
+
+    // アカウント
+    pattern = "^.+$";
+    matchResult = account.userName.match(pattern);
+    if (matchResult == null) {
+      return "アカウント名が不正です。";
+    }
+
+    // 使用ファイター
+    if (!this._fighterListHtml.isExist(account.fighter)) {
+      return "使用ファイターが不正です。";
+    }
+
+    return "";
   }
 }

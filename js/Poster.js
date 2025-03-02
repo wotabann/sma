@@ -1,69 +1,30 @@
 class Poster {
 
-  // URL
-  static _url = "https://script.google.com/macros/s/AKfycbxCdDEdjIlQVzbH6QzQ1A5Jq6Hbw0Z9nbGr2w1LH27hmUjumDlI5bbPTTt6Y3SWbJ73/exec";
-
-  
-  /**
-   * @note コンストラクタ
-   */
   constructor() {
+    //this._URL = "https://script.google.com/macros/s/AKfycbxCdDEdjIlQVzbH6QzQ1A5Jq6Hbw0Z9nbGr2w1LH27hmUjumDlI5bbPTTt6Y3SWbJ73/exec";
+    this._URL = "https://script.google.com/macros/s/AKfycbxxb6AjFCaVv3vEUWtw13AXmBKt7e7ivXEkNzINPUrTedQnq9InGK_tZb7Rfo8hhJbr/exec";
   }
 
 
   /**
    * @note   ポストする
-   * @param  {PostSendData} postSendData
-   * @return {PostRecvData}
+   * @param  {PostRequest} postRequest
+   * @return {PostResponse}
    */
-  static async Post(postSendData) {
+  async post(postRequest) {
     const options = {
       'method': "POST",
-      'body': JSON.stringify(postSendData.ToJsonObject()),
+      'body': JSON.stringify(postRequest.toJsonObject()),
       "Content-Type" : "application/json"
     };
-
     try {
-      const response = await fetch(this._url, options);
+      const response = await fetch(this._URL, options);
       const data = await response.json();
-      var postRecvData = new PostRecvData(data);
-      return postRecvData;
+      var postResponse = new PostResponse(data);
+      return postResponse;
     }
     catch (e) {
       return null;
     }
-  }
-
-
-
-  
-
-
-  /**
-   * @note   ポストする
-   * @param  {PostSendData} postSendData
-   * @return {PostRecvData}
-   */
-  static _post2(postSendData) {
-    var postRecvData = null;
-
-    // ポスト実行
-    $.ajax({
-      type: "POST",
-      url: this._url,
-      async: false,
-      cache: false,
-      dataType: "json",
-      data: JSON.stringify(postSendData.ToJsonObject())
-    })
-    .done(function(data, textStatus, jqXHR) {
-      postRecvData = new PostRecvData(JSON.parse(JSON.stringify(data)));
-    })
-    .fail(function(jqXHR, textStatus, errorThrown) {
-    })
-    .always(function() {
-    })
-  
-    return postRecvData;
   }
 }

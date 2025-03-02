@@ -12,7 +12,7 @@ class TableSorter {
       var buttonHtml = $(buttonHtmls[i]);
       var sortCell = buttonHtml.data("sort-cell");
       var sortType = buttonHtml.data("sort-type");
-      var compareFunction = TableSorter._getCompareFunction(sortType, isDesc);
+      var compareFunction = this._getCompareFunction(sortType, isDesc);
       var arg = {
         tableHtml : this._tableHtml,
         sortCell : sortCell,
@@ -22,35 +22,35 @@ class TableSorter {
     }
   }
 
-  static _compareAsString(textA, textB) {
+  _compareAsString(textA, textB) {
     return textB < textA;
   }
-  static _compareAsStringDesc(textA, textB) {
+  _compareAsStringDesc(textA, textB) {
     return textB > textA;
   }
-  static _compareAsNumber(textA, textB) {
+  _compareAsNumber(textA, textB) {
     return parseInt(textB, 10) < parseInt(textA, 10);
   }
-  static _compareAsNumberDesc(textA, textB) {
+  _compareAsNumberDesc(textA, textB) {
     return parseInt(textB, 10) > parseInt(textA, 10);
   }
-  static _compareAsFloat(textA, textB) {
+  _compareAsFloat(textA, textB) {
     return parseFloat(textB, 10) < parseFloat(textA, 10);
   }
-  static _compareAsFloatDesc(textA, textB) {
+  _compareAsFloatDesc(textA, textB) {
     return parseFloat(textB, 10) > parseFloat(textA, 10);
   }
 
-  static _getCompareFunction(sortType, isDesc) {
+  _getCompareFunction(sortType, isDesc) {
     switch (sortType) {
       case "string":
-        return (isDesc ? TableSorter._compareAsStringDesc : TableSorter._compareAsString);
+        return (isDesc ? this._compareAsStringDesc : this._compareAsString);
       case "number":
-        return (isDesc ? TableSorter._compareAsNumberDesc : TableSorter._compareAsNumber);
+        return (isDesc ? this._compareAsNumberDesc : this._compareAsNumber);
       case "float":
-        return (isDesc ? TableSorter._compareAsFloatDesc  : TableSorter._compareAsFloat);
+        return (isDesc ? this._compareAsFloatDesc  : this._compareAsFloat);
       default:
-        return (isDesc ? TableSorter._compareAsStringDesc : TableSorter._compareAsString);
+        return (isDesc ? this._compareAsStringDesc : this._compareAsString);
     }
   }
 

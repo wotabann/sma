@@ -1,27 +1,23 @@
 class GameRecord {
   constructor() {
-    this.Id = 0;
-    this.Date = "2025-01-01";
-    this.Rate = 0;
-    this.Stock = 0;
-    this.Fighter = "ファイター名";
-
-    this.CreateTime = 0;
-    this.UpdateTime = 0;
-    this.IsDeleted  = false;
+    this.id        = 0;
+    this.date      = "2025-01-01";
+    this.rate      = 0;
+    this.stock     = 0;
+    this.fighter   = "ファイター名";
+    this.isVip     = false;
+    this.isDeleted = false;
   }
 
-  ToJsonObject() {
+  toJsonObject() {
     var data = {
-      Id:      this.Id,
-      Date:    this.Date,
-      Rate:    this.Rate,
-      Stock:   this.Stock,
-      Fighter: this.Fighter,
-
-      CreateTime: this.CreateTime,
-      UpdateTime: this.UpdateTime,
-      IsDeleted:  this.IsDeleted,
+      id:         this.id,
+      date:       this.date,
+      rate:       this.rate,
+      stock:      this.stock,
+      fighter:    this.fighter,
+      isVip:      this.isVip,
+      isDeleted:  this.isDeleted,
     };
     return data;
   }

@@ -1,40 +1,40 @@
 class DumpHtml {
+
   constructor() {
-  }
-
-  
-  // 各要素の取得
-  static _getRequestButtonHtml()  { return $("#dump-request-button"); }
-
-  // 各要素のセット
-
-  // 各要素のクリア
-  static ClearRate()    { this._getRateObject().val(""); }
-  static ClearStock()   { this._getStockObject().val(""); }
-  static ClearFighter() { this._getFighterObject().val(""); }
-
-
-  /**
-   * @note   ボタン押下時のイベントをセットする
-   */
-  static SetRequestButtonClickEvent(fnc) {
-    this._getRequestButtonHtml().on("click", fnc);
+    this._dumpRequestButtonHtml = new DumpRequestButtonHtml();
+    this._dumpTotalRecordHtml   = new DumpTotalRecordHtml();
+    this._dumpHistoryChartHtml  = new DumpHistoryChartHtml();
+    this._dumpHistoryListHtml   = new DumpHistoryListHtml();
+    this._dumpFighterRecordHtml = new DumpFighterRecordHtml();
   }
 
 
   /**
-   * @note   ボタンを有効にする
+   * @note   表示を更新する。
+   * @param  {GameRecords} gameRecords
    */
-  static SetRequestButtonEnabled() {
-    this._getRequestButtonHtml().prop("disabled", false);
+  update(gameRecords, historyListOnClick) {
+    // 結果を解析
+    var recordAnalyzer = new RecordAnalyzer(gameRecords);
+
+    // 集計結果を更新
+    this._dumpTotalRecordHtml.update(recordAnalyzer.totalRecord);
+
+    // 対戦履歴を更新
+    this._dumpHistoryChartHtml.update(gameRecords);
+    this._dumpHistoryListHtml.update(gameRecords, historyListOnClick);
+
+    // 相手キャラ毎の戦績を更新
+    this._dumpFighterRecordHtml.update(recordAnalyzer.fighterRecords);
   }
 
-
-  /**
-   * @note   ボタンを無効にする
-   */
-  static SetRequestButtonDisabled() {
-    this._getRequestButtonHtml().prop("disabled", true);
+  disableDumpRequestButton() {
+    this._dumpRequestButtonHtml.disableDumpRequestButton();
   }
-
+  enableDumpRequestButton() {
+    this._dumpRequestButtonHtml.enableDumpRequestButton();
+  }
+  addDumpRequestButtonOnClick(callback) {
+    this._dumpRequestButtonHtml.addDumpRequestButtonOnClick(callback);
+  }
 }

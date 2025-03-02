@@ -7,7 +7,7 @@ class FighterRecords {
    * @param  {FighterRecord} fighterRecord
    * @return {FighterRecord}
    */
-  Push(fighterRecord) {
+  push(fighterRecord) {
     this._fighterRecords.push(fighterRecord);
     return fighterRecord;
   }
@@ -15,7 +15,7 @@ class FighterRecords {
   /**
    * @return {Integer}
    */
-  Length() {
+  get length() {
     return this._fighterRecords.length;
   }
 
@@ -23,7 +23,7 @@ class FighterRecords {
    * @param  {Integer} i
    * @return {FighterRecord}
    */
-  Index(i) {
+  index(i) {
     return this._fighterRecords[i];
   }
 
@@ -31,9 +31,9 @@ class FighterRecords {
    * @param  {String} fighter
    * @return {FighterRecord}
    */
-  Find(fighter) {
+  find(fighter) {
     for (let i = 0; i < this._fighterRecords.length; i++) {
-      if (fighter == this._fighterRecords[i].Fighter) {
+      if (fighter == this._fighterRecords[i].fighter) {
         return this._fighterRecords[i];
       }
     }
@@ -41,10 +41,12 @@ class FighterRecords {
   }
 
   // 各種ソート
-  SortByGameCount() { this._fighterRecords.sort(function(a, b) { return b.GameCount - a.GameCount; }); }
-  SortByWinCount()  { this._fighterRecords.sort(function(a, b) { return b.WinCount  - a.WinCount;  }); }
-  SortByLoseCount() { this._fighterRecords.sort(function(a, b) { return b.LoseCount - a.LoseCount; }); }
-  SortByWinRate()   { this._fighterRecords.sort(function(a, b) { return b.WinRate() - a.WinRate(); }); }
-  SortByWinRateR()  { this._fighterRecords.sort(function(a, b) { return a.WinRate() - b.WinRate(); }); }
+  sortByGameCount() { this._fighterRecords.sort(function(a, b) { return b.gameCount - a.gameCount; }); }
+  sortByWinCount()  { this._fighterRecords.sort(function(a, b) { return b.winCount  - a.winCount;  }); }
+  sortByLoseCount() { this._fighterRecords.sort(function(a, b) { return b.loseCount - a.loseCount; }); }
+  sortByWinRate()   { this._fighterRecords.sort(function(a, b) { return b.winRate   - a.winRate; }); }
+  sortByWinRateR()  { this._fighterRecords.sort(function(a, b) { return a.winRate   - b.winRate; }); }
+  sortByWinOver()   { this._fighterRecords.sort(function(a, b) { return b.winOver   - a.winOver; }); }
+  sortByWinOverR()  { this._fighterRecords.sort(function(a, b) { return a.winOver   - b.winOver; }); }
 
 }

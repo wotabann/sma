@@ -1,19 +1,50 @@
 class Registerer {
+
   constructor() {
+    this._poster          = new Poster();
+    this._loadingHtml     = new LoadingHtml();
+    this._fighterListHtml = new FighterListHtml();
+    this._accountHtml     = new AccountHtml();
+    this._registerHtml    = new RegisterHtml();
+    this._dumpHtml        = new DumpHtml();
   }
 
 
   /**
    * @note 登録ボタン押下時のイベント
+   * @param {Boolean} isDump
    */
-  static async Request(isDump) {
+  async insertUpdate(isDump) {
     var errorString = "";
-
-    GameRecordHtml.SetResult("");
-    GameRecordHtml.SetRequestButtonDisabled();
+    this._registerHtml.registerResult = "";
+    this._registerHtml.disableRequestButtons();
 
     try {
-      errorString = await Registerer._request(isDump);
+      errorString = await this._insertUpdate(isDump);
+    }
+    catch(e) {
+      errorString = "予期せぬエラーが発生しました。";
+    }
+
+    if (errorString != "") {
+      this._registerHtml.registerResult = errorString;
+      alert(errorString);
+    }
+    this._registerHtml.enableRequestButtons();
+  }
+
+
+  /**
+   * @note 削除/復活リクエスト
+   * @param {GameRecord} gameRecord
+   * @param {Boolean}    isDelete
+   */
+  async deleteRestore(gameRecord, isDelete) {
+    var errorString = "";
+    this._registerHtml.disableRequestButtons();
+
+    try {
+      errorString = await this._deleteRestore(gameRecord, isDelete);
     }
     catch(e) {
       alert(e.stack);
@@ -21,112 +52,40 @@ class Registerer {
     }
 
     if (errorString != "") {
-      GameRecordHtml.SetResult(errorString);
       alert(errorString);
     }
-
-    GameRecordHtml.SetRequestButtonEnabled();
+    this._registerHtml.enableRequestButtons();
   }
 
 
   /**
-   * @note 修正ボタン押下時のイベント
-   * @return {Boolean}
+   * @note 修正対象を対戦結果欄に反映
+   * @param  {GameRecord} gameRecord
+   * @return {String}
    */
-  static async PreUpdate(gameRecord) {
-    var errorString = "";
-
-    GameRecordHtml.SetRequestButtonDisabled();
-
-    try {
-      errorString = await Registerer._preUpdate(gameRecord);
-    }
-    catch(e) {
-      errorString = "予期せぬエラーが発生しました。";
-    }
-
-    if (errorString != "") {
-      alert(errorString);
-    }
-
-    GameRecordHtml.SetRequestButtonEnabled();
-
-    return (errorString == "");
+  preUpdate(gameRecord) {
+    this._registerHtml.fromGameRecord(gameRecord);
+    $(window).scrollTop(0);
+    this._alertPreUpdate();
+    return true;
   }
 
 
   /**
-   * @note 削除ボタン押下時のイベント
-   * @return {Boolean}
-   */
-  static async Delete(gameRecord) {
-    var errorString = "";
-
-    GameRecordHtml.SetRequestButtonDisabled();
-
-    try {
-      errorString = await Registerer._deleteRestore(gameRecord, true);
-    }
-    catch(e) {
-      errorString = "予期せぬエラーが発生しました。";
-    }
-
-    if (errorString != "") {
-      alert(errorString);
-    }
-
-    GameRecordHtml.SetRequestButtonEnabled();
-
-    return (errorString == "");
-  }
-
-
-  /**
-   * @note 復活ボタン押下時のイベント
-   * @return {Boolean}
-   */
-  static async Restore(gameRecord) {
-    var errorString = "";
-
-    GameRecordHtml.SetRequestButtonDisabled();
-
-    try {
-      errorString = await Registerer._deleteRestore(gameRecord, false);
-    }
-    catch(e) {
-      errorString = "予期せぬエラーが発生しました。";
-    }
-
-    if (errorString != "") {
-      alert(errorString);
-    }
-
-    GameRecordHtml.SetRequestButtonEnabled();
-
-    return (errorString == "");
-  }
-
-
-  /**
-   * @note   
+   * @note  対戦履歴のクリックイベント
    * @param {GameRecord} gameRecord
    */
-  static async DumpHistoryOnClick(gameRecord) {
-    var msg = "";
-    msg += "【" + Registerer._createGameRecordText(gameRecord) + "】\n";
-    msg += "実行したい操作を入力してください。\n";
-    msg += "(\"修正\" or \"削除\" or \"復活\")";
-
-    var text = prompt(msg);
+  async dumpHistoryOnClick(gameRecord) {
+    var text = this._promptOperationSelect(gameRecord);
     switch (text) {
       case "修正":
-        await Registerer.PreUpdate(gameRecord);
+        await this.preUpdate(gameRecord);
         break;
       case "削除":
-        await Registerer.Delete(gameRecord);
+        await this.deleteRestore(gameRecord, true);
         break;
       case "復活":
-        await Registerer.Restore(gameRecord);
+        await this.deleteRestore(gameRecord, false);
         break;
       case null:
         break;
@@ -138,260 +97,152 @@ class Registerer {
 
 
   /**
-   * @note 登録メイン処理
+   * @note 追加/更新リクエスト
+   * @param  {Boolean} isDump
    * @return {String}
    */
-  static async _request(isDump) {
-    // 汎用データ
-    var errorString = "";
-
+  async _insertUpdate(isDump) {
     // 入力データの取得
-    var account = AccountHtml.GetAccount();
-    var gameRecord = GameRecordHtml.GetGameRecord();
-    var operation = (gameRecord.Id > 0) ? "Update" : "Insert";
+    var account = this._accountHtml.toAccount();
+    var gameRecord = this._registerHtml.toGameRecord();
+    var operation = (gameRecord.id > 0) ? "Update" : "Insert";
 
     // 入力フォームのチェック
-    errorString = this._validateInputs();
+    var errorString = this._validateInputs();
     if (errorString != "") {
       return errorString;
     }
 
-    // 現在時刻と日付欄の乖離のチェック
-
     // 確認ダイアログ
-    var msg = "";
-    msg += "下記の内容で登録ます。\nよろしいですか？\n";
-    msg += "【" + this._createGameRecordText(gameRecord) + "】";
-    if (gameRecord.Id > 0) {
-      msg += "\n\n※※指定のIDで上書きされます※※";
-    }
-    else {
-      if (!(this._isDateInRange())) {
-        msg += "\n\n※※日付欄と現在時刻に乖離があります※※";
-      }
-    }
-    if (!window.confirm(msg)) {
+    if (!this._confirmInsertUpdate(gameRecord)) {
       return "";
     }
 
-    // ポスト
-    LoadingHtml.ShowLoading();
-    var postSendData = PostDataManager.CreateRegisterRequest(account, gameRecord, operation, isDump);
-    var postRecvData = await Poster.Post(postSendData);
-    LoadingHtml.ClearLoading();
+    // リクエストのポスト＆レスポンス取得
+    var registerPostResponse = await this._post(account, gameRecord, operation, isDump);
 
-    // 結果のチェック
-    if (postRecvData == null) {
+    // レスポンスのエラーチェック
+    if (registerPostResponse == null) {
       return "サーバーとの通信中に予期せぬエラーが発生しました。";
     }
-    if (postRecvData.ErrorString != "") {
-      return postRecvData.ErrorString;
+    if (registerPostResponse.errorString != "") {
+      return registerPostResponse.errorString;
     }
 
     // 入力フォームをクリア
     this._clearInputs();
 
     // 登録結果テキストを更新
-    var responseGameRecord = PostDataManager.ParseGameRecordFromRegisterResponse(postRecvData);
-    var gameRecordString = this._createGameRecordText(responseGameRecord);
-    GameRecordHtml.SetResult(gameRecordString);
+    var gameRecordString = this._createGameRecordText(registerPostResponse.gameRecord);
+    this._registerHtml.registerResult = gameRecordString;
 
     // データ取得時の更新
     if (isDump) {
-      AccountHtml.SetFighterDisabled();
-      await Registerer._dump(postRecvData);
-    }
+      // 修正や削除時に不整合を防止するため、使用ファイター欄を無効にする
+      this._accountHtml.disableFighter();
+
+      // 戦績の更新
+      var historyListOnClick = this.dumpHistoryOnClick.bind(this);
+      this._dumpHtml.update(registerPostResponse.gameRecords, historyListOnClick);
+    };
 
     // データ修正時は日付欄を最新にしておく
-    GameRecordHtml.SetDate(Util.GetToday());
+    if (operation == "Update") {
+      this._registerHtml.date = Util.getToday();
+    }
 
     return "";
   }
 
 
   /**
-   * @note 修正対象を対戦結果欄に反映する。
-   * @param {GameRecord} gameRecord
-   */
-  static _preUpdate(gameRecord) {
-    var date = gameRecord.Date.substr(0, 10).replaceAll("/", "-");
-    GameRecordHtml.SetId(gameRecord.Id);
-    GameRecordHtml.SetDate(date);
-    GameRecordHtml.SetRate(gameRecord.Rate);
-    GameRecordHtml.SetStock(gameRecord.Stock);
-    GameRecordHtml.SetFighter(gameRecord.Fighter);
-    $(window).scrollTop(0);
-
-    var msg = "";
-    msg += "対象を結果登録欄に反映しました。\n";
-    msg += "内容を修正して再度登録してください。\n";
-    msg += "\n";
-    msg += "※※ 注意 ※※\n";
-    msg += "取り消す場合はページをリロードしてください。\n";
-    msg += "(編集対象のIDがクリアされないため)";
-    alert(msg);
-
-    return "";
-  }
-
-
-  /**
-   * @note 戦績の削除処理
+   * @note 削除/復活リクエスト
    * @param  {GameRecord} gameRecord
    * @param  {Boolean}    isDelete
    * @return {String}
    */
-  static async _deleteRestore(gameRecord, isDelete) {
-    var msg = "";
+  async _deleteRestore(gameRecord, isDelete) {
+    var isDump    = true;
     var operation = isDelete ? "Delete" : "Restore";
 
-    if (isDelete) {
-      msg += "下記の戦績を削除します。\n";
-      msg += "本当によろしいですか？\n";
-    }
-    else {
-      msg += "下記の戦績を復活させますか？\n";
-    }
-    msg += "【" + this._createGameRecordText(gameRecord) + "】";
-
     // 確認ダイアログ
-    if (!window.confirm(msg)) {
-      return "";
+    if (!this._confirmDeleteRestore(gameRecord, isDelete)) {
+      return;
     }
 
     // 入力データの取得
-    var account = AccountHtml.GetAccount();
-    gameRecord.IsDeleted = isDelete;
+    var account = this._accountHtml.toAccount();
 
-    // ポスト
-    LoadingHtml.ShowLoading();
-    var postSendData = PostDataManager.CreateRegisterRequest(account, gameRecord, operation, true);
-    var postRecvData = await Poster.Post(postSendData);
-    LoadingHtml.ClearLoading();
+    // リクエストのポスト＆レスポンス取得
+    var registerPostResponse = await this._post(account, gameRecord, operation, isDump);
 
-    // 結果のチェック
-    if (postRecvData == null) {
+    // レスポンスのエラーチェック
+    if (registerPostResponse == null) {
       return "サーバーとの通信中に予期せぬエラーが発生しました。";
     }
-    if (postRecvData.ErrorString != "") {
-      return postRecvData.ErrorString;
+    if (registerPostResponse.errorString != "") {
+      return registerPostResponse.errorString;
     }
 
-    // データを取得時の更新
-    await Registerer._dump(postRecvData);
+    // 戦績の更新
+    var historyListOnClick = this.dumpHistoryOnClick.bind(this);
+    this._dumpHtml.update(registerPostResponse.gameRecords, historyListOnClick);
 
     return "";
   }
 
 
   /**
-   * @note データを取得した時の処理。役割分担がクソだけどもうどうでもいい。
-   * @param  {PostRecvData} postRecvData
-   */
-  static _dump(postRecvData) {
-
-    // 結果を変数に格納
-    var gameRecords = PostDataManager.ParseGameRecordsFromRegisterResponse(postRecvData);
-
-    // 結果を解析
-    var recordAnalyzer = new RecordAnalyzer(gameRecords);
-
-    // 集計結果を更新
-    DumpTotalRecordHtml.Update(recordAnalyzer.TotalRecord());
-
-    // 対戦履歴を更新
-    DumpHistoryHtml.Update(gameRecords, Registerer.DumpHistoryOnClick);
-
-    // 相手キャラ毎の戦績を更新
-    DumpFighterRecordHtml.Update(recordAnalyzer.FighterRecords());
-  }
-
-
-  /**
-   * @note   入力フォームのバリデーションを行う
+   * @rnote  リクエストのポスト＆レスポンス取得
+   * @param  {Account}    account
+   * @param  {GameRecord} gameRecord
+   * @param  {String}     operation
+   * @param  {Boolean}    isDump
    * @return {String}
    */
-  static _validateInputs() {
-    var pattern;
-    var matchResult;
+  async _post(account, gameRecord, operation, isDump) {
+    // リクエストをポスト
+    this._loadingHtml.showLoading();
+    var registerPostRequest = new RegisterPostRequest(account, gameRecord, operation, isDump);
+    var postResponse = await this._poster.post(registerPostRequest.postRequest);
+    this._loadingHtml.hideLoading();
 
-    // 入力データを取得
-    var account = AccountHtml.GetAccount();
-    var gameRecord = GameRecordHtml.GetGameRecord();
-
-    // アカウント
-    pattern = "^.+$";
-    matchResult = account.UserName.match(pattern);
-    if (matchResult == null) {
-      return "アカウント名が不正です。";
+    // レスポンスのエラーチェック
+    if (postResponse == null) {
+      return null;
     }
 
-    // 使用ファイター
-    if (!FighterListHtml.IsExist(account.Fighter)) {
-      return "使用ファイターが不正です。";
-    }
+    // レスポンスをパース
+    return new RegisterPostResponse(postResponse);
+  }
 
-    // 日付
-    pattern = "^[0-9]{1,4}$";
-    matchResult = gameRecord.Id.match(pattern);
-    if (matchResult == null) {
-      return "IDが不正です。";
-    }
 
-    // 日付
-    pattern = "^202[5-9]-[0-9][0-9]-[0-3][0-9]$";
-    matchResult = gameRecord.Date.match(pattern);
-    if (matchResult == null) {
-      return "日付の形式が不正です。";
+  /**
+   * @rnote  入力フォームのエラーチェック
+   * @return {String}
+   */
+  _validateInputs() {
+    var errorString;
+    errorString = this._accountHtml.validateInputs();
+    if (errorString != "") {
+      return errorString;
     }
-
-    // 戦闘力
-    pattern = "^[0-9]{3,4}$";
-    matchResult = gameRecord.Rate.match(pattern);
-    if (matchResult == null) {
-      return "戦闘力が不正です。";
+    errorString = this._registerHtml.validateInputs();
+    if (errorString != "") {
+      return errorString;
     }
-
-    // ストック差
-    pattern = "^[\-]{0,1}[0-5]$";
-    matchResult = gameRecord.Stock.match(pattern);
-    if (matchResult == null) {
-      return "ストック差が不正です。";
-    }
-
-    // 相手ファイター
-    if (!FighterListHtml.IsExist(gameRecord.Fighter)) {
-      return "相手ファイターが不正です。";
-    }
-
     return "";
   }
 
 
   /**
-   * @note   現在時刻と日付に乖離がないか調べる
-   * @return {Boolean}
+   * @note 入力フォームをクリアする
    */
-  static _isDateInRange() {
-    var gameRecord = GameRecordHtml.GetGameRecord();
-
-    // 現在時刻の日付と一致なら乖離なし。
-    if (gameRecord.Date == Util.GetToday()) {
-      return true;
-    }
-
-    // 現在時刻の4時間前までは乖離なしと見なす。
-    var now = new Date();
-    var date = new Date(now - (1000 * 60 * 60 * 4));
-    const yyyy = date.getFullYear();
-    const mm = ('00' + (date.getMonth()+1)).slice(-2);
-    const dd = ('00' + date.getDate()).slice(-2);
-    if (gameRecord.Date == `${yyyy}-${mm}-${dd}`) {
-      return true;
-    }
-
-    // 上記以外は日付の乖離アリと見なす。
-    return false;
+  _clearInputs() {
+    this._registerHtml.id = 0;
+    this._registerHtml.rate = "";
+    this._registerHtml.stock = "";
+    this._registerHtml.fighter = "";
   }
 
 
@@ -400,24 +251,91 @@ class Registerer {
    * @param  {GameRecord} gameRecord
    * @return {String}
    */
-  static _createGameRecordText(gameRecord) {
-    var msg = "";
-    msg = msg + gameRecord.Date + ", ";
-    msg = msg + gameRecord.Rate + ", ";
-    msg = msg + gameRecord.Stock + ", ";
-    msg = msg + gameRecord.Fighter;
+  _createGameRecordText(gameRecord) {
+    var msg = "【";
+    msg += gameRecord.date + ", ";
+    msg += gameRecord.rate + ", ";
+    msg += gameRecord.stock + ", ";
+    msg += gameRecord.fighter + "】";
     return msg;
   }
 
 
+
+  /****************************************************/
+  /* ↓↓↓↓↓ 以下ダイアログ系 ↓↓↓↓↓
+  /****************************************************/
+
   /**
-   * @note 入力フォームをクリアする
+   * @note Insert/Update時の確認ダイアログ
+   * @param  {GameRecord} gameRecord
+   * @return {String}
    */
-  static _clearInputs() {
-    GameRecordHtml.ClearRate();
-    GameRecordHtml.ClearStock();
-    GameRecordHtml.ClearFighter();
-    GameRecordHtml.ClearId();
+  _confirmInsertUpdate(gameRecord) {
+    var msg = "";
+    msg += "下記の内容で登録します。\nよろしいですか？\n";
+    msg += this._createGameRecordText(gameRecord);
+    if (gameRecord.id > 0) {
+      msg += "\n\n※※指定のIDで上書きされます※※";
+    }
+    else {
+      if (!(this._registerHtml.isDateInRange())) {
+        msg += "\n\n※※日付欄と現在時刻に乖離があります※※";
+      }
+    }
+    return window.confirm(msg);
+  }
+
+
+  /**
+   * @note Delete/Restore時の確認ダイアログ
+   * @param  {GameRecord} gameRecord
+   * @param  {Boolean}    isDelete
+   * @return {Boolean}
+   */
+  _confirmDeleteRestore(gameRecord, isDelete) {
+    var msg = "";
+    if (isDelete) {
+      msg += "下記の戦績を削除します。\n";
+      msg += "本当によろしいですか？\n";
+    }
+    else {
+      msg += "下記の戦績を復活させますか？\n";
+    }
+    msg += this._createGameRecordText(gameRecord);
+
+    return window.confirm(msg);
+  }
+
+
+  /**
+   * @note Update内容を入力フォームに反映した時のアラート
+   * @param  {GameRecord} gameRecord
+   * @param  {Boolean}    isDelete
+   * @return {Boolean}
+   */
+  _alertPreUpdate() {
+    var msg = "";
+    msg += "対象を結果登録欄に反映しました。\n";
+    msg += "内容を修正して再度登録してください。\n";
+    msg += "\n";
+    msg += "※※ 注意 ※※\n";
+    msg += "取り消す場合はページをリロードしてください。\n";
+    msg += "(編集対象のIDがクリアされないため)";
+    alert(msg);
+  }
+
+
+  /**
+   * @note Update内容を入力フォームに反映した時のアラート
+   * @param  {GameRecord} gameRecord
+   * @return {String}
+   */
+  _promptOperationSelect(gameRecord) {
+    var msg = this._createGameRecordText(gameRecord) + "\n";
+    msg += "実行したい操作を入力してください。\n";
+    msg += "(\"修正\" or \"削除\" or \"復活\")";
+    return prompt(msg);
   }
 
 }

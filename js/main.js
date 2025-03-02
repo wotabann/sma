@@ -3,12 +3,17 @@
  * @note 画面ロード時のイベント
  */
 $(window).on("load", function() {
-  AccountHtml.SetUserName(Util.GetDirectoryName());
-  AccountHtml.SetFighter(GetMyFighter());
-  GameRecordHtml.SetDate(Util.GetToday());
-  GameRecordHtml.SetRequestButtonClickEvent(RequestRegister);
-  GameRecordHtml.SetRequestDumpButtonClickEvent(RequestRegisterDump);
-  DumpHtml.SetRequestButtonClickEvent(RequestDump);
+  var accountHtml = new AccountHtml();
+  accountHtml.userName = Util.getDirectoryName();
+  accountHtml.fighter = _getMyFighter();
+
+  var registerHtml = new RegisterHtml();
+  registerHtml.date = Util.getToday();
+  registerHtml.addRegisterRequestButtonOnClick(_requestRegister);
+  registerHtml.addRegisterDumpRequestButtonOnClick(_requestRegisterDump);
+
+  var dumpHtml = new DumpHtml();
+  dumpHtml.addDumpRequestButtonOnClick(_requestDump);
 });
 
 
@@ -16,32 +21,35 @@ $(window).on("load", function() {
 /**
  * @note 登録ボタンのイベントリスナー
  */
-function RequestRegister() {
-  Registerer.Request(false);
+function _requestRegister() {
+  var registerer = new Registerer();
+  registerer.insertUpdate(false);
 }
 
 
 /**
  * @note 登録＆取得ボタンのイベントリスナー
  */
-function RequestRegisterDump() {
-  Registerer.Request(true);
+function _requestRegisterDump() {
+  var registerer = new Registerer();
+  registerer.insertUpdate(true);
 }
 
 
 /**
  * @note データ取得ボタンのイベントリスナー
  */
-function RequestDump() {
-  Dumper.Request();
+function _requestDump() {
+  var dumper = new Dumper();
+  dumper.dump();
 }
 
 
 /**
  * @note 使用ファイターを取得する
  */
-function GetMyFighter() {
-  var dirName = Util.GetDirectoryName();
+function _getMyFighter() {
+  var dirName = Util.getDirectoryName();
   switch(dirName) {
     case "karinsama":
       return "インクリング";

@@ -1,26 +1,27 @@
 class TotalRecord {
+
   constructor() {
-    this.GameCount  = 0;
-    this.WinCount   = 0;
-    this.LoseCount  = 0;
-    this.TotalStock = 0;
-    this.Rate       = 0;
-    this.MaxRate    = 0;
-    this.MinRate    = 9999;
-    this.MaxWin     = 0;
-    this.MaxLose    = 0;
+    this.gameCount  = 0;
+    this.winCount   = 0;
+    this.loseCount  = 0;
+    this.totalStock = 0;
+    this.rate       = 0;
+    this.maxRate    = 0;
+    this.minRate    = 9999;
+    this.maxWin     = 0;
+    this.maxLose    = 0;
   }
 
-  WinRate() {
-    if (this.GameCount > 0) {
-      return this.WinCount / this.GameCount;
+  get winRate() {
+    if (this.gameCount > 0) {
+      return this.winCount / this.gameCount;
     }
     return 0;
   }
 
-  StockRate() {
-    if (this.GameCount > 0) {
-      return this.TotalStock / this.GameCount;
+  get stockRate() {
+    if (this.gameCount > 0) {
+      return this.totalStock / this.gameCount;
     }
     return 0;
   }

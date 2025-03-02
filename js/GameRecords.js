@@ -1,40 +1,41 @@
 class GameRecords {
+
   constructor() {
     this._gameRecords = [];
+  }
+
+  /**
+   * @return {Integer}
+   */
+  get length() {
+    return this._gameRecords.length;
   }
 
   /**
    * @param  {GameRecord} gameRecord
    * @return {GameRecord}
    */
-  Push(gameRecord) {
+  push(gameRecord) {
     this._gameRecords.push(gameRecord);
     return gameRecord;
-  }
-
-  /**
-   * @return {Integer}
-   */
-  Length() {
-    return this._gameRecords.length;
   }
 
   /**
    * @param  {Integer} i
    * @return {GameRecord}
    */
-  Index(i) {
+  index(i) {
     return this._gameRecords[i];
   }
 
   /**
    * @return {JsonObject}
    */
-  ToJsonObject() {
+  toJsonObject() {
     var data = [];
 
     for (let gameRecord of this._gameRecords) {
-      data.push(gameRecord.ToJsonObject());
+      data.push(gameRecord.toJsonObject());
     }
   
     return data;

@@ -1,13 +1,17 @@
 class Account {
+
   constructor() {
-    this.UserName = "test";
-    this.Fighter  = "ファイター名";
+    this.userName = "test";
+    this.fighter  = "ファイター名";
   }
 
-  ToJsonObject() {
+  /**
+   * @return {Object}
+   */
+  toJsonObject() {
     var data = {
-      UserName: this.UserName,
-      Fighter:  this.Fighter,
+      userName: this.userName,
+      fighter:  this.fighter,
     };
     return data;
   }
