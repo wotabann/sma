@@ -61,13 +61,12 @@ class Registerer {
   /**
    * @note 修正対象を対戦結果欄に反映
    * @param  {GameRecord} gameRecord
-   * @return {String}
    */
   preUpdate(gameRecord) {
     this._registerHtml.fromGameRecord(gameRecord);
+    this._registerHtml.registerResult = "";
     $(window).scrollTop(0);
     this._alertPreUpdate();
-    return true;
   }
 
 
@@ -167,7 +166,7 @@ class Registerer {
 
     // 確認ダイアログ
     if (!this._confirmDeleteRestore(gameRecord, isDelete)) {
-      return;
+      return "";
     }
 
     // 入力データの取得
