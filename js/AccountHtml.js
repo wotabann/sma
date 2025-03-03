@@ -59,7 +59,7 @@ class AccountHtml {
 
     // 使用ファイター
     if (!this._fighterListHtml.isExist(account.fighter)) {
-      return "使用ファイターが不正です。";
+      return "使用ファイターが不正です。\nリストの表記に合わせてください。";
     }
 
     return "";

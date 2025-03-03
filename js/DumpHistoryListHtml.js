@@ -5,9 +5,10 @@ class DumpHistoryListHtml {
   }
 
   
-  get _html_listRows()       { return $("#dump-history-list").children(".row"); }
-  get _html_Wrapper()        { return $("#dump-history-list-wrapper"); }
+  get _html_wrapper()        { return $("#dump-history-list-wrapper"); }
+  get _html_notice()         { return $("#dump-history-list-notice"); }
   get _html_list()           { return $("#dump-history-list"); }
+  get _html_listRows()       { return $("#dump-history-list").children(".row"); }
   get _html_listShowButton() { return $("#dump-history-list-show-button"); }
   get _html_listHideButton() { return $("#dump-history-list-hide-button"); }
 
@@ -29,7 +30,7 @@ class DumpHistoryListHtml {
     this._html_listHideButton.on("click", { callback: this._hideList.bind(this) }, function(e) { e.data.callback(); });
     this._updateListNotice();
 
-    this._html_Wrapper.show();
+    this._html_wrapper.show();
   }
 
 
@@ -61,6 +62,7 @@ class DumpHistoryListHtml {
     for (let i = 1; i < html_listRow.length; i++) {
       $(html_listRow[i]).remove();
     }
+    this._html_notice.hide();
   }
 
 
@@ -188,6 +190,7 @@ class DumpHistoryListHtml {
     // 退避
     var html_listRows = this._html_listRows;
     var length = html_listRows.length;
+    var noticeCount = 0;
 
     // 1レコードずつループして表示
     for (let i = 1; i < (length - 1); i++) {
@@ -223,9 +226,15 @@ class DumpHistoryListHtml {
       if ((rate < rate_prev) && (stock > 0) || (rate > rate_prev) && (stock < 0)) {
         var html_noticeIcon = html_listRow.children(".notice-icon");
         var html_notice     = html_noticeIcon.children(".notice");
-        html_notice.text("戦闘力の増減とストック差に不整合があります。");
+        html_notice.text("戦闘力の増減とストック差に不整合あり");
         html_noticeIcon.show();
+        noticeCount++;
       }
+    }
+
+    if (noticeCount > 0) {
+      this._html_notice.text("！　戦闘力の増減とストック差が不整合な戦績あり");
+      this._html_notice.show();
     }
   }
 

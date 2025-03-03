@@ -428,6 +428,13 @@ label[for="input-game-record-is-vip"] span {
   display: none;
   padding-bottom: 10px;
 }
+#dump-history-list-notice {
+  display: none;
+  padding: 3px 0;
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: red;
+}
 #dump-history-list .row {
   position: relative;
   display: flex;

@@ -118,7 +118,7 @@ class RegisterHtml {
 
     // 相手ファイター
     if (!this._fighterListHtml.isExist(gameRecord.fighter)) {
-      return "相手ファイターが不正です。";
+      return "相手ファイターが不正です。\nリストの表記に合わせてください。";
     }
 
     return "";
