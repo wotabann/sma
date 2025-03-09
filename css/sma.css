@@ -415,10 +415,42 @@ label[for="input-game-record-is-vip"] span {
 #dump-history-chart-wrapper {
   display: none;
 }
-#dump-history-chart-canvas {
+#dump-history-chart > div {
+  width: calc(100% - 18px);
+  margin: 0 auto;
+}
+#dump-history-chart canvas {
   height: 300px;
 }
-
+#dump-history-chart span {
+  font-size: 0.9rem;
+  padding: 2px;
+}
+#dump-history-chart-canvas-latest {
+  display: none;
+}
+#dump-history-chart-canvas-all {
+  display: none;
+}
+#dump-history-chart-canvas-daily {
+  display: none;
+}
+#dump-history-chart .slick-next {
+  right: 0 !important;
+}
+#dump-history-chart .slick-prev {
+  left: 0 !important;
+}
+#dump-history-chart .slick-arrow {
+  z-index: 2 !important;
+}
+#dump-history-chart .slick-arrow:before {
+  color: rgba(0, 0, 0, 0.6);
+}
+#dump-history-chart .slick-slide {
+  height: auto !important;
+  max-height: 340px !important;
+}
 
 
 /******************************************************************************/

@@ -59,9 +59,12 @@ class Dumper {
     // 修正や削除時に不整合を防止するため、使用ファイター欄を無効にする
     this._accountHtml.disableFighter();
 
+    // 結果を解析
+    var recordAnalyzer = new RecordAnalyzer(dumpPostResponse.gameRecords);
+
     // 戦績を更新
     var historyListOnClick = this._registerer.dumpHistoryOnClick.bind(this._registerer);
-    this._dumpHtml.update(dumpPostResponse.gameRecords, historyListOnClick);
+    this._dumpHtml.update(recordAnalyzer, historyListOnClick);
     
     return "";
   }

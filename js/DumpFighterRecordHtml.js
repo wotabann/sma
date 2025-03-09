@@ -11,9 +11,11 @@ class DumpFighterRecordHtml {
   
   /**
    * @note   表示を更新する。
-   * @param  {FighterRecords} fighterRecords
+   * @param  {RecordAnalyzer} recordAnalyzer
    */
-  update(fighterRecords) {
+  update(recordAnalyzer) {
+    var fighterRecords = recordAnalyzer.fighterRecords;
+
     this._clearTable();
 
     this._updateTable(fighterRecords);

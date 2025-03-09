@@ -11,21 +11,16 @@ class DumpHtml {
 
   /**
    * @note   表示を更新する。
-   * @param  {GameRecords} gameRecords
+   * @param  {RecordAnalyzer} recordAnalyzer
+   * @param  {Object}         historyListOnClick
    */
-  update(gameRecords, historyListOnClick) {
-    // 結果を解析
-    var recordAnalyzer = new RecordAnalyzer(gameRecords);
+  update(recordAnalyzer, historyListOnClick) {
+    this._dumpTotalRecordHtml.update(recordAnalyzer);
 
-    // 集計結果を更新
-    this._dumpTotalRecordHtml.update(recordAnalyzer.totalRecord);
+    this._dumpHistoryChartHtml.update(recordAnalyzer);
+    this._dumpHistoryListHtml.update(recordAnalyzer, historyListOnClick);
 
-    // 対戦履歴を更新
-    this._dumpHistoryChartHtml.update(gameRecords);
-    this._dumpHistoryListHtml.update(gameRecords, historyListOnClick);
-
-    // 相手キャラ毎の戦績を更新
-    this._dumpFighterRecordHtml.update(recordAnalyzer.fighterRecords);
+    this._dumpFighterRecordHtml.update(recordAnalyzer);
   }
 
   disableDumpRequestButton() {

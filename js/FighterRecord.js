@@ -1,10 +1,37 @@
 class FighterRecord {
-  constructor() {
-    this.fighter    = "ファイター名";
-    this.gameCount  = 0;
-    this.winCount   = 0;
-    this.loseCount  = 0;
-    this.totalStock = 0;
+  constructor(fighter) {
+    this._fighter    = fighter;
+    this._gameCount  = 0;
+    this._winCount   = 0;
+    this._loseCount  = 0;
+    this._totalStock = 0;
+  }
+
+  add(stock) {
+    this._gameCount++;
+    this._winCount   += (stock > 0) ? 1 : 0;
+    this._loseCount  += (stock < 0) ? 1 : 0;
+    this._totalStock += stock;
+  }
+
+  get fighter() {
+    return this._fighter;
+  }
+
+  get gameCount() {
+    return this._gameCount;
+  }
+
+  get winCount() {
+    return this._winCount;
+  }
+
+  get loseCount() {
+    return this._loseCount;
+  }
+
+  get totalStock() {
+    return this._totalStock;
   }
 
   get winOver() {

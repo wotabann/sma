@@ -13,12 +13,18 @@
         <link href="https://fonts.googleapis.com/css2?family=Hachi+Maru+Pop&display=swap" rel="stylesheet">
         <link href="http://fonts.googleapis.com/css?family=Abel" rel="stylesheet" type="text/css">
 
+        <!-- jQueryプラグイン -->
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.css">
+    
         <!-- JavaScript -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 
         <!-- CSS -->
-        <link rel="stylesheet" type="text/css" href="../../css/sma.css?ver=20250303a">
+        <link rel="stylesheet" type="text/css" href="../../css/sma.css?ver=20250309a">
     </head>
 
 
@@ -236,6 +242,10 @@
                                     <div class="caption">最低戦闘力</div>
                                     <div class="content" id="dump-total-record-min-rate"></div>
                                 </div>
+                                <div class="row">
+                                    <div class="caption">最終対戦日</div>
+                                    <div class="content" id="dump-total-record-last-date"></div>
+                                </div>
                             </div>
                             <div class="column">
                                 <div class="row">
@@ -260,7 +270,17 @@
                     
                     <div class="dump-section" id="dump-history-chart-wrapper">
                         <h3>戦闘力の推移</h3>
-                        <canvas id="dump-history-chart-canvas"></canvas>
+                        <div id="dump-history-chart">
+                            <div>
+                                <canvas id="dump-history-chart-canvas-latest"></canvas>
+                            </div>
+                            <div>
+                                <canvas id="dump-history-chart-canvas-all"></canvas>
+                            </div>
+                            <div>
+                                <canvas id="dump-history-chart-canvas-daily"></canvas>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="dump-section" id="dump-history-list-wrapper">
@@ -348,46 +368,51 @@
         </div>
 
         
-        <script src="../../js/util.js?ver=20250303a"></script>
+        <script src="../../js/util.js?ver=20250309a"></script>
 
-        <script src="../../js/Account.js?ver=20250303a"></script>
+        <script src="../../js/Account.js?ver=20250309a"></script>
 
-        <script src="../../js/GameRecord.js?ver=20250303a"></script>
-        <script src="../../js/GameRecords.js?ver=20250303a"></script>
+        <script src="../../js/GameRecord.js?ver=20250309a"></script>
+        <script src="../../js/GameRecords.js?ver=20250309a"></script>
 
-        <script src="../../js/FighterRecord.js?ver=20250303a"></script>
-        <script src="../../js/FighterRecords.js?ver=20250303a"></script>
+        <script src="../../js/FighterRecord.js?ver=20250309a"></script>
+        <script src="../../js/FighterRecords.js?ver=20250309a"></script>
 
-        <script src="../../js/TotalRecord.js?ver=20250303a"></script>
+        <script src="../../js/DailyRecord.js?ver=20250309a"></script>
+        <script src="../../js/DailyRecords.js?ver=20250309a"></script>
 
-        <script src="../../js/RecordAnalyzer.js?ver=20250303a"></script>
+        <script src="../../js/TotalRecord.js?ver=20250309a"></script>
 
-        <script src="../../js/Poster.js?ver=20250303a"></script>
-        <script src="../../js/PostRequest.js?ver=20250303a"></script>
-        <script src="../../js/PostResponse.js?ver=20250303a"></script>
-        <script src="../../js/RegisterPostRequest.js?ver=20250303a"></script>
-        <script src="../../js/RegisterPostResponse.js?ver=20250303a"></script>
-        <script src="../../js/DumpPostRequest.js?ver=20250303a"></script>
-        <script src="../../js/DumpPostResponse.js?ver=20250303a"></script>
+        <script src="../../js/RecordAnalyzer.js?ver=20250309a"></script>
 
-        <script src="../../js/LoadingHtml.js?ver=20250303a"></script>
-        <script src="../../js/FighterListHtml.js?ver=20250303a"></script>
-        <script src="../../js/AccountHtml.js?ver=20250303a"></script>
-        <script src="../../js/RegisterHtml.js?ver=20250303a"></script>
+        <script src="../../js/Poster.js?ver=20250309a"></script>
+        <script src="../../js/PostRequest.js?ver=20250309a"></script>
+        <script src="../../js/PostResponse.js?ver=20250309a"></script>
+        <script src="../../js/RegisterPostRequest.js?ver=20250309a"></script>
+        <script src="../../js/RegisterPostResponse.js?ver=20250309a"></script>
+        <script src="../../js/DumpPostRequest.js?ver=20250309a"></script>
+        <script src="../../js/DumpPostResponse.js?ver=20250309a"></script>
 
-        <script src="../../js/DumpRequestButtonHtml.js?ver=20250303a"></script>
-        <script src="../../js/DumpTotalRecordHtml.js?ver=20250303a"></script>
-        <script src="../../js/DumpHistoryChartHtml.js?ver=20250303a"></script>
-        <script src="../../js/DumpHistoryListHtml.js?ver=20250303a"></script>
-        <script src="../../js/DumpFighterRecordHtml.js?ver=20250303a"></script>
-        <script src="../../js/DumpHtml.js?ver=20250303a"></script>
+        <script src="../../js/LoadingHtml.js?ver=20250309a"></script>
+        <script src="../../js/FighterListHtml.js?ver=20250309a"></script>
 
-        <script src="../../js/TableSorter.js?ver=20250303a"></script>
+        <script src="../../js/AccountHtml.js?ver=20250309a"></script>
+        <script src="../../js/RegisterHtml.js?ver=20250309a"></script>
 
-        <script src="../../js/Registerer.js?ver=20250303a"></script>
-        <script src="../../js/Dumper.js?ver=20250303a"></script>
+        <script src="../../js/DumpRequestButtonHtml.js?ver=20250309a"></script>
+        <script src="../../js/DumpTotalRecordHtml.js?ver=20250309a"></script>
+        <script src="../../js/DumpHistoryChartHtml.js?ver=20250309a"></script>
+        <script src="../../js/DumpHistoryListRowHtml.js?ver=20250309a"></script>
+        <script src="../../js/DumpHistoryListHtml.js?ver=20250309a"></script>
+        <script src="../../js/DumpFighterRecordHtml.js?ver=20250309a"></script>
+        <script src="../../js/DumpHtml.js?ver=20250309a"></script>
 
-        <script src="../../js/main.js?ver=20250303a"></script>
+        <script src="../../js/TableSorter.js?ver=20250309a"></script>
+
+        <script src="../../js/Registerer.js?ver=20250309a"></script>
+        <script src="../../js/Dumper.js?ver=20250309a"></script>
+
+        <script src="../../js/main.js?ver=20250309a"></script>
 
     </body>
 </html>

@@ -4,6 +4,22 @@ class FighterRecords {
   }
 
   /**
+   * @param  {String}  fighter
+   * @param  {Integer} stock 
+   * @return {FighterRecord}
+   */
+  add(fighter, stock) {
+    var fighterRecord = this.find(fighter);
+    if (fighterRecord == null) {
+      fighterRecord = new FighterRecord(fighter);
+      this.push(fighterRecord);
+    }
+
+    fighterRecord.add(stock);
+    return fighterRecord;
+  }
+
+  /**
    * @param  {FighterRecord} fighterRecord
    * @return {FighterRecord}
    */

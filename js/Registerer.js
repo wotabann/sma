@@ -47,7 +47,6 @@ class Registerer {
       errorString = await this._deleteRestore(gameRecord, isDelete);
     }
     catch(e) {
-      alert(e.stack);
       errorString = "予期せぬエラーが発生しました。";
     }
 
@@ -140,9 +139,12 @@ class Registerer {
       // 修正や削除時に不整合を防止するため、使用ファイター欄を無効にする
       this._accountHtml.disableFighter();
 
+      // 結果を解析
+      var recordAnalyzer = new RecordAnalyzer(registerPostResponse.gameRecords);
+
       // 戦績の更新
       var historyListOnClick = this.dumpHistoryOnClick.bind(this);
-      this._dumpHtml.update(registerPostResponse.gameRecords, historyListOnClick);
+      this._dumpHtml.update(recordAnalyzer, historyListOnClick);
     };
 
     // データ修正時は日付欄を最新にしておく
@@ -183,9 +185,15 @@ class Registerer {
       return registerPostResponse.errorString;
     }
 
+    // 修正や削除時に不整合を防止するため、使用ファイター欄を無効にする
+    this._accountHtml.disableFighter();
+
+    // 結果を解析
+    var recordAnalyzer = new RecordAnalyzer(registerPostResponse.gameRecords);
+
     // 戦績の更新
     var historyListOnClick = this.dumpHistoryOnClick.bind(this);
-    this._dumpHtml.update(registerPostResponse.gameRecords, historyListOnClick);
+    this._dumpHtml.update(recordAnalyzer, historyListOnClick);
 
     return "";
   }
