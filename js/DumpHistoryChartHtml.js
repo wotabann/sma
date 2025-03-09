@@ -307,7 +307,7 @@ class DumpHistoryChartHtml {
         title: {
           display: true,
           position: "top",
-          fontSize: 13,
+          fontSize: 12,
           fontColot: "#333",
           fontStyle: "normal",
           text: "",
