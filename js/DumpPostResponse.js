@@ -36,6 +36,10 @@ class DumpPostResponse {
   _parseGameRecords(postResponse) {
     var gameRecords = new GameRecords();
 
+    if (postResponse.payload.gameRecords == null) {
+      return gameRecords;
+    }
+
     for (let tmp of postResponse.payload.gameRecords) {
       var gameRecord = new GameRecord();
       gameRecord.id         = tmp.id;
