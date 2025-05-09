@@ -127,7 +127,7 @@ class DumpHistoryChartHtml {
     var rates = [];
     var labels = [];
     for (let i = headIndex; i < length; i++) {
-      rates.push(dailyRecords.index(i).medianRate);
+      rates.push(dailyRecords.index(i).latestRate);
       labels.push(dailyRecords.index(i).date.substr(5, 5));
       //var m = dailyRecords.index(i).date.substr(5, 2);
       //var d = dailyRecords.index(i).date.substr(8, 2);
@@ -138,7 +138,7 @@ class DumpHistoryChartHtml {
     var option = this._initialChartOption();
     option.data.labels = labels;
     option.data.datasets[0].data = rates;
-    option.options.title.text = "日毎の戦績 (その日の中央値)";
+    option.options.title.text = "日毎の戦績 (その日の最終値)";
 
     return option;
   }

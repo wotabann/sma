@@ -45,6 +45,13 @@ class FighterRecord {
     return 0;
   }
 
+  get loseRate() {
+    if (this.gameCount > 0) {
+      return this.loseCount / this.gameCount;
+    }
+    return 0;
+  }
+
   get stockRate() {
     if (this.gameCount > 0) {
       return this.totalStock / this.gameCount;

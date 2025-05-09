@@ -24,7 +24,7 @@
         <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 
         <!-- CSS -->
-        <link rel="stylesheet" type="text/css" href="../../css/sma.css?ver=20250324a">
+        <link rel="stylesheet" type="text/css" href="../../css/sma.css?ver=20250509a">
     </head>
 
 
@@ -306,6 +306,24 @@
                         </button>
                     </div>
 
+                    <div class="dump-section" id="dump-daily-history-list-wrapper">
+                        <h3>日ごとの戦績</h3>
+                        <div id="dump-daily-history-list">
+                            <div class="row">
+                                <div class="date">日付</div>
+                                <div class="rate">戦闘力</div>
+                                <div class="game-count">対戦</div>
+                                <div class="win-over">勝越</div>
+                            </div>
+                        </div>
+                        <button type="button" id="dump-daily-history-list-show-button">
+                            全件表示
+                        </button>
+                        <button type="button" id="dump-daily-history-list-hide-button">
+                            直近のみ表示
+                        </button>
+                    </div>
+
                     <div class="dump-section" id="dump-fighter-record-table-wrapper">
                         <h3>相手キャラ毎の対戦データ</h3>
                         <div class="dump-fighter-record-table-description">
@@ -322,12 +340,12 @@
                                         </th>
                                         <th>
                                             <div class="sort-asc"  data-sort-cell="game-count" data-sort-type="number">▲</div>
-                                            <div>対戦数</div>
+                                            <div>対戦</div>
                                             <div class="sort-desc" data-sort-cell="game-count" data-sort-type="number">▼</div>
                                         </th>
                                         <th>
                                             <div class="sort-asc"  data-sort-cell="win-over" data-sort-type="number">▲</div>
-                                            <div>勝越数</div>
+                                            <div>勝越</div>
                                             <div class="sort-desc" data-sort-cell="win-over" data-sort-type="number">▼</div>
                                         </th>
                                         <th>
@@ -349,12 +367,12 @@
                                 </thead>
                                 <tbody class="sort-body">
                                     <tr>
-                                        <td class="dump-table-fighter"     data-sort-cell="fighter"   ></td>
-                                        <td class="dump-table-game-count"  data-sort-cell="game-count"></td>
-                                        <td class="dump-table-win-over"   data-sort-cell="win-over"></td>
-                                        <td class="dump-table-win-rate"    data-sort-cell="win-rate"></td>
-                                        <td class="dump-table-stock-rate"  data-sort-cell="stock-rate"></td>
-                                        <td class="dump-table-total-stock" data-sort-cell="total-stock"></td>
+                                        <td class="dump-table-fighter"            data-sort-cell="fighter"   ></td>
+                                        <td class="dump-table-game-count"         data-sort-cell="game-count"></td>
+                                        <td class="dump-table-win-over"           data-sort-cell="win-over"></td>
+                                        <td class="dump-table-win-rate"           data-sort-cell="win-rate"></td>
+                                        <td class="dump-table-stock-rate"         data-sort-cell="stock-rate"></td>
+                                        <td class="dump-table-total-stock"        data-sort-cell="total-stock"></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -368,51 +386,53 @@
         </div>
 
         
-        <script src="../../js/util.js?ver=20250324a"></script>
+        <script src="../../js/util.js?ver=20250509a"></script>
 
-        <script src="../../js/Account.js?ver=20250324a"></script>
+        <script src="../../js/Account.js?ver=20250509a"></script>
 
-        <script src="../../js/GameRecord.js?ver=20250324a"></script>
-        <script src="../../js/GameRecords.js?ver=20250324a"></script>
+        <script src="../../js/GameRecord.js?ver=20250509a"></script>
+        <script src="../../js/GameRecords.js?ver=20250509a"></script>
 
-        <script src="../../js/FighterRecord.js?ver=20250324a"></script>
-        <script src="../../js/FighterRecords.js?ver=20250324a"></script>
+        <script src="../../js/FighterRecord.js?ver=20250509a"></script>
+        <script src="../../js/FighterRecords.js?ver=20250509a"></script>
 
-        <script src="../../js/DailyRecord.js?ver=20250324a"></script>
-        <script src="../../js/DailyRecords.js?ver=20250324a"></script>
+        <script src="../../js/DailyRecord.js?ver=20250509a"></script>
+        <script src="../../js/DailyRecords.js?ver=20250509a"></script>
 
-        <script src="../../js/TotalRecord.js?ver=20250324a"></script>
+        <script src="../../js/TotalRecord.js?ver=20250509a"></script>
 
-        <script src="../../js/RecordAnalyzer.js?ver=20250324a"></script>
+        <script src="../../js/RecordAnalyzer.js?ver=20250509a"></script>
 
-        <script src="../../js/Poster.js?ver=20250324a"></script>
-        <script src="../../js/PostRequest.js?ver=20250324a"></script>
-        <script src="../../js/PostResponse.js?ver=20250324a"></script>
-        <script src="../../js/RegisterPostRequest.js?ver=20250324a"></script>
-        <script src="../../js/RegisterPostResponse.js?ver=20250324a"></script>
-        <script src="../../js/DumpPostRequest.js?ver=20250324a"></script>
-        <script src="../../js/DumpPostResponse.js?ver=20250324a"></script>
+        <script src="../../js/Poster.js?ver=20250509a"></script>
+        <script src="../../js/PostRequest.js?ver=20250509a"></script>
+        <script src="../../js/PostResponse.js?ver=20250509a"></script>
+        <script src="../../js/RegisterPostRequest.js?ver=20250509a"></script>
+        <script src="../../js/RegisterPostResponse.js?ver=20250509a"></script>
+        <script src="../../js/DumpPostRequest.js?ver=20250509a"></script>
+        <script src="../../js/DumpPostResponse.js?ver=20250509a"></script>
 
-        <script src="../../js/LoadingHtml.js?ver=20250324a"></script>
-        <script src="../../js/FighterListHtml.js?ver=20250324a"></script>
+        <script src="../../js/LoadingHtml.js?ver=20250509a"></script>
+        <script src="../../js/FighterListHtml.js?ver=20250509a"></script>
 
-        <script src="../../js/AccountHtml.js?ver=20250324a"></script>
-        <script src="../../js/RegisterHtml.js?ver=20250324a"></script>
+        <script src="../../js/AccountHtml.js?ver=20250509a"></script>
+        <script src="../../js/RegisterHtml.js?ver=20250509a"></script>
 
-        <script src="../../js/DumpRequestButtonHtml.js?ver=20250324a"></script>
-        <script src="../../js/DumpTotalRecordHtml.js?ver=20250324a"></script>
-        <script src="../../js/DumpHistoryChartHtml.js?ver=20250324a"></script>
-        <script src="../../js/DumpHistoryListRowHtml.js?ver=20250324a"></script>
-        <script src="../../js/DumpHistoryListHtml.js?ver=20250324a"></script>
-        <script src="../../js/DumpFighterRecordHtml.js?ver=20250324a"></script>
-        <script src="../../js/DumpHtml.js?ver=20250324a"></script>
+        <script src="../../js/DumpRequestButtonHtml.js?ver=20250509a"></script>
+        <script src="../../js/DumpTotalRecordHtml.js?ver=20250509a"></script>
+        <script src="../../js/DumpHistoryChartHtml.js?ver=20250509a"></script>
+        <script src="../../js/DumpHistoryListRowHtml.js?ver=20250509a"></script>
+        <script src="../../js/DumpHistoryListHtml.js?ver=20250509a"></script>
+        <script src="../../js/DumpDailyHistoryListRowHtml.js?ver=20250509a"></script>
+        <script src="../../js/DumpDailyHistoryListHtml.js?ver=20250509a"></script>
+        <script src="../../js/DumpFighterRecordHtml.js?ver=20250509a"></script>
+        <script src="../../js/DumpHtml.js?ver=20250509a"></script>
 
-        <script src="../../js/TableSorter.js?ver=20250324a"></script>
+        <script src="../../js/TableSorter.js?ver=20250509a"></script>
 
-        <script src="../../js/Registerer.js?ver=20250324a"></script>
-        <script src="../../js/Dumper.js?ver=20250324a"></script>
+        <script src="../../js/Registerer.js?ver=20250509a"></script>
+        <script src="../../js/Dumper.js?ver=20250509a"></script>
 
-        <script src="../../js/main.js?ver=20250324a"></script>
+        <script src="../../js/main.js?ver=20250509a"></script>
 
     </body>
 </html>

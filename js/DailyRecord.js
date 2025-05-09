@@ -43,6 +43,10 @@ class DailyRecord {
     return this._loseCount;
   }
 
+  get winOver() {
+    return this._winCount - this._loseCount;
+  }
+
   get totalStock() {
     return this._totalStock;
   }
@@ -55,6 +59,10 @@ class DailyRecord {
     return this._minRate;
   }
 
+  get lastRate() {
+    return this._rates[this._rates.length - 1];
+  }
+
   get winRate() {
     if (this.gameCount > 0) {
       return this.winCount / this.gameCount;
@@ -65,6 +73,13 @@ class DailyRecord {
   get stockRate() {
     if (this.gameCount > 0) {
       return this.totalStock / this.gameCount;
+    }
+    return 0;
+  }
+
+  get latestRate() {
+    if (this.gameCount > 0) {
+      return this._rates[this._rates.length - 1];
     }
     return 0;
   }

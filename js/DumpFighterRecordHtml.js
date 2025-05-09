@@ -53,8 +53,9 @@ class DumpFighterRecordHtml {
     for (let i = 0; i < fighterRecords.length; i++) {
       var fighterRecord = fighterRecords.index(i);
 
-      var winRate   = Math.floor(fighterRecord.winRate * 100) + "%";
+      var winRate = Math.floor(fighterRecord.winRate * 100) + "%";
       var stockRate = Math.floor(fighterRecord.stockRate * 100) / 100;
+      var counterPlanIndex = Math.floor(fighterRecord.counterPlanIndex);
 
       var html_tr = $(html_trs[0]).clone().appendTo(html_tbody);
       html_tr.children(".dump-table-fighter").text(fighterRecord.fighter);
