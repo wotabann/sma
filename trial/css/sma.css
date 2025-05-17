@@ -456,7 +456,7 @@ label[for="input-game-record-is-vip"] span {
   position: sticky;
   top: 0;
   left: 0;
-  min-width: 60px;
+  min-width: 50px;
   padding: 2px 4px;
   border-bottom: 1px solid #ccc;
   text-align: center;
@@ -476,7 +476,7 @@ label[for="input-game-record-is-vip"] span {
   z-index: 1;
 }
 .dump-table td {
-  padding: 2px 4px;
+  padding: 2px 3px;
 }
 .dump-table td:first-child {
   position: sticky;
@@ -562,19 +562,19 @@ label[for="input-game-record-is-vip"] span {
   display: none;
 }
 .dump-table tr .date {
-  min-width: 80px;
+  min-width: 50px;
 }
 .dump-table tr .rate {
-  min-width: 80px;
+  min-width: 70px;
 }
 .dump-table tr .win-over {
-  min-width: 60px;
+  min-width: 50px;
 }
 .dump-table tr .stock {
-  min-width: 60px;
+  min-width: 50px;
 }
 .dump-table tr .fighter {
-  min-width: 180px;
+  max-width: 180px;
   text-align: left;
   padding-left: 20px;
 }
@@ -642,7 +642,7 @@ label[for="input-game-record-is-vip"] span {
 /******************************************************************************/
 .dialog-section {
   margin: 0 auto;
-  padding: 5px 0;
+  padding: 3px 0;
 }
 .dialog-head {
   font-size: 14px;
@@ -655,7 +655,7 @@ label[for="input-game-record-is-vip"] span {
   border-bottom: 1px solid rgba(0, 73, 134, 1.0);
 }
 .dialog-body {
-  padding: 5px 0;
+  padding: 3px 0;
 }
 .dialog-game-record-table-wrapper {
   overflow-y: scroll;
@@ -663,11 +663,6 @@ label[for="input-game-record-is-vip"] span {
   padding: 0;
   width: auto;
   max-height: 300px;
-}
-.dialog-game-record-table {
-  margin: 0;
-  padding: 0;
-  width: 100%;
 }
 
 
