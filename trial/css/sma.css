@@ -440,6 +440,7 @@ label[for="input-game-record-is-vip"] span {
 .dump-table-wrapper {
   overflow-x: auto;
   margin: 0 auto;
+  width: 98%;
 }
 .dump-table {
   font-size: 0.8rem;
@@ -451,15 +452,15 @@ label[for="input-game-record-is-vip"] span {
 }
 .dump-table tr {
   vertical-align: middle;
+  padding: 0 5px;
 }
 .dump-table th {
   position: sticky;
   top: 0;
   left: 0;
-  min-width: 50px;
-  padding: 2px 4px;
+  padding: 2px 10px;
   border-bottom: 1px solid #ccc;
-  text-align: center;
+  text-align: right;
 }
 .dump-table th::before {
   content: "";
@@ -473,17 +474,17 @@ label[for="input-game-record-is-vip"] span {
   z-index: -1;
 }
 .dump-table th:first-child {
-  z-index: 1;
+  z-index: 2;
 }
 .dump-table td {
-  padding: 2px 3px;
+  padding: 2px 10px;
+  text-align: right;
 }
 .dump-table td:first-child {
   position: sticky;
   top: 0;
   left: 0;
   background-color: #fff;
-  padding-right: 5px;
 }
 .dump-table td:first-child::before {
   content: "";
@@ -562,21 +563,20 @@ label[for="input-game-record-is-vip"] span {
   display: none;
 }
 .dump-table tr .date {
-  min-width: 50px;
-}
-.dump-table tr .rate {
   min-width: 70px;
 }
+.dump-table tr .rate {
+  min-width: 80px;
+}
 .dump-table tr .win-over {
-  min-width: 50px;
+  min-width: 30px;
 }
 .dump-table tr .stock {
-  min-width: 50px;
+  min-width: 30px;
 }
 .dump-table tr .fighter {
-  max-width: 180px;
+  min-width: 160px;
   text-align: left;
-  padding-left: 20px;
 }
 
 
@@ -617,6 +617,7 @@ label[for="input-game-record-is-vip"] span {
   vertical-align: middle;
   margin: 0;
   padding: 4px 0;
+  width: 96%;
 }
 .dump-one-line-description dt {
   display: block;
@@ -736,32 +737,8 @@ label[for="input-game-record-is-vip"] span {
 .dump-game-record-table-wrapper {
   max-height: 520px;
   overflow-y: scroll;
-}
-.dump-game-record-table th {
-  text-align: right;
-}
-.dump-game-record-table tr .id {
-  display: none;
-}
-.dump-game-record-table tr .is-deleted {
-  display: none;
-}
-.dump-game-record-table tr .is-vip {
-  display: none;
-}
-.dump-game-record-table tr .date {
-  min-width: 80px;
-}
-.dump-game-record-table tr .rate {
-  min-width: 80px;
-}
-.dump-game-record-table tr .stock {
-  min-width: 40px;
-}
-.dump-game-record-table tr .fighter {
-  min-width: 180px;
-  text-align: left;
-  padding-left: 20px;
+  overflow-x: hidden;
+  text-align: center;
 }
 
 
@@ -780,16 +757,16 @@ label[for="input-game-record-is-vip"] span {
   text-align: right;
 }
 .dump-daily-record-table tr .date {
-  min-width: 80px;
+  min-width: 70px;
 }
 .dump-daily-record-table tr .rate {
   min-width: 80px;
 }
 .dump-daily-record-table tr .game-count {
-  min-width: 60px;
+  min-width: 50px;
 }
 .dump-daily-record-table tr .win-over {
-  min-width: 60px;
+  min-width: 50px;
 }
 .dump-daily-record-table tr .win-count,
 .dump-daily-record-table tr .lose-count,
@@ -811,8 +788,15 @@ label[for="input-game-record-is-vip"] span {
 .dump-fighter-record-table-wrapper {
   overflow-x: auto;
 }
-.dump-fighter-record-table tr .fighter {
+.dump-fighter-record-table th {
+  text-align: center;
+}
+.dump-fighter-record-table thead tr .fighter {
+  text-align: center;
+}
+.dump-fighter-record-table tbody tr .fighter {
   padding-right: 8px;
+  text-align: right;
 }
 .dump-fighter-record-table tr .win-count,
 .dump-fighter-record-table tr .lose-count,
