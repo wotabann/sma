@@ -34,7 +34,7 @@ class DumpGameRecordHtml {
    */
   update(gameRecords, noticeIds) {
     // レコードがなければ何もしない
-    if (gameRecords.enabledCount == 0) {
+    if (gameRecords.length == 0) {
       this._html_section.hide();
       return;
     }
