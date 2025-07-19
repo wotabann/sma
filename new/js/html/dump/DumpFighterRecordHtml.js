@@ -28,6 +28,12 @@ class DumpFighterRecordHtml {
    * @param  {FighterRecords} fighterRecords
    */
   update(fighterRecords) {
+    // レコードがなければ何もしない
+    if (fighterRecords.length == 0) {
+      this._html_section.hide();
+      return;
+    }
+
     // 対戦回数順および負け越している順にソート
     fighterRecords.sortByWinOverR();
     fighterRecords.sortByGameCount();

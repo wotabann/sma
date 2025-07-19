@@ -33,6 +33,12 @@ class DumpGameRecordHtml {
    * @param  {Object} noticeIds
    */
   update(gameRecords, noticeIds) {
+    // レコードがなければ何もしない
+    if (gameRecords.enabledCount == 0) {
+      this._html_section.hide();
+      return;
+    }
+
     // テーブル更新
     this._clearTable();
     this._updateTable(gameRecords, noticeIds);

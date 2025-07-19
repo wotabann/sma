@@ -33,6 +33,12 @@ class DumpDailyRecordHtml {
    * @param  {DailyRecords} dailyRecords
    */
   update(dailyRecords) {
+    // レコードがなければ何もしない
+    if (dailyRecords.length == 0) {
+      this._html_section.hide();
+      return;
+    }
+
     // テーブル更新
     this._clearTable();
     this._updateTable(dailyRecords);

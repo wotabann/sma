@@ -24,6 +24,12 @@ class DumpTotalRecordHtml {
    * @param  {TotalRecord} totalRecord
    */
   update(totalRecord) {
+    // レコードがなければ何もしない
+    if (totalRecord.gameCount == 0) {
+      this._html_section.hide();
+      return;
+    }
+
     var winRate = Math.floor(totalRecord.winRate * 100) + "％";
     var lastDate_m = Number(totalRecord.lastDate.substr(5, 2));
     var lastDate_d = Number(totalRecord.lastDate.substr(8, 2));

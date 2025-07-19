@@ -21,7 +21,7 @@ class DumpHistoryChartHtml {
    */
   update(gameRecords, dailyRecords) {
     // 表示対象がない場合は即終了
-    if (gameRecords.length == 0) {
+    if (gameRecords.enabledCount == 0) {
       this._html_section.hide();
       return;
     }
