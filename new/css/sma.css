@@ -140,7 +140,6 @@ body:has(dialog[open]) {
   position: fixed;
   inset-inline: 0;
   inset-block: 0;
-  min-width: 420px;
   max-width: 680px;
   max-height: 95%;
   margin: auto;
