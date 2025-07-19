@@ -25,7 +25,7 @@ class GameRecords {
    */
   push(gameRecord) {
     this._gameRecords.push(gameRecord);
-    if (gameRecord.isDisabled != 0) {
+    if (gameRecord.isDisabled == 0) {
       this._enabledCount++;
     }
     return gameRecord;
