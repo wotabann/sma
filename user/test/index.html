@@ -24,7 +24,7 @@
         <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 
         <!-- CSS -->
-        <link rel="stylesheet" type="text/css" href="../../css/sma.css?ver=20250509a">
+        <link rel="stylesheet" type="text/css" href="../../css/sma.css?ver=20250719a">
     </head>
 
 
@@ -136,14 +136,14 @@
                     <div style="top: 45%; right: 13%;" class="shape large  green  circle"></div>
                 </div>
                 <div class="section-body">
-                    <div id="account-form">
-                        <div class="input">
-                            <label for="input-account-username">ユーザ名</label>
-                            <input type="text" id="input-account-username" disabled>
+                    <div class="account-form">
+                        <div class="input account-form-username">
+                            <label for="account-form-username">ユーザ名</label>
+                            <input type="text" id="account-form-username" disabled>
                         </div>
-                        <div class="input">
-                            <label for="input-account-fighter">使用キャラ</label>
-                            <input type="text" id="input-account-fighter" list="fighter-list">
+                        <div class="input account-form-fighter">
+                            <label for="account-form-fighter">使用キャラ</label>
+                            <input type="text" id="account-form-fighter" list="fighter-list">
                         </div>
                     </div>
                 </div>
@@ -160,26 +160,24 @@
                     <div style="top: 45%; right: 13%;" class="shape large  green  circle"></div>
                 </div>
                 <div class="section-body">
-                    <div id="register-form">
-                        <div class="input">
-                            <label for="input-game-record-id">ID</label>
-                            <input type="number" id="input-game-record-id" value=0 disabled>
-                            <label for="input-game-record-is-vip">
-                                <input type="checkbox" id="input-game-record-is-vip"><span>VIP</span>
-                            </label>
+                    <div class="register-form">
+                        <div class="input register-form-date">
+                            <label for="register-form-date">対戦日</label>
+                            <input type="date" id="register-form-date">
                         </div>
-                        <div class="input">
-                            <label for="input-game-record-date">対戦日</label>
-                            <input type="date" id="input-game-record-date">
+                        <div class="input register-form-rate">
+                            <label for="register-form-rate">戦闘力[万]</label>
+                            <input type="number" id="register-form-rate" placeholder="(例) 765">
+                            <div class="checkbox register-form-is-vip">
+                                <label for="register-form-is-vip">
+                                    <input type="checkbox" id="register-form-is-vip">VIP
+                                </label>
+                            </div>
                         </div>
-                        <div class="input">
-                            <label for="input-game-record-rate">戦闘力[万]</label>
-                            <input type="number" id="input-game-record-rate" placeholder="(例) 765">
-                        </div>
-                        <div class="input">
-                            <label for="input-game-record-stock">ストック差</label>
-                            <input type="number" id="input-game-record-stock" list="input-game-record-stock-list" placeholder="(例) 1, -2">
-                            <datalist id="input-game-record-stock-list">
+                        <div class="input register-form-stock">
+                            <label for="register-form-stock">ストック差</label>
+                            <input type="number" id="register-form-stock" list="register-form-stock-list" placeholder="(例) 1, -2">
+                            <datalist id="register-form-stock-list">
                                 <option value=1></option>
                                 <option value=-1></option>
                                 <option value=2></option>
@@ -188,15 +186,15 @@
                                 <option value=-3></option>
                             </datalist>
                         </div>
-                        <div class="input">
-                            <label for="input-game-record-fighter">相手キャラ</label>
-                            <input type="text" name="input-game-record-fighter" id="input-game-record-fighter" list="fighter-list">
+                        <div class="input register-form-fighter">
+                            <label for="register-form-fighter">相手キャラ</label>
+                            <input type="text" name="register-form-fighter" id="register-form-fighter" list="fighter-list">
                         </div>
-                        <div class="input">
-                            <button type="button" id="register-request-button" class="request-button">
+                        <div class="input register-form-button">
+                            <button type="button" class="request-button register-request-button" id="register-request-button">
                                 登録する
                             </button>
-                            <button type="button" id="register-dump-request-button" class="request-button">
+                            <button type="button" class="request-button register-dump-request-button" id="register-dump-request-button">
                                 登録＆取得
                             </button>
                         </div>
@@ -219,163 +217,247 @@
                     <div style="top: 45%; right: 13%;" class="shape large  blue   circle"></div>
                 </div>
 
-                <div class="section-body" id ="dump">
-                    <div class="dump-section">
-                        <button type="button" id="dump-request-button" class="request-button">
+                <div class="section-body">
+                    <div class="dump-section" id="dump-request-button">
+                        <button type="button" class="request-button dump-request-button">
                             データを取得
                         </button>
                     </div>
 
-                    <div class="dump-section" id="dump-total-record-wrapper">
-                        <h3>基本情報</h3>
-                        <div id="dump-total-record">
-                            <div class="column">
-                                <div class="row">
-                                    <div class="caption">戦闘力</div>
-                                    <div class="content" id="dump-total-record-rate"></div>
-                                </div>
-                                <div class="row">
-                                    <div class="caption">最高戦闘力</div>
-                                    <div class="content" id="dump-total-record-max-rate"></div>
-                                </div>
-                                <div class="row">
-                                    <div class="caption">最低戦闘力</div>
-                                    <div class="content" id="dump-total-record-min-rate"></div>
-                                </div>
-                                <div class="row">
-                                    <div class="caption">最終対戦日</div>
-                                    <div class="content" id="dump-total-record-last-date"></div>
-                                </div>
-                            </div>
-                            <div class="column">
-                                <div class="row">
-                                    <div class="caption">戦闘回数</div>
-                                    <div class="content" id="dump-total-record-game-count"></div>
-                                </div>
-                                <div class="row">
-                                    <div class="caption">最大連勝</div>
-                                    <div class="content" id="dump-total-record-max-win"></div>
-                                </div>
-                                <div class="row">
-                                    <div class="caption">最大連敗</div>
-                                    <div class="content" id="dump-total-record-max-lose"></div>
-                                </div>
-                                <div class="row">
-                                    <div class="caption">勝率</div>
-                                    <div class="content" id="dump-total-record-win-rate"></div>
-                                </div>
-                            </div>
+                    <div class="dump-section" id="dump-total-record">
+                        <div class="dump-section-head">
+                            基本情報
                         </div>
-                    </div>
-                    
-                    <div class="dump-section" id="dump-history-chart-wrapper">
-                        <h3>戦闘力の推移</h3>
-                        <div id="dump-history-chart">
-                            <div>
-                                <canvas id="dump-history-chart-canvas-latest"></canvas>
-                            </div>
-                            <div>
-                                <canvas id="dump-history-chart-canvas-all"></canvas>
-                            </div>
-                            <div>
-                                <canvas id="dump-history-chart-canvas-daily"></canvas>
+                        <div class="dump-section-body">
+                            <div class="dump-two-columns">
+                                <div class="dump-two-columns-left">
+                                    <table class="description-table">
+                                        <tbody>
+                                            <tr>
+                                                <td>戦闘力</td>
+                                                <td class="rate"></td>
+                                            </tr>
+                                            <tr>
+                                                <td>最高戦闘力</td>
+                                                <td class="max-rate"></td>
+                                            </tr>
+                                            <tr>
+                                                <td>最低戦闘力</td>
+                                                <td class="min-rate"></td>
+                                            </tr>
+                                            <tr>
+                                                <td>最終対戦日</td>
+                                                <td class="last-date"></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="dump-two-columns-right">
+                                    <table class="description-table">
+                                        <tbody>
+                                            <tr>
+                                                <td>戦闘回数</td>
+                                                <td class="game-count"></td>
+                                            </tr>
+                                            <tr>
+                                                <td>最大連勝</dt>
+                                                <td class="max-win"></td>
+                                            </tr>
+                                            <tr>
+                                                <td>最大連敗</dt>
+                                                <td class="max-lose"></td>
+                                            </tr>
+                                            <tr>
+                                                <td>勝率</dt>
+                                                <td class="win-rate"></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="dump-section" id="dump-history-list-wrapper">
-                        <h3>直近の戦績</h3>
-                        <div id="dump-history-list-notice"></div>
-                        <div id="dump-history-list">
-                            <div class="row">
-                                <div class="notice-icon">！<div class="notice"></div></div>
-                                <div class="id" data-raw="">ID</div>
-                                <div class="date" data-raw="">日付</div>
-                                <div class="rate" data-raw="">戦闘力</div>
-                                <div class="stock" data-raw="">差</div>
-                                <div class="fighter" data-raw="">相手キャラ</div>
-                                <div class="is-vip" data-raw="">VIP</div>
-                                <div class="is-deleted" data-raw="">DEL</div>
+                    <div class="dump-section" id="dump-history-chart">
+                        <div class="dump-section-head">
+                            戦闘力の推移
+                        </div>
+                        <div class="dump-section-body">
+                            <div class="dump-history-chart">
+                                <div>
+                                    <canvas class="canvas-latest"></canvas>
+                                </div>
+                                <div>
+                                    <canvas class="canvas-all"></canvas>
+                                </div>
+                                <div>
+                                    <canvas class="canvas-daily"></canvas>
+                                </div>
                             </div>
                         </div>
-                        <button type="button" id="dump-history-list-show-button">
-                            全件表示
-                        </button>
-                        <button type="button" id="dump-history-list-hide-button">
-                            直近のみ表示
-                        </button>
                     </div>
 
-                    <div class="dump-section" id="dump-daily-history-list-wrapper">
-                        <h3>日ごとの戦績</h3>
-                        <div id="dump-daily-history-list">
-                            <div class="row">
-                                <div class="date">日付</div>
-                                <div class="rate">戦闘力</div>
-                                <div class="game-count">対戦</div>
-                                <div class="win-over">勝越</div>
+                    <div class="dump-section" id="dump-game-record">
+                        <div class="dump-section-head">
+                            直近の戦績
+                        </div>
+                        <div class="dump-section-body">
+                            <div class="dump-game-record-notice">
                             </div>
+                            <div class="dump-game-record-table-wrapper">
+                                <table class="dump-table dump-game-record-table">
+                                    <thead>
+                                        <tr>
+                                            <th class="id"          >ID</th>
+                                            <th class="date"        >日付</th>
+                                            <th class="rate"        >戦闘力</th>
+                                            <th class="stock"       >差</th>
+                                            <th class="fighter"     >相手キャラ</th>
+                                            <th class="fighter-id"  >相手キャラID</th>
+                                            <th class="is-vip"      >VIP</th>
+                                            <th class="is-disabled" >無効</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="clickable">
+                                            <td class="id"          data-raw=""></td>
+                                            <td class="date"        data-raw=""></td>
+                                            <td class="rate"        data-raw=""></td>
+                                            <td class="stock"       data-raw=""></td>
+                                            <td class="fighter"     data-raw=""></td>
+                                            <td class="fighter-id"  data-raw=""></td>
+                                            <td class="is-vip"      data-raw=""></td>
+                                            <td class="is-disabled" data-raw=""></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <button type="button" class="dump-table-more-button">
+                                全件表示
+                            </button>
+                            <button type="button" class="dump-table-less-button">
+                                直近のみ表示
+                            </button>
                         </div>
-                        <button type="button" id="dump-daily-history-list-show-button">
-                            全件表示
-                        </button>
-                        <button type="button" id="dump-daily-history-list-hide-button">
-                            直近のみ表示
-                        </button>
                     </div>
 
-                    <div class="dump-section" id="dump-fighter-record-table-wrapper">
-                        <h3>相手キャラ毎の対戦データ</h3>
-                        <div class="dump-fighter-record-table-description">
-                            横スクロール可能／列名の▲▼でソート可能
+                    <div class="dump-section" id="dump-daily-record">
+                        <div class="dump-section-head">
+                            日ごとの戦績
                         </div>
-                        <div id="dump-fighter-record-table">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>
-                                            <div class="sort-asc"  data-sort-cell="fighter" data-sort-type="string">▲</div>
-                                            <div>相手キャラ</div>
-                                            <div class="sort-desc" data-sort-cell="fighter" data-sort-type="string">▼</div>
-                                        </th>
-                                        <th>
-                                            <div class="sort-asc"  data-sort-cell="game-count" data-sort-type="number">▲</div>
-                                            <div>対戦</div>
-                                            <div class="sort-desc" data-sort-cell="game-count" data-sort-type="number">▼</div>
-                                        </th>
-                                        <th>
-                                            <div class="sort-asc"  data-sort-cell="win-over" data-sort-type="number">▲</div>
-                                            <div>勝越</div>
-                                            <div class="sort-desc" data-sort-cell="win-over" data-sort-type="number">▼</div>
-                                        </th>
-                                        <th>
-                                            <div class="sort-asc"  data-sort-cell="win-rate" data-sort-type="float">▲</div>
-                                            <div>勝率</div>
-                                            <div class="sort-desc" data-sort-cell="win-rate" data-sort-type="float">▼</div>
-                                        </th>
-                                        <th>
-                                            <div class="sort-asc"  data-sort-cell="stock-rate" data-sort-type="float">▲</div>
-                                            <div>平均スト差</div>
-                                            <div class="sort-desc" data-sort-cell="stock-rate" data-sort-type="float">▼</div>
-                                        </th>
-                                        <th>
-                                            <div class="sort-asc"  data-sort-cell="total-stock" data-sort-type="number">▲</div>
-                                            <div>合計スト差</div>
-                                            <div class="sort-desc" data-sort-cell="total-stock" data-sort-type="number">▼</div>
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody class="sort-body">
-                                    <tr>
-                                        <td class="dump-table-fighter"            data-sort-cell="fighter"   ></td>
-                                        <td class="dump-table-game-count"         data-sort-cell="game-count"></td>
-                                        <td class="dump-table-win-over"           data-sort-cell="win-over"></td>
-                                        <td class="dump-table-win-rate"           data-sort-cell="win-rate"></td>
-                                        <td class="dump-table-stock-rate"         data-sort-cell="stock-rate"></td>
-                                        <td class="dump-table-total-stock"        data-sort-cell="total-stock"></td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                        <div class="dump-section-body">
+                            <div class="dump-daily-record-table-wrapper">
+                                <table class="dump-table dump-daily-record-table">
+                                    <thead>
+                                        <tr>
+                                            <th class="date">日付</th>
+                                            <th class="rate">戦闘力</th>
+                                            <th class="game-count">対戦</th>
+                                            <th class="win-over">勝越</th>
+                                            <th class="win-count">勝ち</th>
+                                            <th class="lose-count">負け</th>
+                                            <th class="min-rate">最低戦闘力</th>
+                                            <th class="max-rate">最高戦闘力</th>
+                                            <th class="total-stock">合計スト差</th>
+                                            <th class="total-rate">合計戦闘力</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="clickable">
+                                            <td class="date"></td>
+                                            <td class="rate"></td>
+                                            <td class="game-count"></td>
+                                            <td class="win-over"></td>
+                                            <td class="win-count"   data-sort-cell="win-count"></td>
+                                            <td class="lose-count"  data-sort-cell="lose-count"></td>
+                                            <td class="min-rate"    data-sort-cell="min-rate"></td>
+                                            <td class="max-rate"    data-sort-cell="max-rate"></td>
+                                            <td class="total-stock" data-sort-cell="total-stock"></td>
+                                            <td class="total-rate"  data-sort-cell="total-rate"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <button type="button" class="dump-table-more-button">
+                                全件表示
+                            </button>
+                            <button type="button" class="dump-table-less-button">
+                                直近のみ表示
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="dump-section" id="dump-fighter-record">
+                        <div class="dump-section-head">
+                            相手キャラ毎の対戦データ
+                        </div>
+                        <div class="dump-section-body">
+                            <div class="dump-fighter-record-table-wrapper">
+                                <table class="dump-table dump-fighter-record-table">
+                                    <thead>
+                                        <tr>
+                                            <th class="fighter-id">
+                                                <div class="sort-asc"  data-sort-cell="fighter-id" data-sort-type="string">▲</div>
+                                                <div>相手キャラ</div>
+                                                <div class="sort-desc" data-sort-cell="fighter-id" data-sort-type="string">▼</div>
+                                            </th>
+                                            <th class="fighter">
+                                                <div class="sort-asc"  data-sort-cell="fighter" data-sort-type="string">▲</div>
+                                                <div>相手キャラ</div>
+                                                <div class="sort-desc" data-sort-cell="fighter" data-sort-type="string">▼</div>
+                                            </th>
+                                            <th class="game-count">
+                                                <div class="sort-asc"  data-sort-cell="game-count" data-sort-type="number">▲</div>
+                                                <div>対戦</div>
+                                                <div class="sort-desc" data-sort-cell="game-count" data-sort-type="number">▼</div>
+                                            </th>
+                                            <th class="win-over">
+                                                <div class="sort-asc"  data-sort-cell="win-over" data-sort-type="number">▲</div>
+                                                <div>勝越</div>
+                                                <div class="sort-desc" data-sort-cell="win-over" data-sort-type="number">▼</div>
+                                            </th>
+                                            <th class="win-rate">
+                                                <div class="sort-asc"  data-sort-cell="win-rate" data-sort-type="float">▲</div>
+                                                <div>勝率</div>
+                                                <div class="sort-desc" data-sort-cell="win-rate" data-sort-type="float">▼</div>
+                                            </th>
+                                            <th class="win-count">
+                                                <div class="sort-asc"  data-sort-cell="win-count" data-sort-type="number">▲</div>
+                                                <div>勝ち</div>
+                                                <div class="sort-desc" data-sort-cell="win-count" data-sort-type="number">▼</div>
+                                            </th>
+                                            <th class="lose-count">
+                                                <div class="sort-asc"  data-sort-cell="lose-count" data-sort-type="number">▲</div>
+                                                <div>負け</div>
+                                                <div class="sort-desc" data-sort-cell="lose-count" data-sort-type="number">▼</div>
+                                            </th>
+                                            <th class="stock-rate">
+                                                <div class="sort-asc"  data-sort-cell="stock-rate" data-sort-type="float">▲</div>
+                                                <div>平均スト差</div>
+                                                <div class="sort-desc" data-sort-cell="stock-rate" data-sort-type="float">▼</div>
+                                            </th>
+                                            <th class="total-stock">
+                                                <div class="sort-asc"  data-sort-cell="total-stock" data-sort-type="number">▲</div>
+                                                <div>合計スト差</div>
+                                                <div class="sort-desc" data-sort-cell="total-stock" data-sort-type="number">▼</div>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="sort-body">
+                                        <tr class="clickable">
+                                            <td class="fighter-id"  data-sort-cell="fighter-id"></td>
+                                            <td class="fighter"     data-sort-cell="fighter"></td>
+                                            <td class="game-count"  data-sort-cell="game-count"></td>
+                                            <td class="win-over"    data-sort-cell="win-over"></td>
+                                            <td class="win-rate"    data-sort-cell="win-rate"></td>
+                                            <td class="win-count"   data-sort-cell="win-count"></td>
+                                            <td class="lose-count"  data-sort-cell="lose-count"></td>
+                                            <td class="stock-rate"  data-sort-cell="stock-rate"></td>
+                                            <td class="total-stock" data-sort-cell="total-stock"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
 
@@ -383,56 +465,246 @@
             </section>
 
 
+            <dialog class="dialog" id="dialog" autofocus>
+                <section class="dialog-section" id="dialog-fighter-record">
+                    <div class="dialog-head">
+                        基本戦績
+                    </div>
+                    <div class="dialog-body">
+                        <div class="dump-two-columns">
+                            <div class="dump-two-columns-left">
+                                <table class="description-table">
+                                    <tbody>
+                                        <tr>
+                                            <td>対戦回数</td>
+                                            <td class="game-count"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>勝ち回数</td>
+                                            <td class="win-count"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>負け回数</td>
+                                            <td class="lose-count"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="dump-two-columns-right">
+                                <table class="description-table">
+                                    <tbody>
+                                        <tr>
+                                            <td>勝率</td>
+                                            <td class="win-rate"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>勝越</td>
+                                            <td class="win-over"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>平均スト差</td>
+                                            <td class="stock-rate"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="dialog-section" id="dialog-daily-record">
+                    <div class="dialog-head">
+                        基本戦績
+                    </div>
+                    <div class="dialog-body">
+                        <div class="dump-two-columns">
+                            <div class="dump-two-columns-left">
+                                <table class="description-table">
+                                    <tbody>
+                                        <tr>
+                                            <td>対戦回数</td>
+                                            <td class="game-count"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>勝ち回数</td>
+                                            <td class="win-count"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>負け回数</td>
+                                            <td class="lose-count"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="dump-two-columns-right">
+                                <table class="description-table">
+                                    <tbody>
+                                        <tr>
+                                            <td>勝率</td>
+                                            <td class="win-rate"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>勝越</td>
+                                            <td class="win-over"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>戦闘力</td>
+                                            <td class="rate"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="dialog-section" id="dialog-game-record">
+                    <div class="dialog-head">
+                        戦績
+                    </div>
+                    <div class="dialog-body">
+                        <div class="dialog-game-record-table-wrapper">
+                            <table class="dump-table dialog-game-record-table">
+                                <thead>
+                                    <tr>
+                                        <th class="id"         >ID</th>
+                                        <th class="date"       >日付</th>
+                                        <th class="rate"       >戦闘力</th>
+                                        <th class="stock"      >差</th>
+                                        <th class="fighter"    >相手キャラ</th>
+                                        <th class="fighter-id" >相手キャラID</th>
+                                        <th class="is-vip"     >VIP</th>
+                                        <th class="is-disabled" >無効</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="sort-body">
+                                    <tr>
+                                        <td class="id"          data-sort-cell="id"          data-sort-value=""></td>
+                                        <td class="date"        data-sort-cell="date"        data-sort-value=""></td>
+                                        <td class="rate"        data-sort-cell="rate"        data-sort-value=""></td>
+                                        <td class="stock"       data-sort-cell="stock"       data-sort-value=""></td>
+                                        <td class="fighter-id"  data-sort-cell="fighter-id"  data-sort-value=""></td>
+                                        <td class="fighter"     data-sort-cell="fighter"     data-sort-value=""></td>
+                                        <td class="is-vip"      data-sort-cell="is-vip"      data-sort-value=""></td>
+                                        <td class="is-disabled" data-sort-cell="is-disabled" data-sort-value=""></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="dialog-section" id="dialog-register">
+                    <div class="dialog-head">
+                        戦績の修正
+                    </div>
+                    <div class="dialog-body">
+                        <div class="dialog-form">
+                            <div class="input dialog-form-id">
+                                <label for="dialog-form-id">ID</label>
+                                <input type="number" id="dialog-form-id" value=0 disabled>
+                                <div class="checkbox dialog-form-is-disabled">
+                                    <label for="dialog-form-is-disabled">
+                                        <input type="checkbox" id="dialog-form-is-disabled">無効にする
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="input dialog-form-date">
+                                <label for="dialog-form-date">対戦日</label>
+                                <input type="date" id="dialog-form-date">
+                            </div>
+                            <div class="input dialog-form-rate">
+                                <label for="dialog-form-rate">戦闘力[万]</label>
+                                <input type="number" id="dialog-form-rate" placeholder="(例) 765">
+                                <div class="checkbox dialog-form-is-vip">
+                                    <label for="dialog-form-is-vip">
+                                        <input type="checkbox" id="dialog-form-is-vip">VIP
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="input dialog-form-stock">
+                                <label for="dialog-form-stock">ストック差</label>
+                                <input type="number" id="dialog-form-stock" list="dialog-form-stock-list" placeholder="(例) 1, -2">
+                                <datalist id="dialog-form-stock-list">
+                                    <option value=1></option>
+                                    <option value=-1></option>
+                                    <option value=2></option>
+                                    <option value=-2></option>
+                                    <option value=3></option>
+                                    <option value=-3></option>
+                                </datalist>
+                            </div>
+                            <div class="input dialog-form-fighter">
+                                <label for="dialog-form-fighter">相手キャラ</label>
+                                <input type="text" name="dialog-form-fighter" id="dialog-form-fighter" list="fighter-list">
+                            </div>
+                            <div class="input dialog-form-button">
+                                <button type="button" class="request-button dialog-dump-request-button" id="dialog-dump-request-button">
+                                    修正＆取得
+                                </button>
+                            </div>
+                            <div class="dialog-request-result">
+                                <div class="dialog-request-result-caption">登録結果:</div>
+                                <div class="dialog-request-result-content" id="dialog-request-result"></div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="dialog-section">
+                    <button type="button" id="dialog-close-button">close</button>
+                </section>
+            </dialog>
+
         </div>
 
         
-        <script src="../../js/util.js?ver=20250509a"></script>
+        <script src="../../js/util.js?ver=20250719a"></script>
+        <script src="../../js/SmaError.js?ver=20250719a"></script>
 
-        <script src="../../js/Account.js?ver=20250509a"></script>
+        <script src="../../js/struct/Account.js?ver=20250719a"></script>
+        <script src="../../js/struct/GameRecord.js?ver=20250719a"></script>
+        <script src="../../js/struct/GameRecords.js?ver=20250719a"></script>
+        <script src="../../js/struct/FighterRecord.js?ver=20250719a"></script>
+        <script src="../../js/struct/FighterRecords.js?ver=20250719a"></script>
+        <script src="../../js/struct/DailyRecord.js?ver=20250719a"></script>
+        <script src="../../js/struct/DailyRecords.js?ver=20250719a"></script>
+        <script src="../../js/struct/TotalRecord.js?ver=20250719a"></script>
+        <script src="../../js/struct/PostRequest.js?ver=20250719a"></script>
+        <script src="../../js/struct/PostResponse.js?ver=20250719a"></script>
+        <script src="../../js/struct/Fighter.js?ver=20250719a"></script>
 
-        <script src="../../js/GameRecord.js?ver=20250509a"></script>
-        <script src="../../js/GameRecords.js?ver=20250509a"></script>
+        <script src="../../js/html/common/LoadingHtml.js?ver=20250719a"></script>
 
-        <script src="../../js/FighterRecord.js?ver=20250509a"></script>
-        <script src="../../js/FighterRecords.js?ver=20250509a"></script>
+        <script src="../../js/com/Poster.js?ver=20250719a"></script>
+        <script src="../../js/com/MockPoster.js?ver=20250719a"></script>
 
-        <script src="../../js/DailyRecord.js?ver=20250509a"></script>
-        <script src="../../js/DailyRecords.js?ver=20250509a"></script>
+        <script src="../../js/middleware/GameRecordDb.js?ver=20250719a"></script>
+        <script src="../../js/middleware/TableSorter.js?ver=20250719a"></script>
+        <script src="../../js/middleware/RecordAnalyzer.js?ver=20250719a"></script>
 
-        <script src="../../js/TotalRecord.js?ver=20250509a"></script>
+        <script src="../../js/html/account/AccountHtml.js?ver=20250719a"></script>
 
-        <script src="../../js/RecordAnalyzer.js?ver=20250509a"></script>
+        <script src="../../js/html/register/RegisterHtml.js?ver=20250719a"></script>
 
-        <script src="../../js/Poster.js?ver=20250509a"></script>
-        <script src="../../js/PostRequest.js?ver=20250509a"></script>
-        <script src="../../js/PostResponse.js?ver=20250509a"></script>
-        <script src="../../js/RegisterPostRequest.js?ver=20250509a"></script>
-        <script src="../../js/RegisterPostResponse.js?ver=20250509a"></script>
-        <script src="../../js/DumpPostRequest.js?ver=20250509a"></script>
-        <script src="../../js/DumpPostResponse.js?ver=20250509a"></script>
+        <script src="../../js/html/dialog/DialogDailyRecordHtml.js?ver=20250719a"></script>
+        <script src="../../js/html/dialog/DialogFighterRecordHtml.js?ver=20250719a"></script>
+        <script src="../../js/html/dialog/DialogGameRecordHtml.js?ver=20250719a"></script>
+        <script src="../../js/html/dialog/DialogRegisterHtml.js?ver=20250719a"></script>
+        <script src="../../js/html/dialog/DialogHtml.js?ver=20250719a"></script>
 
-        <script src="../../js/LoadingHtml.js?ver=20250509a"></script>
-        <script src="../../js/FighterListHtml.js?ver=20250509a"></script>
+        <script src="../../js/html/dump/DumpRequestButtonHtml.js?ver=20250719a"></script>
+        <script src="../../js/html/dump/DumpTotalRecordHtml.js?ver=20250719a"></script>
+        <script src="../../js/html/dump/DumpHistoryChartHtml.js?ver=20250719a"></script>
+        <script src="../../js/html/dump/DumpGameRecordHtml.js?ver=20250719a"></script>
+        <script src="../../js/html/dump/DumpDailyRecordHtml.js?ver=20250719a"></script>
+        <script src="../../js/html/dump/DumpFighterRecordHtml.js?ver=20250719a"></script>
+        <script src="../../js/html/dump/DumpHtml.js?ver=20250719a"></script>
 
-        <script src="../../js/AccountHtml.js?ver=20250509a"></script>
-        <script src="../../js/RegisterHtml.js?ver=20250509a"></script>
-
-        <script src="../../js/DumpRequestButtonHtml.js?ver=20250509a"></script>
-        <script src="../../js/DumpTotalRecordHtml.js?ver=20250509a"></script>
-        <script src="../../js/DumpHistoryChartHtml.js?ver=20250509a"></script>
-        <script src="../../js/DumpHistoryListRowHtml.js?ver=20250509a"></script>
-        <script src="../../js/DumpHistoryListHtml.js?ver=20250509a"></script>
-        <script src="../../js/DumpDailyHistoryListRowHtml.js?ver=20250509a"></script>
-        <script src="../../js/DumpDailyHistoryListHtml.js?ver=20250509a"></script>
-        <script src="../../js/DumpFighterRecordHtml.js?ver=20250509a"></script>
-        <script src="../../js/DumpHtml.js?ver=20250509a"></script>
-
-        <script src="../../js/TableSorter.js?ver=20250509a"></script>
-
-        <script src="../../js/Registerer.js?ver=20250509a"></script>
-        <script src="../../js/Dumper.js?ver=20250509a"></script>
-
-        <script src="../../js/main.js?ver=20250509a"></script>
+        <script src="../../js/application/Dumper.js?ver=20250719a"></script>
+        <script src="../../js/application/Registerer.js?ver=20250719a"></script>
+        <script src="../../js/application/DialogRegisterer.js?ver=20250719a"></script>
+        <script src="../../js/main.js?ver=20250719a"></script>
 
     </body>
 </html>
