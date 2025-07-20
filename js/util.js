@@ -41,13 +41,17 @@ class Util {
 
 
   /**
-   * @note LocalStorageに値を保存する
-   * @param {String} key
-   * @param {String} value
+   * @note LocalStorageに登録情報を保存する
+   * @param {Account} account
+   * @param {GameRecord} gameRecord
    */
-  static setLocalStorage(key, value) {
+  static setRecordToLocalStorage(userName, account, gameRecord) {
     try {
-      localStorage.setItem(key, value);
+      var jsonObject = {
+        account:    account.toJsonObject(),
+        gameRecord: gameRecord.toJsonObject(),
+      };
+      localStorage.setItem(userName, JSON.stringify(jsonObject));
     }
     catch (e) {
       // 何もしない
@@ -55,13 +59,38 @@ class Util {
   }
 
   /**
-   * @note LocalStorageから値を取得する
-   * @param {String} key
-   * @return {String}
+   * @note LocalStorageからアカウント情報を取得する
+   * @return {Account}
    */
-  static getLocalStorage(key) {
+  static getAccountFromLocalStorage(userName) {
     try {
-      return localStorage.getItem(key);
+      var jsonObject = JSON.parse(localStorage.getItem(userName));
+      var account = new Account();
+      account.userName  = jsonObject.account.userName;
+      account.fighterId = jsonObject.account.fighterId;
+      return account;
+    }
+    catch (e) {
+      return null;
+    }
+  }
+
+  /**
+   * @note LocalStorageからアカウント情報を取得する
+   * @return {GameRecord}
+   */
+  static getGameRecordFromLocalStorage(userName) {
+    try {
+      var jsonObject = JSON.parse(localStorage.getItem(userName));
+      var gameRecord = new GameRecord();
+      gameRecord.id         = jsonObject.gameRecord.id;
+      gameRecord.date       = jsonObject.gameRecord.date;
+      gameRecord.rate       = jsonObject.gameRecord.rate;
+      gameRecord.stock      = jsonObject.gameRecord.stock;
+      gameRecord.fighterId  = jsonObject.gameRecord.fighterId;
+      gameRecord.isVip      = jsonObject.gameRecord.isVip;
+      gameRecord.isDisabled = jsonObject.gameRecord.isDisabled;
+      return gameRecord;
     }
     catch (e) {
       return null;

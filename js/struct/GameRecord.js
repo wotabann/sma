@@ -9,6 +9,18 @@ class GameRecord {
     this.isDisabled = 0;
   }
 
+  toJsonObject() {
+    return {
+      id:         this.id,
+      date:       this.date,
+      rate:       this.rate,
+      stock:      this.stock,
+      fighterId:  this.fighterId,
+      isVip:      this.isVip,
+      isDisabled: this.isDisabled,
+    };
+  }
+
   toLineString(separator = ", ", prefix = "【", suffix = "】") {
     var lineString = prefix;
     lineString += this.date + separator;

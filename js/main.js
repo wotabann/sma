@@ -51,9 +51,9 @@ function _initializeAccountHtml() {
   accountHtml = new AccountHtml();
   accountHtml.userName = Util.getDirectoryName();
   accountHtml.fighter = _geDefaultFighter();
-  var fighterId = Util.getLocalStorage("fighterId");
-  if (fighterId != null) {
-    accountHtml.fighter = Fighter.idToName[fighterId];
+  var account = Util.getAccountFromLocalStorage(Util.getDirectoryName());
+  if (account != null) {
+    accountHtml.fighter = Fighter.idToName[account.fighterId];
   }
 }
 
@@ -66,9 +66,9 @@ function _initializeRegisterHtml() {
   registerHtml.isVip = _geDefaultIsVip();
   registerHtml.addRegisterRequestButtonOnClick(_requestRegister);
   registerHtml.addRegisterDumpRequestButtonOnClick(_requestRegisterDump);
-  var isVip = Util.getLocalStorage("isVip");
-  if (isVip != null) {
-    registerHtml.isVip = isVip;
+  var gameRecord = Util.getGameRecordFromLocalStorage(Util.getDirectoryName());
+  if (gameRecord != null) {
+    registerHtml.isVip = gameRecord.isVip;
   }
 }
 

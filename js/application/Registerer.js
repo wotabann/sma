@@ -67,8 +67,7 @@ class Registerer {
     }
 
     // 登録した情報を記憶
-    Util.setLocalStorage("fighterId", account.fighterId);
-    Util.setLocalStorage("isVip", gameRecord.isVip);
+    Util.setRecordToLocalStorage(account.userName, account, gameRecord);
   }
 
 
