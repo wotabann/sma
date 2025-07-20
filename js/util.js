@@ -1,6 +1,6 @@
 class Util {
   /**
-   * @note   本日の日付をyyyy-mm-ddで取得する
+   * @note 本日の日付をyyyy-mm-ddで取得する
    * @return {String}
    */
   static getToday() {
@@ -14,7 +14,7 @@ class Util {
 
 
   /**
-   * @note   ディレクトリ名を取得する
+   * @note ディレクトリ名を取得する
    * @return {String}
    */
   static getDirectoryName() {
@@ -25,7 +25,7 @@ class Util {
 
 
   /**
-   * @note   全てのボタンを無効化する
+   * @note 全てのボタンを無効化する
    */
   static disableAllButtons() {
     $( "button" ).prop( "disabled", true );
@@ -33,9 +33,38 @@ class Util {
 
 
   /**
-   * @note   全てのボタンを有効化する
+   * @note 全てのボタンを有効化する
    */
   static enableAllButtons() {
     $( "button" ).prop( "disabled", false );
+  }
+
+
+  /**
+   * @note LocalStorageに値を保存する
+   * @param {String} key
+   * @param {String} value
+   */
+  static setLocalStorage(key, value) {
+    try {
+      localStorage.setItem(key, value);
+    }
+    catch (e) {
+      // 何もしない
+    }
+  }
+
+  /**
+   * @note LocalStorageから値を取得する
+   * @param {String} key
+   * @return {String}
+   */
+  static getLocalStorage(key) {
+    try {
+      return localStorage.getItem(key);
+    }
+    catch (e) {
+      return null;
+    }
   }
 }

@@ -65,6 +65,10 @@ class Registerer {
       this._dumpHtml.update(recordAnalyzer);
       this._dialogHtml.update(recordAnalyzer);
     }
+
+    // 登録した情報を記憶
+    Util.setLocalStorage("fighterId", account.fighterId);
+    Util.setLocalStorage("isVip", gameRecord.isVip);
   }
 
 
