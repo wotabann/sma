@@ -141,12 +141,11 @@ class DialogGameRecordHtml {
     }
 
     // VIPは王冠マークを付ける
-    this._html_td_rate(html_tr).addClass("crown");
     if (gameRecord.isVip != 0) {
-      this._html_td_rate(html_tr).addClass("crown-show");
+      this._html_td_date(html_tr).addClass("crown");
     }
     else {
-      this._html_td_rate(html_tr).removeClass("crown-show");
+      this._html_td_date(html_tr).removeClass("crown");
     }
   }
 

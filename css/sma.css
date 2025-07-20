@@ -140,6 +140,7 @@ body:has(dialog[open]) {
   position: fixed;
   inset-inline: 0;
   inset-block: 0;
+  min-width: 360px;
   max-width: 680px;
   max-height: 95%;
   margin: auto;
@@ -583,7 +584,7 @@ body:has(dialog[open]) {
   display: none;
 }
 .dump-table tr .date {
-  min-width: 70px;
+  min-width: 80px;
 }
 .dump-table tr .rate {
   min-width: 80px;
@@ -599,34 +600,12 @@ body:has(dialog[open]) {
   text-align: left;
 }
 
-.dump-table .crown {
+.dump-table tr .crown:before {
+  content: url('https://wotabann.github.io/sma/img/crown.png');
   position: relative;
-  padding: 0px 0px 0px 0em;
-}
-.dump-table .crown::before,
-.dump-table .crown::after {
-  position: absolute;
-  left: 0px;
-  width: 0px;
-  height: 0px;
-  content: "";
-  color: #dbb400;
-  opacity: 0;
-}
-.dump-table .crown::before {
-  top: 0em;
-  border: 0.5em solid transparent;
-  border-bottom: 0.75em solid currentColor;
-}
-.dump-table .crown::after {
-  top: 0.7em;
-  border: 0.25em solid transparent;
-  border-left: 0.5em solid currentColor;
-  border-right: 0.5em solid currentColor;
-}
-.dump-table .crown-show::before,
-.dump-table .crown-show::after {
-  opacity: 1;
+  top: 2px;
+  left: -5px;
+  z-index: 1;
 }
 
 
@@ -850,7 +829,7 @@ body:has(dialog[open]) {
   color: red;
 }
 .dump-game-record-table-wrapper {
-  max-height: 515px;
+  max-height: 550px;
   overflow-y: scroll;
   overflow-x: hidden;
   text-align: center;

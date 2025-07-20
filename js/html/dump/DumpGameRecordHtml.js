@@ -49,9 +49,11 @@ class DumpGameRecordHtml {
     this._html_lessButton.on("click", () => { this._less(); });
     if (gameRecords.length > this._showLimit) {
       this._html_moreButton.show();
+      this._html_lessButton.hide();
     }
     else {
       this._html_moreButton.hide();
+      this._html_lessButton.hide();
     }
 
     // セクション表示
@@ -156,12 +158,11 @@ class DumpGameRecordHtml {
     }
 
     // VIPは王冠マークを付ける
-    this._html_td_rate(html_tr).addClass("crown");
     if (gameRecord.isVip != 0) {
-      this._html_td_rate(html_tr).addClass("crown-show");
+      this._html_td_date(html_tr).addClass("crown");
     }
     else {
-      this._html_td_rate(html_tr).removeClass("crown-show");
+      this._html_td_date(html_tr).removeClass("crown");
     }
   }
 
@@ -179,7 +180,7 @@ class DumpGameRecordHtml {
     this._html_td_stock(html_tr).text(gameRecord.stock);
     this._html_td_fighter(html_tr).text(Fighter.idToName[gameRecord.fighterId]);
     this._html_td_fighterId(html_tr).text(gameRecord.fighterId);
-    //this._html_td_isVip(html_tr).text(gameRecord.isVip);
+    this._html_td_isVip(html_tr).text(gameRecord.isVip);
     this._html_td_isDisabled(html_tr).text(gameRecord.isDisabled);
 
     // 参照用に生の値を仕込む

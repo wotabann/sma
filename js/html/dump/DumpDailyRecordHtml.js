@@ -49,9 +49,11 @@ class DumpDailyRecordHtml {
     this._html_lessButton.on("click", () => { this._less(); });
     if (dailyRecords.length > this._showLimit) {
       this._html_moreButton.show();
+      this._html_lessButton.hide();
     }
     else {
       this._html_moreButton.hide();
+      this._html_lessButton.hide();
     }
 
     // セクション表示
