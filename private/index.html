@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>スマブラSP専用部屋</title>
+
+        <!-- スマートフォン表示対応 -->
+        <meta name="viewport" content="width=device-width">
+
+        <!-- フォントスタイル -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Hachi+Maru+Pop&display=swap" rel="stylesheet">
+        <link href="http://fonts.googleapis.com/css?family=Abel" rel="stylesheet" type="text/css">
+
+        <!-- JavaScript -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+        <!-- CSS -->
+        <link rel="stylesheet" type="text/css" href="./css/sma.css?ver=20250720e">
+    </head>
+
+
+    <body>
+        <div id="overlay">
+            <div class="cv-spinner">
+                <span class="spinner"></span>
+            </div>
+        </div>
+
+        <datalist id="user-list">
+            <option value="yume"></option>
+            <option value="karin"></option>
+            <option value="kou"></option>
+            <option value="fumi"></option>
+            <option value="naato"></option>
+            <option value="wada"></option>
+            <option value="en"></option>
+        </datalist>
+
+        <datalist id="fighter-list">
+            <option value="マリオ"></option>
+            <option value="ドンキーコング"></option>
+            <option value="リンク"></option>
+            <option value="サムス"></option>
+            <option value="ダークサムス"></option>
+            <option value="ヨッシー"></option>
+            <option value="カービィ"></option>
+            <option value="フォックス"></option>
+            <option value="ピカチュウ"></option>
+            <option value="ルイージ"></option>
+            <option value="ネス"></option>
+            <option value="キャプテン・ファルコン"></option>
+            <option value="プリン"></option>
+            <option value="ピーチ"></option>
+            <option value="デイジー"></option>
+            <option value="クッパ"></option>
+            <option value="アイスクライマー"></option>
+            <option value="シーク"></option>
+            <option value="ゼルダ"></option>
+            <option value="ドクターマリオ"></option>
+            <option value="ピチュー"></option>
+            <option value="ファルコ"></option>
+            <option value="マルス"></option>
+            <option value="ルキナ"></option>
+            <option value="こどもリンク"></option>
+            <option value="ガノンドロフ"></option>
+            <option value="ミュウツー"></option>
+            <option value="ロイ"></option>
+            <option value="クロム"></option>
+            <option value="Mr.ゲーム＆ウォッチ"></option>
+            <option value="メタナイト"></option>
+            <option value="ピット"></option>
+            <option value="ブラックピット"></option>
+            <option value="ゼロスーツサムス"></option>
+            <option value="ワリオ"></option>
+            <option value="スネーク"></option>
+            <option value="アイク"></option>
+            <option value="ポケモントレーナー"></option>
+            <option value="ディディーコング"></option>
+            <option value="リュカ"></option>
+            <option value="ソニック"></option>
+            <option value="デデデ"></option>
+            <option value="ピクミン＆オリマー"></option>
+            <option value="ルカリオ"></option>
+            <option value="ロボット"></option>
+            <option value="トゥーンリンク"></option>
+            <option value="ウルフ"></option>
+            <option value="むらびと"></option>
+            <option value="ロックマン"></option>
+            <option value="Wii Fit トレーナー"></option>
+            <option value="ロゼッタ＆チコ"></option>
+            <option value="リトル・マック"></option>
+            <option value="ゲッコウガ"></option>
+            <option value="Miiファイター格闘"></option>
+            <option value="Miiファイター剣術"></option>
+            <option value="Miiファイター射撃"></option>
+            <option value="パルテナ"></option>
+            <option value="パックマン"></option>
+            <option value="ルフレ"></option>
+            <option value="シュルク"></option>
+            <option value="クッパJr."></option>
+            <option value="ダックハント"></option>
+            <option value="リュウ"></option>
+            <option value="ケン"></option>
+            <option value="クラウド"></option>
+            <option value="カムイ"></option>
+            <option value="ベヨネッタ"></option>
+            <option value="インクリング"></option>
+            <option value="リドリー"></option>
+            <option value="シモン"></option>
+            <option value="リヒター"></option>
+            <option value="キングクルール"></option>
+            <option value="しずえ"></option>
+            <option value="ガオガエン"></option>
+            <option value="パックンフラワー"></option>
+            <option value="ジョーカー"></option>
+            <option value="勇者"></option>
+            <option value="バンジョー＆カズーイ"></option>
+            <option value="テリー"></option>
+            <option value="ベレト／ベレス"></option>
+            <option value="ミェンミェン"></option>
+            <option value="スティーブ／アレックス"></option>
+            <option value="セフィロス"></option>
+            <option value="ホムラ／ヒカリ"></option>
+            <option value="カズヤ"></option>
+            <option value="ソラ"></option>
+        </datalist>
+
+
+        <div id="background">
+
+            <section class="section" id="insert">
+                <div class="section-head">
+                    <h1>Register</h1>
+                    <h2>結果登録</h2>
+                    <div style="top: 20%; left:   6%;" class="shape medium green  circle"></div>
+                    <div style="top: 50%; left:  14%;" class="shape large  orange square"></div>
+                    <div style="top: 15%; right:  7%;" class="shape medium yellow square"></div>
+                    <div style="top: 45%; right: 13%;" class="shape large  green  circle"></div>
+                </div>
+                <div class="section-body">
+                    <div class="upsert-form">
+                        <div class="two-columns">
+                            <div class="two-columns-left">
+                                <dl class="date">
+                                    <dt>
+                                        対戦日
+                                    </dt>
+                                    <dd>
+                                        <input type="date" class="upsert-form-date">
+                                    </dd>
+                                </dl>
+                            </div>
+                            <div class="two-columns-right">
+                                <div class="is-dump">
+                                    <input type="checkbox" class="upsert-form-is-dump" id="insert-form-is-dump">
+                                    <label for="insert-form-is-dump">データも取得</label>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="fighter">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>ユーザー</th>
+                                        <th>ファイター</th>
+                                        <th>勝ち</th>
+                                        <th>負け</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><input class="user-name"    type="text" list="user-list" value="test1"></td>
+                                        <td><input class="fighter-name" type="text" list="fighter-list" value="ピカチュウ"></td>
+                                        <td><input class="is-win"       type="checkbox" checked></td>
+                                        <td><input class="is-lose"      type="checkbox"></td>
+                                    </tr>
+                                    <tr>
+                                        <td><input class="user-name"    type="text" list="user-list" value="test2"></td>
+                                        <td><input class="fighter-name" type="text" list="fighter-list" value="マリオ"></td>
+                                        <td><input class="is-win"       type="checkbox"></td>
+                                        <td><input class="is-lose"      type="checkbox"checked></td>
+                                    </tr>
+                                    <tr>
+                                        <td><input class="user-name"    type="text" list="user-list"></td>
+                                        <td><input class="fighter-name" type="text" list="fighter-list"></td>
+                                        <td><input class="is-win"       type="checkbox"></td>
+                                        <td><input class="is-lose"      type="checkbox"></td>
+                                    </tr>
+                                    <tr>
+                                        <td><input class="user-name"    type="text" list="user-list"></td>
+                                        <td><input class="fighter-name" type="text" list="fighter-list"></td>
+                                        <td><input class="is-win"       type="checkbox"></td>
+                                        <td><input class="is-lose"      type="checkbox"></td>
+                                    </tr>
+                                    <tr>
+                                        <td><input class="user-name"    type="text" list="user-list"></td>
+                                        <td><input class="fighter-name" type="text" list="fighter-list"></td>
+                                        <td><input class="is-win"       type="checkbox"></td>
+                                        <td><input class="is-lose"      type="checkbox"></td>
+                                    </tr>
+                                    <tr>
+                                        <td><input class="user-name"    type="text" list="user-list"></td>
+                                        <td><input class="fighter-name" type="text" list="fighter-list"></td>
+                                        <td><input class="is-win"       type="checkbox"></td>
+                                        <td><input class="is-lose"      type="checkbox"></td>
+                                    </tr>
+                                    <tr>
+                                        <td><input class="user-name"    type="text" list="user-list"></td>
+                                        <td><input class="fighter-name" type="text" list="fighter-list"></td>
+                                        <td><input class="is-win"       type="checkbox"></td>
+                                        <td><input class="is-lose"      type="checkbox"></td>
+                                    </tr>
+                                    <tr>
+                                        <td><input class="user-name"    type="text" list="user-list"></td>
+                                        <td><input class="fighter-name" type="text" list="fighter-list"></td>
+                                        <td><input class="is-win"       type="checkbox"></td>
+                                        <td><input class="is-lose"      type="checkbox"></td>
+                                    </tr>
+                                    <tr>
+                                        <td><input class="user-name"    type="text" list="user-list"></td>
+                                        <td><input class="fighter-name" type="text" list="fighter-list"></td>
+                                        <td><input class="is-win"       type="checkbox"></td>
+                                        <td><input class="is-lose"      type="checkbox"></td>
+                                    </tr>
+                                    <tr>
+                                        <td><input class="user-name"    type="text" list="user-list"></td>
+                                        <td><input class="fighter-name" type="text" list="fighter-list"></td>
+                                        <td><input class="is-win"       type="checkbox"></td>
+                                        <td><input class="is-lose"      type="checkbox"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <hr>
+                        <div class="stock">
+                            <dl>
+                                <dt>
+                                    ストック差:
+                                </dt>
+                                <dd>
+                                    <input type="radio" id="insert-stock-3" name="insert-stock" value=3>
+                                    <label for="insert-stock-3">３</label>
+                                    <input type="radio" id="insert-stock-2" name="insert-stock" value=2>
+                                    <label for="insert-stock-2">２</label>
+                                    <input type="radio" id="insert-stock-1" name="insert-stock" value=1>
+                                    <label for="insert-stock-1">１</label>
+                                </dd>
+                            </dl>
+                        </div>
+                        <hr>
+                        <div class="input button">
+                            <button type="button" class="request-button upsert-button" id="insert-button">
+                                登録する
+                            </button>
+                        </div>
+                        <div class="upsert-result">
+                            <div class="upsert-result-caption">登録結果:</div>
+                            <div class="upsert-result-content"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+            <section class="section" id="dump">
+                <div class="section-head">
+                    <h1>Records</h1>
+                    <h2>戦績</h2>
+                    <div style="top: 20%; left:   6%;" class="shape medium violet circle"></div>
+                    <div style="top: 50%; left:  14%;" class="shape large  green  square"></div>
+                    <div style="top: 15%; right:  7%;" class="shape medium green  square"></div>
+                    <div style="top: 45%; right: 13%;" class="shape large  blue   circle"></div>
+                </div>
+
+                <div class="section-body">
+                    <div class="dump-section" id="dump-button">
+                        <button type="button" class="request-button dump-button">
+                            データを取得
+                        </button>
+                    </div>
+
+                    <div class="dump-section" id="dump-game-record">
+                        <div class="dump-section-head">
+                            直近の戦績
+                        </div>
+                        <div class="dump-section-body">
+                            <div class="dump-game-record-notice">
+                            </div>
+                            <div class="dump-game-record-table-wrapper">
+                                <table class="dump-table dump-game-record-table">
+                                    <thead>
+                                        <tr>
+                                            <th class="id"               >ID</th>
+                                            <th class="date"             >日付</th>
+                                            <th class="stock"            >差</th>
+                                            <th class="win-user-name"    >勝ちユーザ</th>
+                                            <th class="win-fighter-name" >勝ちキャラ</th>
+                                            <th class="win-fighter-id"   >勝ちキャラID</th>
+                                            <th class="lose-user-name"   >勝ちユーザ</th>
+                                            <th class="lose-fighter-name">負けキャラ</th>
+                                            <th class="lose-fighter-id"  >負けキャラID</th>
+                                            <th class="is-disabled"      >無効</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="clickable">
+                                            <td class="id"                data-raw=""></td>
+                                            <td class="date"              data-raw=""></td>
+                                            <td class="stock"             data-raw=""></td>
+                                            <td class="win-user-name"     data-raw=""></td>
+                                            <td class="win-fighter-name"  data-raw=""></td>
+                                            <td class="win-fighter-id"    data-raw=""></td>
+                                            <td class="lose-user-name"    data-raw=""></td>
+                                            <td class="lose-fighter-name" data-raw=""></td>
+                                            <td class="lose-fighter-id"   data-raw=""></td>
+                                            <td class="is-disabled"       data-raw=""></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <button type="button" class="dump-table-more-button">
+                                全件表示
+                            </button>
+                            <button type="button" class="dump-table-less-button">
+                                直近のみ表示
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        
+        <script src="./js/util.js?ver=20250720e"></script>
+        <script src="./js/SmaError.js?ver=20250720e"></script>
+
+        <script src="./js/struct/GameRecord.js?ver=20250720e"></script>
+        <script src="./js/struct/GameRecords.js?ver=20250720e"></script>
+        <script src="./js/struct/PostRequest.js?ver=20250720e"></script>
+        <script src="./js/struct/PostResponse.js?ver=20250720e"></script>
+        <script src="./js/struct/Fighter.js?ver=20250720e"></script>
+
+        <script src="./js/html/LoadingHtml.js?ver=20250720e"></script>
+
+        <script src="./js/com/Poster.js?ver=20250720e"></script>
+        <script src="./js/com/MockPoster.js?ver=20250720e"></script>
+
+        <script src="./js/middleware/GameRecordDb.js?ver=20250720e"></script>
+        <script src="./js/middleware/RecordAnalyzer.js?ver=20250720e"></script>
+
+        <script src="./js/html/InsertHtml.js?ver=20250720e"></script>
+        <script src="./js/html/DumpButtonHtml.js?ver=20250720e"></script>
+        <script src="./js/html/DumpGameRecordHtml.js?ver=20250720e"></script>
+        <script src="./js/html/DumpHtml.js?ver=20250720e"></script>
+
+        <script src="./js/application/Dumper.js?ver=20250720e"></script>
+        <script src="./js/application/Inserter.js?ver=20250720e"></script>
+
+        <script src="./js/main.js?ver=20250720e"></script>
+
+    </body>
+</html>
