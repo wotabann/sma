@@ -202,7 +202,7 @@ hr {
 .section {
   background-color: #fff;
   border-radius: 30px;
-  width: 98%;
+  width: 100%;
   margin: 0 auto 15px auto;
   padding: 10px 15px 20px 15px;
   box-shadow: 0 0px 16px rgba(0, 73, 134, .50);
@@ -279,7 +279,7 @@ hr {
 /* upsert-form                                                                */
 /******************************************************************************/
 .upsert-form {
-  width: 90%;
+  width: 100%;
   margin: 0 auto;
 }
 .upsert-form * {
@@ -327,11 +327,10 @@ hr {
 }
 .upsert-form .upsert-form-stock {
   margin: 0;
-  margin-left: 20px;
+  margin-left: 10px;
   padding: 3px;
 }
 .upsert-form .fighter {
-  width: 99%;
   margin: 0 auto;
   padding: 0;
 }
@@ -339,7 +338,7 @@ hr {
   margin: 0 auto;
 }
 .upsert-form .fighter th {
-  font-size: 12px;
+  font-size: 11px;
   font-weight: normal;
   margin: 0;
   padding: 0;
@@ -350,16 +349,16 @@ hr {
   padding-left: 5px;
 }
 .upsert-form .fighter input {
-  font-size: 13px;
+  font-size: 12px;
   font-weight: normal;
   margin: 0;
   padding: 4px;
 }
 .upsert-form .fighter .user-name {
-  width: 100px;
+  width: 70px;
 }
 .upsert-form .fighter .fighter-name {
-  width: 180px;
+  width: 160px;
   text-align: left;
 }
 .upsert-form .fighter input[type=checkbox] {
@@ -373,20 +372,20 @@ hr {
   margin: 0 auto;
 }
 .upsert-form .stock dl {
-  width: 95%;
+  width: 100%;
 }
 .upsert-form .stock dt {
-  width: 120px;
+  width: 100px;
 }
 .upsert-form .stock dd {
   width: 300px;
 }
 .upsert-form .stock label {
   text-align: left;
-  padding-right: 20px;
+  padding-right: 10px;
 }
 .upsert-form .stock input[type=radio] {
-  margin-left: 30px;
+  margin-left: 20px;
   margin-bottom: 4px;
 }
 
@@ -602,4 +601,5 @@ hr {
 }
 .dump-table tr .lose-fighter-id {
   display: none;
+
 }
