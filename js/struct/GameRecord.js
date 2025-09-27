@@ -6,6 +6,7 @@ class GameRecord {
     this.stock      = 0;
     this.fighterId  = 0;
     this.isVip      = 0;
+    this.rankIndex  = -1;
     this.isDisabled = 0;
   }
 
@@ -17,6 +18,7 @@ class GameRecord {
       stock:      this.stock,
       fighterId:  this.fighterId,
       isVip:      this.isVip,
+      rankIndex:  this.rankIndex,
       isDisabled: this.isDisabled,
     };
   }

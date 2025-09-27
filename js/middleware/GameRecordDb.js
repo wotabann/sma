@@ -26,6 +26,7 @@ class GameRecordDb {
         stock:       gameRecord.stock,
         fighterId:   gameRecord.fighterId,
         isVip:      (gameRecord.isVip ? 1 : 0),
+        rankIndex:   gameRecord.rankIndex,
         isDisabled: (gameRecord.isDisabled ? 1 : 0),
       },
       isDump: (isDump) ? 1 : 0,
@@ -97,6 +98,7 @@ class GameRecordDb {
       gameRecord.stock      = payload.gameRecords.stock[i];
       gameRecord.fighterId  = payload.gameRecords.fighterId[i];
       gameRecord.isVip      = payload.gameRecords.isVip[i];
+      gameRecord.rankIndex  = payload.gameRecords.rankIndex[i];
       gameRecord.isDisabled = payload.gameRecords.isDisabled[i];
       gameRecords.push(gameRecord);
     }

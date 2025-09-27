@@ -81,10 +81,11 @@ class RecordAnalyzer {
    * @param  {GameRecord} gameRecord
    */
   _updateTotalRecord(gameRecord) {
-    var date  = gameRecord.date;
-    var rate  = gameRecord.rate;
-    var stock = gameRecord.stock;
-    this._totalRecord.add(date, rate, stock);
+    var date      = gameRecord.date;
+    var rate      = gameRecord.rate;
+    var stock     = gameRecord.stock;
+    var rankIndex = gameRecord.rankIndex;
+    this._totalRecord.add(date, rate, stock, rankIndex);
   }
 
 

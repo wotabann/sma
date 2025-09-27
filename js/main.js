@@ -9,8 +9,6 @@ $(window).on("load", function() {
   _initializeDialogHtml();
 });
 
-
-
 /**
  * @note 登録ボタンのイベントリスナー
  */

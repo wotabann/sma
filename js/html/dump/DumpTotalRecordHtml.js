@@ -17,6 +17,7 @@ class DumpTotalRecordHtml {
   get _html_maxWin()    { return $(this._html_table.find(".max-win")); }
   get _html_maxLose()   { return $(this._html_table.find(".max-lose")); }
   get _html_winRate()   { return $(this._html_table.find(".win-rate")); }
+  get _html_rank()      { return $(this._html_body.find(".dump-rank")); }
 
 
   /**
@@ -43,6 +44,14 @@ class DumpTotalRecordHtml {
     this._html_maxLose.text(totalRecord.maxLose + "回");
     this._html_winRate.text(winRate);
 
+    if (totalRecord.rankNumber == "-") {
+      this._html_rank.hide();
+    }
+    else {
+      this._html_rank.show();
+      this._html_rank.text("【現在の段位】" + totalRecord.rankString);
+    }
+  
     this._html_section.show();
   }
 }

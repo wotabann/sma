@@ -769,6 +769,11 @@ body:has(dialog[open]) {
   display: none;
 }
 
+#dump-total-record .dump-rank {
+  padding: 6px 3px 1px 3px;
+  font-size: 0.9em;
+}
+
 
 
 /******************************************************************************/

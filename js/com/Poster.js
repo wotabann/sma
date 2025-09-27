@@ -2,6 +2,7 @@ class Poster {
 
   constructor() {
     this._URL = "https://script.google.com/macros/s/AKfycbzEX4LcDz2QLFZfvHdunvlIb9bHSIMT1eGy9lPgcWLuodOvjfhwCaQTCK-GsNXDjo1T/exec";
+    this._URL = "https://script.google.com/macros/s/AKfycbzEX4LcDz2QLFZfvHdunvlIb9bHSIMT1eGy9lPgcWLuodOvjfhwCaQTCK-GsNXDjo1T/exec";
     this._loadingHtml = new LoadingHtml();
   }
 

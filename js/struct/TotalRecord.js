@@ -12,13 +12,18 @@ class TotalRecord {
     this._maxWin     = 0;
     this._maxLose    = 0;
     this._lastDate   = "-";
+    this._rankNumber = "-";
+    this._rankString = "-";
 
     // 内部計算用プロパティ
     this._winningStreak = 0;
     this._lossingStreak = 0;
+
+    // クマメイト段位
+    this._kumamate = new Kumamate();
   }
 
-  add(date, rate, stock) {
+  add(date, rate, stock, rankIndex) {
     this._winningStreak = (stock > 0) ? (this._winningStreak + 1) : 0;
     this._lossingStreak = (stock < 0) ? (this._lossingStreak + 1) : 0;
 
@@ -32,6 +37,8 @@ class TotalRecord {
     this._maxWin      = Math.max(this._maxWin,  this._winningStreak);
     this._maxLose     = Math.max(this._maxLose, this._lossingStreak);
     this._lastDate    = date;
+    this._rankNumber  = this._kumamate.getRankNumber(rankIndex);
+    this._rankString  = this._kumamate.getRankString(rankIndex);
   }
 
   get gameCount() {
@@ -86,5 +93,13 @@ class TotalRecord {
       return this.totalStock / this.gameCount;
     }
     return 0;
+  }
+
+  get rankNumber() {
+    return this._rankNumber;
+  }
+
+  get rankString() {
+    return this._rankString;
   }
 }
