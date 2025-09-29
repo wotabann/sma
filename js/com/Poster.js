@@ -2,7 +2,7 @@ class Poster {
 
   constructor() {
     this._URL = "https://script.google.com/macros/s/AKfycbzEX4LcDz2QLFZfvHdunvlIb9bHSIMT1eGy9lPgcWLuodOvjfhwCaQTCK-GsNXDjo1T/exec";
-    this._URL = "https://script.google.com/macros/s/AKfycbzEX4LcDz2QLFZfvHdunvlIb9bHSIMT1eGy9lPgcWLuodOvjfhwCaQTCK-GsNXDjo1T/exec";
+    this._URL = "https://script.google.com/macros/s/AKfycbyKR7KinZUnwIuqF0Fu4M4V9BxKDA7KGd3emvGiuDlVV5dXLCUCaN4ng9nLI-p6CebM/exec";
     this._loadingHtml = new LoadingHtml();
   }
 

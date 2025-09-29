@@ -53,6 +53,10 @@ class RegisterHtml {
     gameRecord.fighterId  = Fighter.nameToId[this.fighter];
     gameRecord.isVip      = this.isVip ? 1 : 0;
     gameRecord.isDisabled = 0;
+
+    // 【暫定対応】VIP自動判定のためfalse固定
+    gameRecord.isVip = 0;
+
     return gameRecord;
   }
 
@@ -68,6 +72,9 @@ class RegisterHtml {
     this.fighter    = Fighter.idToName[gameRecord.fighterId];
     this.isVip      = (gameRecord.isVip != 0);
     this.isDisabled = 0;
+
+    // 【暫定対応】VIP自動判定のためfalse固定
+    this.isVip = false;
   }
 
 

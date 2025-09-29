@@ -376,6 +376,9 @@ body:has(dialog[open]) {
 .register-form-fighter input {
   width: 180px;
 }
+.register-form-is-vip {
+  display: none;
+}
 .register-form-is-vip input {
   display: block;
   width: 25px;
@@ -929,6 +932,9 @@ body:has(dialog[open]) {
 }
 .dialog-form-fighter input {
   width: 180px;
+}
+.dialog-form-is-vip {
+  display: none;
 }
 .dialog-form-is-vip input {
   display: block;

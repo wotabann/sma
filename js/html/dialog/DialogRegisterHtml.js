@@ -68,6 +68,10 @@ class DialogRegisterHtml {
     gameRecord.fighterId  = Fighter.nameToId[this.fighter];
     gameRecord.isVip      = this.isVip ? 1 : 0;
     gameRecord.isDisabled = this.isDisabled ? 1 : 0;
+
+    // 【暫定対応】VIP自動判定のためfalse固定
+    gameRecord.isVip = 0;
+
     return gameRecord;
   }
 
@@ -83,6 +87,9 @@ class DialogRegisterHtml {
     this.fighter    = Fighter.idToName[gameRecord.fighterId];
     this.isVip      = (gameRecord.isVip != 0);
     this.isDisabled = (gameRecord.isDisabled != 0);
+  
+    // 【暫定対応】VIP自動判定のためfalse固定
+    this.isVip = false;
   }
 
 
